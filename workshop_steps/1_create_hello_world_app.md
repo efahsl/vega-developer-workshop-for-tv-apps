@@ -8,7 +8,7 @@ Run `kepler --version` command in a terminal window and confirm version is 0.21.
 
 Launch VS Code and verify the Vega Studio side bar appears in VS Code:
 
-<img src="../images/XHR9fdae9275ba24c52a7e35c0ee.png" alt="Vega Studio Sidebar" height="400">
+<img src="../images/XHR9fdae9275ba24c52a7e35c0ee.png" alt="Vega Studio Sidebar" style="max-height: 400px; max-width: 640px;">
 
 ## 1.2: Create Your First Vega App (Hello World)
 
@@ -16,23 +16,23 @@ Launch VS Code and verify the Vega Studio side bar appears in VS Code:
 
 In the VS Code Command Palette, run "Vega Project: Create a new Vega project" command and follow steps in the interactive wizard to create the project.
 
-![Command Palette](../images/XHR126417328aa245b781134319b.png)
+<img src="../images/XHR126417328aa245b781134319b.png" alt="Command Palette" style="max-height: 400px; max-width: 640px;">
 
 Use the "Hello World" template:
 
-<img src="../images/XHR7cc1b0243c2545ad92ed89908.png" alt="Hello World Template" height="400">
+<img src="../images/XHR7cc1b0243c2545ad92ed89908.png" alt="Hello World Template" style="max-height: 400px; max-width: 640px;">
 
 VegaStudio asks for a directory to save the project, select one from your workspace.
 
 Provide a name for your project:
 
-<img src="../images/XHR0e03e66faa244202bcbc4f1e1.png" alt="Project Name" height="400">
+<img src="../images/XHR0e03e66faa244202bcbc4f1e1.png" alt="Project Name" style="max-height: 400px; max-width: 640px;">
 
-![Package ID Prompt](../images/XHRbb34d49550c24c6d8fc13c848.png)
+<img src="../images/XHRbb34d49550c24c6d8fc13c848.png" alt="Package ID Prompt" style="max-height: 400px; max-width: 640px;">
 
 Add a package ID:
 
-![Package ID](../images/XHR9f0674b1e1b847d0bfd520dae.png)
+<img src="../images/XHR9f0674b1e1b847d0bfd520dae.png" alt="Package ID" style="max-height: 400px; max-width: 640px;">
 
 Open Your Created Project in VS Code (if it's not already open).
 
@@ -50,9 +50,9 @@ Note: You can start your app in "Debug" mode, which we generally recommend as th
 
 This will install and run the app on the Vega Virtual Device or FireTV Stick.
 
-<img src="../images/XHRc12aba94725f4761bd79bb1a7.png" alt="Play Icon" height="400">
+<img src="../images/XHRc12aba94725f4761bd79bb1a7.png" alt="Play Icon" style="max-height: 400px; max-width: 640px;">
 
-<img src="../images/XHR3a0610450b974a119a77f3f38.png" alt="Running App" height="400">
+<img src="../images/XHR3a0610450b974a119a77f3f38.png" alt="Running App" style="max-height: 400px; max-width: 640px;">
 
 **Recommended Testing (Optional)**
 
@@ -67,9 +67,9 @@ setImage(images.learn);
 
 When you press the Learn button, your editor should "break" and you should see the current variables/etc.
 
-<img src="../images/XHR81ca84c05fda42c98d2ca42b6.png" alt="Breakpoint" height="400">
+<img src="../images/XHR81ca84c05fda42c98d2ca42b6.png" alt="Breakpoint" style="max-height: 400px; max-width: 640px;">
 
-<img src="../images/XHR0c9ca828e7c542de9aa3f3ba1.png" alt="Debug View" height="400">
+<img src="../images/XHR0c9ca828e7c542de9aa3f3ba1.png" alt="Debug View" style="max-height: 400px; max-width: 640px;">
 
 ---
 
