@@ -11,6 +11,10 @@ You'll create a 3-screen media streaming app optimized for TV, featuring:
 - Video playback capabilities
 - TV-optimized navigation and focus management
 
+<img src="./images/screen1-list.png" width="640">
+<img src="./images/screen2-detail.png" width="640">
+<img src="./images/screen3-playback.png" width="640">
+
 ## What You'll Learn
 
 - How to develop React Native apps for TV using the Vega Developer Tools
