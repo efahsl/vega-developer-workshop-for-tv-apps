@@ -1,6 +1,6 @@
-# Vega TV Developer Workshop
+# Vega Developer Workshop for TV Apps
 
-Welcome to the Vega Developer Workshop! This hands-on workshop will guide you through building a TV streaming app using Amazon's Vega Developer Tools, the Vega MCP server, and AI prompts.
+Welcome! This hands-on workshop will guide you through building a TV streaming app using [Amazon's Vega Developer Tools](https://developer.amazon.com/apps-and-games/vega), the Vega MCP server, and AI prompts.
 
 ## What You'll Build
 
@@ -35,3 +35,7 @@ You'll create a 3-screen media streaming app optimized for TV, featuring:
 ## Getting Started
 
 Begin with the [Prerequisites](workshop_steps/0_prerequisites.md) to ensure you have all necessary tools installed, then follow the workshop steps in order.
+
+## Toubleshooting
+
+Running into issues? Check out our [troubleshooting guide](https://developer.amazon.com/docs/vega/0.21/troubleshoot-overview.html) on our [Vega Developer Docs](https://developer.amazon.com/apps-and-games/vega).
