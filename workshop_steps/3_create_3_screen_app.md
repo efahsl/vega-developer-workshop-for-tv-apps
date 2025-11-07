@@ -2,7 +2,7 @@
 
 Now the fun part! We are going to build our TV-based UI, a basic 3-screen video streaming app with some AI-generated videos. You can either use the Vega Virtual Device or a Fire TV 4K Select (with [developer mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) enabled). We generally recommend using the Vega Virtual Device for developing new screens, and using the Fire TV device for validating performance/video playback.
 
-*If you do not wish to use AI (or were unable to use AI), you can always follow our tutorial on our tech docs: <https://developer.amazon.com/docs/vega-tutorial/0.21/introduction.html>*
+_If you do not wish to use AI (or were unable to use AI), you can always follow our tutorial on our tech docs: <https://developer.amazon.com/docs/vega-tutorial/0.21/introduction.html>_
 
 ## 3.1: Add a home screen
 
@@ -23,8 +23,8 @@ Assuming you have Fast Refresh enabled, your app UI should automatically update 
 You should have a new HomeScreen.tsx (likely in a new "screens" folder) with content similar to this:
 
 ```javascript
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 export const HomeScreen = () => {
   return (
@@ -37,13 +37,13 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#1a1a1a',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#1a1a1a",
   },
   text: {
     fontSize: 48,
-    color: '#FFFFFF',
+    color: "#FFFFFF",
   },
 });
 ```
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
 It's perfectly OK if your code doesn't look exactly the same. Your App.tsx should be something similar to this:
 
 ```javascript
-import React from 'react';
-import {HomeScreen} from './screens/HomeScreen';
+import React from "react";
+import { HomeScreen } from "./screens/HomeScreen";
 
 export const App = () => {
   return <HomeScreen />;
@@ -135,13 +135,13 @@ A lot of activity happening here. One thing to note is that in your Home Screen 
 
 ```javascript
 const handleItemPress = (item: MovieItem) => {
-    navigation.navigate('Detail', {
-      bannerImage: item.images.poster_16x9,
-      title: item.title,
-      description: item.description,
-      videoUrl: item.sources[0]?.url || '',
-    });
-  };
+  navigation.navigate("Detail", {
+    bannerImage: item.images.poster_16x9,
+    title: item.title,
+    description: item.description,
+    videoUrl: item.sources[0]?.url || "",
+  });
+};
 ```
 
 You should now be able to navigate to your detail screen, and press the "back" button (or "Esc" key) to go back to the home screen.
@@ -193,7 +193,7 @@ Let's add a focus management improvement, prompt:
 I want to trap focus on each row, such that when I am at the end of a row, when I press "right", the focus should NOT go down to the next row.
 ```
 
-*This should import TvFocusGuideView (if it's not already included - and you may have to "npm install" again) and implement the trapFocusLeft and trapFocusRight props.*
+_This should import TvFocusGuideView (if it's not already included - and you may have to "npm install" again) and implement the trapFocusLeft and trapFocusRight props._
 
 <img src="../images/XHRa9e779280eb94f8192f4393d7.png" height="400">
 
@@ -209,7 +209,7 @@ Your agent should import your navigation reference via a prop and add in an even
 // Add event listener for when video ends
     video.current.addEventListener('ended', handleVideoEnded);
     ...
-    
+
 const handleVideoEnded = () => {
     console.log('Video playback ended, navigating back');
     navigation.goBack();
@@ -218,4 +218,4 @@ const handleVideoEnded = () => {
 
 ---
 
-[← Previous: Checkpoint - Get Fire TV Device](2_X_checkpoint_get_firetv_device.md) | [Next: Performance Testing →](4_performance_testing.md)
+[← Previous: Checkpoint - Get Fire TV Device](2_zCheckpoint_get_firetv_device.md) | [Next: Performance Testing →](4_performance_testing.md)

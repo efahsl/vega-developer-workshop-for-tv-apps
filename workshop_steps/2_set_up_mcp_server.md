@@ -12,7 +12,7 @@ While you can use most AI Agent models as-is to make changes to the Vega Hello W
 >
 > ℹ️ Don't have an AI agent/tool? Try Amazon Kiro, it comes with 500 free credits upon first use and should more than suffice for this workshop: <https://kiro.dev/>. We use it quite a bit and is one of our favorites!
 
-**Download our Vega MCP Server tarball** *(in the future we will improve this experience, but for now it requires a manual download)* - Download [vega-devtools-mcp.tgz](https://quip-amazon.com/-/blob/XHR9AAz7WE2/Ovlq-285mjReHWvC_FEeHg?name=vega-devtools-mcp.tgz&s=ROPyAzh306H2). Note down the download path
+**Download our Vega MCP Server tarball** _(in the future we will improve this experience, but for now it requires a manual download)_ - Download [vega-devtools-mcp.tgz](https://quip-amazon.com/-/blob/XHR9AAz7WE2/Ovlq-285mjReHWvC_FEeHg?name=vega-devtools-mcp.tgz&s=ROPyAzh306H2). Note down the download path
 
 Run an npm install from the tarball as global scope (or local to your project if you prefer)
 
@@ -26,16 +26,16 @@ You will now need to add the MCP configuration in your AI Agent's MCP settings, 
 
 Below we list some popular AI agents and the link to how to install MCP servers - note that we are using local/stdio MCPs.
 
-| # | AI Agent | MCP Setup Instructions Link | MCP Settings File Location |
-|---|----------|----------------------------|---------------------------|
-| 1 | Cursor | [Instructions](https://cursor.com/docs/context/mcp#using-mcpjson) | ~/.cursor/mcp.json |
-| 2 | Github Copilot | [Instructions](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp) then choose "Configuring MCP Servers Manually" | ~/.config/mcp-config.json<br/><project-root>/.vscode/mcp.json |
-| 3 | Claude Code CLI | [Instructions](https://code.claude.com/docs/en/mcp#option-3%3A-add-a-local-stdio-server) | ~/.claude.json<br/>/Library/Application Support/ClaudeCode/managed-mcp.json |
-| 4 | Amazon Q | [Instructions](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-mcp-config-CLI.html) | ~/.aws/amazonq/mcp.json |
-| 5 | Kiro | [Instructions](https://kiro.dev/docs/mcp/) | ~/.kiro/settings/mcp.json |
-| 6 | Cline | [Instructions](https://docs.cline.bot/mcp/configuring-mcp-servers) | ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json |
+| #   | AI Agent        | MCP Setup Instructions Link                                                                                                                                    | MCP Settings File Location                                                                                    |
+| --- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| 1   | Cursor          | [Instructions](https://cursor.com/docs/context/mcp#using-mcpjson)                                                                                              | ~/.cursor/mcp.json                                                                                            |
+| 2   | Github Copilot  | [Instructions](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp) then choose "Configuring MCP Servers Manually" | ~/.config/mcp-config.json<br/><project-root>/.vscode/mcp.json                                                 |
+| 3   | Claude Code CLI | [Instructions](https://code.claude.com/docs/en/mcp#option-3%3A-add-a-local-stdio-server)                                                                       | ~/.claude.json<br/>/Library/Application Support/ClaudeCode/managed-mcp.json                                   |
+| 4   | Amazon Q        | [Instructions](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-mcp-config-CLI.html)                                                      | ~/.aws/amazonq/mcp.json                                                                                       |
+| 5   | Kiro            | [Instructions](https://kiro.dev/docs/mcp/)                                                                                                                     | ~/.kiro/settings/mcp.json                                                                                     |
+| 6   | Cline           | [Instructions](https://docs.cline.bot/mcp/configuring-mcp-servers)                                                                                             | ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json |
 
-*If your agent is not listed, please ensure it supports MCP before continuing.*
+_If your agent is not listed, please ensure it supports MCP before continuing._
 
 Now for the content to update, we have a few short steps:
 
@@ -45,7 +45,7 @@ First, run the following command to get the binary location and copy the locatio
 % which vega-devtools-mcp
 ```
 
-And you'll get an output that *could* be something like the following (your node version may be different)
+And you'll get an output that _could_ be something like the following (your node version may be different)
 
 ```
 /Users/YOUR_HOME_FOLDER/.nvm/versions/node/v20.19.4/bin/vega-devtools-mcp
@@ -117,14 +117,14 @@ Choose from the following options to automatically install Agent specific preset
 Select an AI agent (1-7):
 ```
 
-| # | AI Agent | Project Context Location |
-|---|----------|-------------------------|
-| 1 | Cursor | project-root/AGENTS.md file |
-| 2 | Claude Code | project-root/CLAUDE.md file |
-| 3 | Github Copilot | project-root/AGENTS.md file |
-| 4 | Amazon Q | project-root/.amazonq/rules folder |
-| 5 | Kiro | project-root/.kiro/steering folder |
-| 6 | Cline | project-root/.clinerules/ folder |
+| #   | AI Agent       | Project Context Location           |
+| --- | -------------- | ---------------------------------- |
+| 1   | Cursor         | project-root/AGENTS.md file        |
+| 2   | Claude Code    | project-root/CLAUDE.md file        |
+| 3   | Github Copilot | project-root/AGENTS.md file        |
+| 4   | Amazon Q       | project-root/.amazonq/rules folder |
+| 5   | Kiro           | project-root/.kiro/steering folder |
+| 6   | Cline          | project-root/.clinerules/ folder   |
 
 If these do not properly load for you, you can always say the following at the start of any AI agent session: `use AGENTS.md for context`
 
@@ -164,4 +164,4 @@ Verify if AI Agent made a tool call to vega-devtools-mcp to read Vega Architectu
 
 ---
 
-[← Previous: Create a Hello World App](1_create_hello_world_app.md) | [Next: Checkpoint - Get Fire TV Device →](2_X_checkpoint_get_firetv_device.md)
+[← Previous: Create a Hello World App](1_create_hello_world_app.md) | [Next: Checkpoint - Get Fire TV Device →](2_zCheckpoint_get_firetv_device.md)
