@@ -20,7 +20,7 @@ For this Vega app, I want to create a new component called HomeScreen with just 
 
 Assuming you have Fast Refresh enabled, your app UI should automatically update to something like the following:
 
-![Home Screen Placeholder](../images/XHR5823cc7985054a889de068d78.png)
+<img src="../images/XHR5823cc7985054a889de068d78.png" alt="Home Screen Placeholder" height="400">
 
 You should have a new HomeScreen.tsx (likely in a new "screens" folder) with content similar to this:
 
@@ -81,7 +81,7 @@ We like to include a question at the end of our prompt to resolve any ambiguity 
 
 Once complete, you should have a UI that looks something like the below image:
 
-![Content Row](../images/XHR0e4c37191438420684935f77e.png)
+<img src="../images/XHR0e4c37191438420684935f77e.png" alt="Content Row" height="400">
 
 **Optional**: modify styling. Since we are going to be using TV Directional-Pad (D-Pad) controls to drive the experience, we will need to understand what item is selected. There should be some basic indicator of what is selected, but consider modifying the style such as setting/changing a background color when focused or setting/changing the scale transform to 1.15. Try using natural language to describe any changes you'd like to make. OR go into the code of your HomeScreen.tsx and make these changes directly.
 
@@ -168,7 +168,7 @@ Now let's add some buttons to the screen so we can do something - we'll add a "P
 Add "Play" and "Add to watchlist" buttons to my DetailsScreen; the button presses should log an acknowledgment message in the logs. Make sure the buttons indicate which one is focused; the "Play" button should be focused by default.
 ```
 
-![Details Screen with Buttons](../images/XHR96fe2b067f0c4c5abb0d47686.png)
+<img src="../images/XHR96fe2b067f0c4c5abb0d47686.png" alt="Details Screen with Buttons" height="400">
 
 Commit changes for safe-measure (`git add * / git commit`)
 
@@ -217,7 +217,7 @@ I want to trap focus on each row, such that when I am at the end of a row, when 
 
 *This should import TvFocusGuideView (if it's not already included - and you may have to "npm install" again) and implement the trapFocusLeft and trapFocusRight props.*
 
-![Multiple Rows](../images/XHRa9e779280eb94f8192f4393d7.png)
+<img src="../images/XHRa9e779280eb94f8192f4393d7.png" alt="Multiple Rows" height="400">
 
 ### Auto-Return After Video Ends
 

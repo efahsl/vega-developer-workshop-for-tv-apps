@@ -14,11 +14,11 @@ Plug in your Fire TV stick to both an HDMI screen and USB power - whether throug
 
 *If you do not have an extra TV/monitor/etc - you can consider using an HDMI capture card to view the contents of the Fire TV Stick on your laptop using Quicktime/OBS/etc.*
 
-![Fire TV Stick](../images/XHR0f97c21856f547a897ea02973.png)
+<img src="../images/XHR0f97c21856f547a897ea02973.png" alt="Fire TV Stick" height="400">
 
 You will need to connect to wifi and complete login/registration steps on the FireTV stick using your FireTV Stick Remote, and then you should be able to see your Fire TV UI below (this is called the "Launcher App").
 
-![Fire TV UI](../images/XHR0c17af328ed544a6bc91a31b2.png)
+<img src="../images/XHR0c17af328ed544a6bc91a31b2.png" alt="Fire TV UI" height="400">
 
 ### Run Your App
 
@@ -26,7 +26,7 @@ Next, we will run the app we've built on the Fire TV device itself. Performance 
 
 In the Vega Studio side bar, select the FireTV Stick device under "Devices" panel and "Release" under "Build Modes", then click the play icon next to the project to build and run the app on the device.
 
-![Vega Studio Device Selection](../images/XHR50dbbb7c316c43109ebfcd6e3.png)
+<img src="../images/XHR50dbbb7c316c43109ebfcd6e3.png" alt="Vega Studio Device Selection" height="400">
 
 You should now see your app running on your TV device, and be able to navigate the screens via the remote control.
 
@@ -42,11 +42,9 @@ Connect a FireTV stick device and run "App KPI Visualizer" tool from Vega Studio
 
 ![App KPI Visualizer](../images/XHR7994f428b5be4518b97c52ce9.png)
 
-Select following options in the wizard:
-
 **KPIs: Choose - 'Cool Start Latency' and 'UI Fluidity' tests**
 
-![KPI Selection](../images/XHRacbe3e86947840b5a662aaace.png)
+<img src="../images/XHRacbe3e86947840b5a662aaace.png" alt="KPI Selection" height="400">
 
 Uncheck "Record CPU Profiler" - *this option records a CPU profiler trace to deep-dive further into performance issues*
 
@@ -56,7 +54,7 @@ Select "No" for the following:
 
 Selecting "No" will run a default UI automation script. Otherwise you can create a new custom Appium based UI automation script and use that.
 
-![Automation Script](../images/XHR5b7b6421529748e1bc4b3f38d.png)
+<img src="../images/XHR5b7b6421529748e1bc4b3f38d.png" alt="Automation Script" height="400">
 
 Select defaults for all other options in the wizard.
 
@@ -76,7 +74,7 @@ Check which KPIs are failing.
 
 For failing KPIs, click "Diagnose with AI" action shown in the KPI report to diagnose a failing KPI:
 
-![Diagnose with AI](../images/XHR786f1b1327704254acc105705.png)
+<img src="../images/XHR786f1b1327704254acc105705.png" alt="Diagnose with AI" width="640">
 
 Review & apply suggested optimizations.
 

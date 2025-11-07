@@ -16,7 +16,7 @@ Inspired to build other TV apps / experiences? Here is a list of some ideas that
 
 ### 1. "Recipe Theater" - Interactive Cooking App
 
-![Recipe Theater](../images/XHRac1f920f34aa4f76ae15e303f.png)
+<img src="../images/XHRac1f920f34aa4f76ae15e303f.png" alt="Recipe Theater" width="640">
 
 **Complexity:** Medium | **API:** TheMealDB or Spoonacular
 
@@ -38,7 +38,7 @@ A lean-back cooking experience optimized for the 10-foot interface.
 
 ### 2. "Ambient Gallery" - Dynamic Art Screensaver
 
-![Ambient Gallery](../images/XHR49766ffe636b4e4aaaf917e39.png)
+<img src="../images/XHR49766ffe636b4e4aaaf917e39.png" alt="Ambient Gallery" width="640">
 
 **Complexity:** Simple | **API:** Unsplash or NASA APOD
 
@@ -60,7 +60,7 @@ Turn your TV into a rotating art gallery with curated images.
 
 ### 3. "News Ticker" - Live News Dashboard
 
-![News Ticker](../images/XHR0291fee0120743c59dc06c6b8.png)
+<img src="../images/XHR0291fee0120743c59dc06c6b8.png" alt="News Ticker" width="640">
 
 **Complexity:** Medium | **API:** NewsAPI or RSS feeds
 
@@ -82,7 +82,7 @@ A TV-optimized news reader with headlines and article browsing.
 
 ### 4. "Trivia Night" - Quiz Game
 
-![Trivia Night](../images/XHR48265964c5ee4cc68f251e40d.png)
+<img src="../images/XHR48265964c5ee4cc68f251e40d.png" alt="Trivia Night" width="640">
 
 **Complexity:** Medium-High | **API:** Open Trivia DB (or an LLM API like OpenAI/etc to generate questions/answers)
 
@@ -105,7 +105,7 @@ A living room quiz game with categories and scoring.
 
 ### 5. "Weather Wall" - Immersive Weather Dashboard
 
-![Weather Wall](../images/XHR70b4c1523a104779a6abc09f6.png)
+<img src="../images/XHR70b4c1523a104779a6abc09f6.png" alt="Weather Wall" width="640">
 
 **Complexity:** Medium | **API:** OpenWeatherMap or WeatherAPI
 

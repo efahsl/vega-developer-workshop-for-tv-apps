@@ -154,7 +154,7 @@ You should get a response similar to:
 
 Verify if AI Agent made a tool call to vega-devtools-mcp to read Vega Architecture document.
 
-![Verification](../images/XHR300f5b9dcd9a4d52b4223abe4.png)
+<img src="../images/XHR300f5b9dcd9a4d52b4223abe4.png" alt="Verification" height="400">
 
 ## [Optional] Use AI To Run Your App via the Vega CLI
 
@@ -166,7 +166,7 @@ Verify if AI Agent made a tool call to vega-devtools-mcp to read Vega Architectu
 
 You should expect the AI agent to run the following tools in order to run your app:
 
-![AI Running App](../images/XHRd458c060ebee4e8b9529adba9.png)
+<img src="../images/XHRd458c060ebee4e8b9529adba9.png" alt="AI Running App" height="400">
 
 Verify app launches successfully and test basic functionality. Make a change in the App and verify it reflects in the running app.
 
