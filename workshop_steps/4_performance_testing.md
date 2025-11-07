@@ -8,7 +8,7 @@ Next, we will run a performance test of the app on our physical device to get a 
 
 This is required to accurately measure performance, apply targeted performance optimizations and re-measure to verify performance improvements.
 
-Add the following config to your VS Code settings file. This config enables *"AI-Assisted Diagnosis"* feature in Vega Studio.
+Add the following config to your VS Code settings file. This config enables _"AI-Assisted Diagnosis"_ feature in Vega Studio.
 
 ```json
 {
@@ -29,11 +29,11 @@ Connect a FireTV stick device and run "App KPI Visualizer" tool from Vega Studio
 
 Select following options in the wizard:
 
-*KPIs: Choose - 'Cool Start Latency' and 'UI Fluidity' tests*
+_KPIs: Choose - 'Cool Start Latency' and 'UI Fluidity' tests_
 
-<img src="../images/XHRacbe3e86947840b5a662aaace.png" height="400">
+<img src="../images/XHRacbe3e86947840b5a662aaace.png" width="640">
 
-Uncheck "Record CPU Profiler" - *this option records a CPU profiler trace to deep-dive further into performance issues*
+Uncheck "Record CPU Profiler" - _this option records a CPU profiler trace to deep-dive further into performance issues_
 
 <img src="../images/XHR5ea09e4481a7473d9d2033a49.png" width="640">
 
@@ -41,7 +41,7 @@ Select defaults for all other options in the wizard
 
 Select "No" for the following:
 
-*Selecting "No" will run a default UI automation script. Otherwise you can create a new custom Appium based UI automation script and use that.*
+_Selecting "No" will run a default UI automation script. Otherwise you can create a new custom Appium based UI automation script and use that._
 
 <img src="../images/XHR5b7b6421529748e1bc4b3f38d.png" height="400">
 
@@ -51,8 +51,8 @@ Once KPI Visualizer starts, you should see a notification window as below
 
 After the test starts, KPI Visualizer will automatically run the app and measure KPIs:
 
-- For *"Application Cool Start Latency"* test, KPI Visualizer launches the App and measure launch latency
-- For *"Application UI Fluidity"* test, KPI Visualizer runs a pre-defined D-Pad remote automation script in the App and automatically measures UI Fluidity, Dropped Frames and Application Responsiveness time.
+- For _"Application Cool Start Latency"_ test, KPI Visualizer launches the App and measure launch latency
+- For _"Application UI Fluidity"_ test, KPI Visualizer runs a pre-defined D-Pad remote automation script in the App and automatically measures UI Fluidity, Dropped Frames and Application Responsiveness time.
 
 **Analyze performance report**
 
@@ -150,7 +150,7 @@ export const HomeScreen = ({navigation}: Props) => {
   const [loading, setLoading] = useState(true);
   const [focusedId, setFocusedId] = useState<string | null>(null);
   const reportFullyDrawnCallback = useReportFullyDrawn();
-  
+
   // Using a useEffect Hook to have the fully drawn reporting performed
   // post first render after cool launch.
   useEffect(() => {
@@ -174,7 +174,7 @@ This should kick off AI-Assisted Diagnosis for TTFF KPI in your AI Agent.
 
 You AI Agent may respond with a message saying the KPI is already meeting expected standards, no further diagnosis is required.
 
-In this case ask your AI Agent to ignore the thresholds and further optimize the KPI; prompt: "*Please help improve this KPI with the instructions provided earlier in the prompt. Ignore the KPI threshold check, I want to improve the KPI value even though it is within the threshold.*"
+In this case ask your AI Agent to ignore the thresholds and further optimize the KPI; prompt: "_Please help improve this KPI with the instructions provided earlier in the prompt. Ignore the KPI threshold check, I want to improve the KPI value even though it is within the threshold._"
 
 You should expect a response similar to the following indicating that Native Splash Screen is not implemented in the App.
 
@@ -186,7 +186,7 @@ rendered frame without any splash screen buffer.
 
 AI Agent should automatically implement the SplashScreen manager APIs in your app.
 
-SplashScreen Manager requires a 'SplashScreenImages.zip' file to maintain splash screen assets. Ask your AI agent to create this file, by providing an input image; prompt: *"Please create the SplahScreenImages.zip file using this image "./src/assets/background.png".* Alternatively, you can provide any 1920x1080 pixels .png image of your choice.
+SplashScreen Manager requires a 'SplashScreenImages.zip' file to maintain splash screen assets. Ask your AI agent to create this file, by providing an input image; prompt: _"Please create the SplahScreenImages.zip file using this image "./src/assets/background.png"._ Alternatively, you can provide any 1920x1080 pixels .png image of your choice.
 
 Follow the agent workflow and verify the zip file is created properly in `<project-root>/assets/raw/SplashScreenImages.zip`.
 
