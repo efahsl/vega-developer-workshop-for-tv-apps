@@ -1,22 +1,20 @@
-# Phase 6: Wrap Up and Next Steps
+# Phase 6: Wrap up and Next Steps
 
-This concludes the official content for the workshop, but we hope it doesn't conclude your curiosity with Vega and TV apps!
+This concludes the official agenda for our workshop. We hope you had fun building app for the big-screen with the Vega OS (and AI).
 
-## So What's Next?
+We would appreciate if you can take few more mins to complete the survey here (<https://amazon6.qualtrics.com/jfe/form/SV_2fRvQv0Cdap2UtM>) and let us know about your experience.
 
-You can continue enhancing/building your existing app - you could add a Turbo Module or other additional features/enhancements. Explore other sample apps...
+We look forward to seeing you build and submit more apps by using [Vega Developer Tools](https://developer.amazon.com/apps-and-games/vega#vegadevtools). You are welcome to continue enhancing your current app by adding more features like [turbo module](https://developer.amazon.com/docs/kepler-tv/create-turbo-module.html), and [media players](https://developer.amazon.com/docs/vega/0.21/media-player.html), you could decide to fork one of the [sample apps](https://developer.amazon.com/docs/vega/0.21/sample-app-home.html), or develop a brand new app (see below for some additional ideas/inspiration). During your development if you run into issues including slow app performance, app not responding, or crashes then use the [Debugging](https://developer.amazon.com/docs/vega/0.21/debug-apps-overview.html), [Performance](https://developer.amazon.com/docs/vega/0.21/improve-performance-overview.html), and Vega MCP Developer Tools to root cause and fix issues. After testing, you can submit your app for publishing in the Fire-TV App marketplace, refer [here](https://developer.amazon.com/docs/vega/0.21/app-submission.html) for more details on submission and publishing.
 
-## App Submission
+For any questions or suggestions either use [developer forums](https://community.amazondeveloper.com/c/vega/6) or [contact-us](https://developer.amazon.com/support/cases/new).
 
-Do you have an app you want to publish to customers on the Amazon App Store? Read through the instructions for submitting your Vega App here: https://developer.amazon.com/docs/vega/0.21/app-submission.html
-
-## Other TV-Friendly Ideas
+## Need a few TV-Friendly app ideas to tinker?
 
 Inspired to build other TV apps / experiences? Here is a list of some ideas that can work well on a large screen that may be of inspiration. Feel free to use the Vega Tools MCP server we provided to help you build out some of these experiences (or variants of).
 
 ### 1. "Recipe Theater" - Interactive Cooking App
 
-<img src="../images/XHRac1f920f34aa4f76ae15e303f.png" alt="Recipe Theater" width="640">
+<img src="../images/XHRac1f920f34aa4f76ae15e303f.png" height="400">
 
 **Complexity:** Medium | **API:** TheMealDB or Spoonacular
 
@@ -38,7 +36,7 @@ A lean-back cooking experience optimized for the 10-foot interface.
 
 ### 2. "Ambient Gallery" - Dynamic Art Screensaver
 
-<img src="../images/XHR49766ffe636b4e4aaaf917e39.png" alt="Ambient Gallery" width="640">
+<img src="../images/XHR49766ffe636b4e4aaaf917e39.png" height="400">
 
 **Complexity:** Simple | **API:** Unsplash or NASA APOD
 
@@ -60,7 +58,7 @@ Turn your TV into a rotating art gallery with curated images.
 
 ### 3. "News Ticker" - Live News Dashboard
 
-<img src="../images/XHR0291fee0120743c59dc06c6b8.png" alt="News Ticker" width="640">
+<img src="../images/XHR0291fee0120743c59dc06c6b8.png" height="400">
 
 **Complexity:** Medium | **API:** NewsAPI or RSS feeds
 
@@ -82,7 +80,7 @@ A TV-optimized news reader with headlines and article browsing.
 
 ### 4. "Trivia Night" - Quiz Game
 
-<img src="../images/XHR48265964c5ee4cc68f251e40d.png" alt="Trivia Night" width="640">
+<img src="../images/XHR48265964c5ee4cc68f251e40d.png" height="400">
 
 **Complexity:** Medium-High | **API:** Open Trivia DB (or an LLM API like OpenAI/etc to generate questions/answers)
 
@@ -105,7 +103,7 @@ A living room quiz game with categories and scoring.
 
 ### 5. "Weather Wall" - Immersive Weather Dashboard
 
-<img src="../images/XHR70b4c1523a104779a6abc09f6.png" alt="Weather Wall" width="640">
+<img src="../images/XHR70b4c1523a104779a6abc09f6.png" height="400">
 
 **Complexity:** Medium | **API:** OpenWeatherMap or WeatherAPI
 
