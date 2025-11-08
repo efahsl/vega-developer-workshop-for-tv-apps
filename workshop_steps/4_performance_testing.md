@@ -19,11 +19,11 @@ Add the following config to your VS Code settings file. This config enables _"AI
 
 You can open VS code settings JSON, by running the following command in VS Code Command Pallet:
 
-<img src="../images/XHRfc0c08d1cf16434d8d2c9f14d.png">
+<img src="../images/XHRfc0c08d1cf16434d8d2c9f14d.png" width="640">
 
 You might see a warning in VS Code settings, you can safely ignore it:
 
-<img src="../images/XHRe7a7958d561849339bef6389b.png">
+<img src="../images/XHRe7a7958d561849339bef6389b.png" width="640">
 
 **Run Performance Performance test:**
 
@@ -35,11 +35,11 @@ Select following options in the wizard:
 
 KPIs: Choose - 'Cool Start Latency' - _you may choose additional KPIs in the check list. Each test runs sequentially, so takes longer to execute_
 
-<img src="../images/app-cool-start-latency-test.png">
+<img src="../images/app-cool-start-latency-test.png" width="640">
 
 Uncheck "Record CPU Profiler" - _this option records a CPU profiler trace to deep-dive further into performance issues_
 
-<img src="../images/XHR5ea09e4481a7473d9d2033a49.png">
+<img src="../images/XHR5ea09e4481a7473d9d2033a49.png" width="640">
 
 Select defaults for all other options in the wizard
 
@@ -51,7 +51,7 @@ _This option is only shown for subset of test cases. Selecting "No" will run a d
 
 Once KPI Visualizer starts, you should see a notification window as below
 
-<img src="../images/XHR3063643309f34a39a1a4f2ea8.png">
+<img src="../images/XHR3063643309f34a39a1a4f2ea8.png"  width="640">
 
 After the test starts, KPI Visualizer will automatically run the app and measure KPIs:
 
