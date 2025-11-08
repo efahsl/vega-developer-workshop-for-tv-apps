@@ -18,7 +18,7 @@ For this Vega app, I want to create a new component called HomeScreen with just 
 
 Assuming you have Fast Refresh enabled, your app UI should automatically update to something like the following:
 
-<img src="../images/XHR5823cc7985054a889de068d78.png" with="640">
+<img src="../images/XHR5823cc7985054a889de068d78.png" width="640">
 
 You should have a new HomeScreen.tsx (likely in a new "screens" folder) with content similar to this:
 
