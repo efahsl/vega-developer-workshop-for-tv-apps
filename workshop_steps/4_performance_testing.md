@@ -19,23 +19,27 @@ Add the following config to your VS Code settings file. This config enables _"AI
 
 You can open VS code settings JSON, by running the following command in VS Code Command Pallet:
 
-<img src="../images/XHRfc0c08d1cf16434d8d2c9f14d.png" width="640">
+<img src="../images/XHRfc0c08d1cf16434d8d2c9f14d.png">
+
+You might see a warning in VS Code settings, you can safely ignore it:
+
+<img src="../images/XHRe7a7958d561849339bef6389b.png">
 
 **Run Performance Performance test:**
 
 Connect a FireTV stick device and run "App KPI Visualizer" tool from Vega Studio side bar in VS Code
 
-<img src="../images/XHR7994f428b5be4518b97c52ce9.png" width="640">
+<img src="../images/XHR7994f428b5be4518b97c52ce9.png">
 
 Select following options in the wizard:
 
 _KPIs: Choose - 'Cool Start Latency' and 'UI Fluidity' tests_
 
-<img src="../images/XHRacbe3e86947840b5a662aaace.png" width="640">
+<img src="../images/XHRacbe3e86947840b5a662aaace.png">
 
 Uncheck "Record CPU Profiler" - _this option records a CPU profiler trace to deep-dive further into performance issues_
 
-<img src="../images/XHR5ea09e4481a7473d9d2033a49.png" width="640">
+<img src="../images/XHR5ea09e4481a7473d9d2033a49.png">
 
 Select defaults for all other options in the wizard
 
@@ -47,7 +51,7 @@ _Selecting "No" will run a default UI automation script. Otherwise you can creat
 
 Once KPI Visualizer starts, you should see a notification window as below
 
-<img src="../images/XHR3063643309f34a39a1a4f2ea8.png" width="640">
+<img src="../images/XHR3063643309f34a39a1a4f2ea8.png">
 
 After the test starts, KPI Visualizer will automatically run the app and measure KPIs:
 
@@ -72,21 +76,23 @@ KPI report includes a "Diagnose with AI" Action, that automatically executes pre
 
 This should kick off AI-Assisted Diagnosis for TTFD KPI in your AI Agent. You should expect a response similar to the following indicating that `reportFullyDrawnCallback()` callback is not invoked in the App.
 
+```
 Key Changes:
 
-- Import `useReportFullyDrawn` from `@amazon-devices/kepler-performance-api`
-- Import `useKeplerAppStateManager` from `@amazon-devices/react-native-kepler`
-- Add state management for app state tracking
-- Call `reportFullyDrawnCallback()` in useEffect after first render (handles Cold Start)
-- Implement app state change listener to call `reportFullyDrawnCallback()` on foreground transitions (handles Warm Start)
+Import useReportFullyDrawn from @amazon-devices/kepler-performance-api
+Import useKeplerAppStateManager from @amazon-devices/react-native-kepler
+Add state management for app state tracking
+Call reportFullyDrawnCallback() in useEffect after first render (handles Cold Start)
+Implement app state change listener to call reportFullyDrawnCallback() on foreground transitions (handles Warm Start)
+```
 
-If your AI Agent doesn't automatically implement the recommended changes, ask your AI Agent to implement them by giving a prompt: "implement the recommended changes".
+If your AI Agent doesn't automatically implement the recommended changes, ask your AI Agent to implement them by giving a prompt: `"implement the recommended changes"`.
 
 Your AI Agent should then install `npm install @amazon-devices/kepler-performance-api` library and invoke the `useReportFullyDrawn()` callback.
 
 Example of AI Agent changes in App.tsx to invoke `useReportFullyDrawn()`:
 
-```javascript
+```typescript
 import {useKeplerAppStateManager} from '@amazon-devices/react-native-kepler';
 import {useReportFullyDrawn} from '@amazon-devices/kepler-performance-api';
 ...
@@ -138,11 +144,11 @@ export const App = () => {
 };
 ```
 
-**⚠️ Important**: Check the placement of `useReportFullyDrawn()` callback. It must be invoked after the component the user first sees is fully mounted. Adjust the placement of `useReportFullyDrawn()` in the useEffect accordingly.
+**\*⚠️ Important**: Check the placement of "useReportFullyDrawn()" callback. It must be invoked after the component the user first sees is fully mounted. Adjust the placement of useReportFullyDrawn() in the useEffect accordingly.\*
 
-For example, in case of an app that displays the first screen in a HomeScreen.tsx component, move the call to `useReportFullyDrawn()` in a useEffect of HomeScreen & remove it from App.tsx. Invoking `useReportFullyDrawn()` results in duplicate markers, that leads to incorrect KPI values.
+For example, in case of an app that displays the first screen in a HomeScreen.tsx component, move the call to `useReportFullyDrawn()` in a useEffect of HomeScreen _& remove it from App.tsx. Invoking useReportFullyDrawn() results in duplicate markers, that leads to incorrect KPI values._
 
-```javascript
+```typescript
 import {useReportFullyDrawn} from '@amazon-devices/kepler-performance-api';
 
 export const HomeScreen = ({navigation}: Props) => {
@@ -174,7 +180,7 @@ This should kick off AI-Assisted Diagnosis for TTFF KPI in your AI Agent.
 
 You AI Agent may respond with a message saying the KPI is already meeting expected standards, no further diagnosis is required.
 
-In this case ask your AI Agent to ignore the thresholds and further optimize the KPI; prompt: "_Please help improve this KPI with the instructions provided earlier in the prompt. Ignore the KPI threshold check, I want to improve the KPI value even though it is within the threshold._"
+In this case ask your AI Agent to ignore the thresholds and further optimize the KPI; prompt: `"Please help improve this KPI with the instructions provided earlier in the prompt. Ignore the KPI threshold check, I want to improve the KPI value even though it is within the threshold."`
 
 You should expect a response similar to the following indicating that Native Splash Screen is not implemented in the App.
 
@@ -186,7 +192,7 @@ rendered frame without any splash screen buffer.
 
 AI Agent should automatically implement the SplashScreen manager APIs in your app.
 
-SplashScreen Manager requires a 'SplashScreenImages.zip' file to maintain splash screen assets. Ask your AI agent to create this file, by providing an input image; prompt: _"Please create the SplahScreenImages.zip file using this image "./src/assets/background.png"._ Alternatively, you can provide any 1920x1080 pixels .png image of your choice.
+SplashScreen Manager requires a 'SplashScreenImages.zip' file to maintain splash screen assets. Ask your AI agent to create this file, by providing an input image; prompt: `"Please create the SplahScreenImages.zip file using this image "./src/assets/background.png".` Alternatively, you can provide any 1920x1080 pixels .png image of your choice.
 
 Follow the agent workflow and verify the zip file is created properly in `<project-root>/assets/raw/SplashScreenImages.zip`.
 
@@ -200,4 +206,4 @@ Re-run performance test
 
 ---
 
-[← Previous: Create a 3 Screen App](3_create_3_screen_app.md) | [Next: Performance Improvements →](5_performance_improvements.md)
+**Previous:** [Create a 3 Screen App](3_create_3_screen_app.md) | **Next:** [Performance Improvements](5_performance_improvements.md)

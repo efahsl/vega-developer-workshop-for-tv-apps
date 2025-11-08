@@ -1,4 +1,4 @@
-# Phase 3: Create a 3-Screen App
+# Phase 3: Create a 3-screen app
 
 Now the fun part! We are going to build our TV-based UI, a basic 3-screen video streaming app with some AI-generated videos. You can either use the Vega Virtual Device or a Fire TV 4K Select (with [developer mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) enabled). We generally recommend using the Vega Virtual Device for developing new screens, and using the Fire TV device for validating performance/video playback.
 
@@ -18,11 +18,11 @@ For this Vega app, I want to create a new component called HomeScreen with just 
 
 Assuming you have Fast Refresh enabled, your app UI should automatically update to something like the following:
 
-<img src="../images/XHR5823cc7985054a889de068d78.png" height="400">
+<img src="../images/XHR5823cc7985054a889de068d78.png" with="640">
 
 You should have a new HomeScreen.tsx (likely in a new "screens" folder) with content similar to this:
 
-```javascript
+```typescript
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 
 It's perfectly OK if your code doesn't look exactly the same. Your App.tsx should be something similar to this:
 
-```javascript
+```typescript
 import React from "react";
 import { HomeScreen } from "./screens/HomeScreen";
 
@@ -64,7 +64,7 @@ Next we are going to build the main content of our HomeScreen, which will be a r
 We will use the following prompt, make sure you read it all. The benefit of using prompts is that we can use natural language to describe the experience we want to build, while still specifying some technical direction and details. Prompt:
 
 ```
-I want to update HomeScreen to list movie content titles that the user can watch. It will contain a single row of content that we will first retrieve via a fetch call to: https://raw.githubusercontent.com/efahsl/scrap-tv-feed/refs/heads/main/catalog-fullUrls-720p.json. Check the data structure from the API. The content should be displayed as 16:9 thumbnail images in a FlatList that should be focusable via d-pad remote control and look OK when viewed far away at 10 foot.
+I want to update HomeScreen to list movie content titles that the user can watch. It will contain a single row of content that we will first retrieve via a fetch call to: https://raw.githubusercontent.com/efahsl/scrap-tv-feed/refs/heads/main/catalog-fullUrls-720p.json. Check the data structure from the API. The content should be displayed as 16:9 thumbnail images in a FlatList that should be focusable via d-pad remote control and look OK when viewed far away at 10 foot. Set the default focus to the first item in the list.
 
 Use the thumbnail image (not the poster image) for display, and each item should be about 400px wide (and thus 225px tall). I also want a small header above my content row called "Latest Releases". Pressing the item should result in just a console log statement for now. I'd like a white 4px border around the actively focused element.
 
@@ -105,7 +105,7 @@ You may need to run `npm install` to install these dependencies
 
 Your App.tsx may look something like the following:
 
-```javascript
+```typescript
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const App = () => {
@@ -115,7 +115,8 @@ export const App = () => {
         initialRouteName="Home"
         screenOptions={{
           headerShown: false,
-        }}>
+        }}
+      >
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -128,12 +129,12 @@ If your app loads up properly and shows your Home Screen without errors, you may
 Now let's build the actual DetailsScreen, prompt (again, make sure you read and understand what we're doing):
 
 ```
-Create a new DetailsScreen component. This screen will be accessed via our stack navigator when the user presses one of the content items from the Landing page. This Details Screen should use the "banner" image from the item data which takes up the entire background of the screen and display text for the title and description (make sure these are readable on top of the background image). Add the following props to the component and pass them via navigation: banner image, title, description, and video URL.
+Create a new DetailsScreen component. This screen will be accessed via our stack navigator when the user presses one of the content items from the Landing page. This Details Screen should use the "banner" image from the item data which takes up the entire background of the screen and display text for the title and description (make sure these are readable on top of the background image). Add the following props to the component and pass them via navigation: banner image, title, description, and video URL. These values should be populated from the original API request.
 ```
 
 A lot of activity happening here. One thing to note is that in your Home Screen you should now see navigation wired up upon button press, something like the following:
 
-```javascript
+```typescript
 const handleItemPress = (item: MovieItem) => {
   navigation.navigate("Detail", {
     bannerImage: item.images.poster_16x9,
@@ -146,7 +147,7 @@ const handleItemPress = (item: MovieItem) => {
 
 You should now be able to navigate to your detail screen, and press the "back" button (or "Esc" key) to go back to the home screen.
 
-<img src="../images/XHR075c624e36dd4058810676523.png" width="640">
+<img src="../images/vega-navigation-working-animated.gif" width="640">
 
 Add actions/buttons to the screen. Now let's add some buttons to the screen so we can do something - we'll add a "Play" button which will bring us to a new Video Playback Screen (to be built next) and an "Add to watchlist" button that is a placeholder and won't be built in this workshop (though you can try doing it yourself if you like!) Prompt:
 
@@ -170,7 +171,7 @@ For this workshop, we're going to use URL mode as we're just dealing with simple
 **Add Media Player, In your AI Agent's chat interface, run the following prompt:**
 
 ```
-Add a new VideoPlayerScreen following the Vega Video Player Example. Add it to the existing navigation structure - the video URL should be passed/linked from the Detail Screen when the user presses the "Play Video" button
+Add a new VideoPlayerScreen following the Vega Video Player Example. Add it to the existing navigation structure - the video URL should be passed/linked from the Detail Screen (via navigation prop) when the user presses the "Play Video" button.
 ```
 
 Given that we are updating app manifest entries, you will likely need to rebuild/relaunch your app.
@@ -190,7 +191,7 @@ On the HomeScreen, instead of a single row of content we want to have multiple c
 Let's add a focus management improvement, prompt:
 
 ```
-I want to trap focus on each row, such that when I am at the end of a row, when I press "right", the focus should NOT go down to the next row.
+Let's update our focus management rules, I want to trap focus on each row such that when I am at the end of a row, when I press "right", the focus should NOT go down to the next row.
 ```
 
 _This should import TvFocusGuideView (if it's not already included - and you may have to "npm install" again) and implement the trapFocusLeft and trapFocusRight props._
@@ -205,7 +206,7 @@ On the Video Playback Screen, when the video playback is "done", I want to go ba
 
 Your agent should import your navigation reference via a prop and add in an event listener for "ended" (same as HTML5):
 
-```javascript
+```typescript
 // Add event listener for when video ends
     video.current.addEventListener('ended', handleVideoEnded);
     ...
@@ -218,4 +219,4 @@ const handleVideoEnded = () => {
 
 ---
 
-[← Previous: Checkpoint - Get Fire TV Device](2_zCheckpoint_get_firetv_device.md) | [Next: Performance Testing →](4_performance_testing.md)
+**Previous:** [Checkpoint: Get Fire TV Device](2_zCheckpoint_get_firetv_device.md) | **Next:** [Performance Testing](4_performance_testing.md)

@@ -12,7 +12,7 @@ So to get your Vega Fire TV Stick, talk to one of the workshop session support s
    ```
    *We are looking to ensure your MCP server is called and the "read_document" command is triggered.*
 
-<img src="../images/XHRb0cb339e49824037a1a66f33b.png" width="425">
+<img src="../images/XHRb0cb339e49824037a1a66f33b.png">
 
 ## Configure and run the App on your FireTV Stick
 
@@ -26,7 +26,7 @@ Plug in your Fire TV stick to both an HDMI screen and USB power - whether throug
 
 *If you do not have an extra TV/monitor/etc - you can consider using an HDMI capture card to view the contents of the Fire TV Stick on your laptop using Quicktime/OBS/etc.*
 
-<img src="../images/XHR673cd778489441a2afb108b6c.png" width="412">
+<img src="../images/XHR673cd778489441a2afb108b6c.png" height="400">
 
 You will need to connect to wifi and complete login/registration steps on the FireTV stick using your FireTV Stick Remote, and then you should be able to see your Fire TV UI below (this is called the "Launcher App").
 
@@ -44,4 +44,4 @@ You should now see your app running on your TV device, and be able to navigate t
 
 ---
 
-[← Previous: Set Up MCP Server](2_set_up_mcp_server.md) | [Next: Create a 3 Screen App →](3_create_3_screen_app.md)
+**Previous:** [Set Up MCP Server](2_set_up_mcp_server.md) | **Next:** [Create a 3 Screen App](3_create_3_screen_app.md)

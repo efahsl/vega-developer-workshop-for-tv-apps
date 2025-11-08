@@ -164,4 +164,4 @@ Verify if AI Agent made a tool call to vega-devtools-mcp to read Vega Architectu
 
 ---
 
-[← Previous: Create a Hello World App](1_create_hello_world_app.md) | [Next: Checkpoint - Get Fire TV Device →](2_zCheckpoint_get_firetv_device.md)
+**Previous:** [Create a Hello World App](1_create_hello_world_app.md) | **Next:** [Checkpoint: Get Fire TV Device](2_zCheckpoint_get_firetv_device.md)
