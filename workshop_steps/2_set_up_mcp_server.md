@@ -148,19 +148,15 @@ vega-devtools-mcp - read_document (MCP)(document_name: "react_native_for_vega_ar
 
 or the following with an AI IDE or extension:
 
+<img src="../images/XHR300f5b9dcd9a4d52b4223abe4.png" height="400">
+
 <img src="../images/XHR96290dcb2cd74fc68ab4ecfd8.png" width="640">
 
 You should get a response similar to:
 
 ```
-Vega is a TV platform that uses a system-bundled React Native runtime (rather than app-bundled), where
-  applications only package their JavaScript code and dynamically link to the OS-provided React Native
-  framework and native services at runtime for optimized performance and resource sharing.
+Vega is a TV platform that uses a system-bundled React Native runtime (rather than app-bundled), where applications only package their JavaScript code and dynamically link to the OS-provided React Native framework and native services at runtime for optimized performance and resource sharing.
 ```
-
-Verify if AI Agent made a tool call to vega-devtools-mcp to read Vega Architecture document.
-
-<img src="../images/XHR300f5b9dcd9a4d52b4223abe4.png" height="400">
 
 ---
 
