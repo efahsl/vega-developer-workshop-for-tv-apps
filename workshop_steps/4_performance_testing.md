@@ -6,7 +6,7 @@ Now let's do some performance benchmarking! Note that performance tools are only
 
 Next, we will run a performance test of the app on our physical device to get a performance baseline.
 
-This is required to accurately measure performance, apply targeted performance optimizations and re-measure to verify performance improvements.
+Build your app in **“release”** mode before running a performance test. A release build is required to accurately measure performance, apply targeted performance optimizations and re-measure to verify performance improvements.
 
 Add the following config to your VS Code settings file. This config enables _"AI-Assisted Diagnosis"_ feature in Vega Studio.
 
@@ -33,9 +33,9 @@ Connect a FireTV stick device and run "App KPI Visualizer" tool from Vega Studio
 
 Select following options in the wizard:
 
-_KPIs: Choose - 'Cool Start Latency' and 'UI Fluidity' tests_
+KPIs: Choose - 'Cool Start Latency' - _you may choose additional KPIs in the check list. Each test runs sequentially, so takes longer to execute_
 
-<img src="../images/XHRacbe3e86947840b5a662aaace.png">
+<img src="../images/app-cool-start-latency-test.png">
 
 Uncheck "Record CPU Profiler" - _this option records a CPU profiler trace to deep-dive further into performance issues_
 
@@ -45,7 +45,7 @@ Select defaults for all other options in the wizard
 
 Select "No" for the following:
 
-_Selecting "No" will run a default UI automation script. Otherwise you can create a new custom Appium based UI automation script and use that._
+_This option is only shown for subset of test cases. Selecting "No" will run a default UI automation script. Otherwise you can create a new custom Appium based UI automation script and use that._
 
 <img src="../images/XHR5b7b6421529748e1bc4b3f38d.png" height="400">
 
@@ -64,27 +64,27 @@ The Performance report is automatically opened after performance test is complet
 
 <img src="../images/XHR4a169ce96cb043feab89728f0.png" height="400">
 
-You can also manually open the KPI report file, by navigating to the `<project-root>/generated` directory and clicking on the `aggregated-kpi-report-.json` file.
+You can also manually open the KPI report file, by navigating to the `<project-root>/generated` directory and clicking on the `app-launch-kpi-report-*.json` file.
+
+If you run multiple tests at once a `aggregated-kpi-report-.json` file is created in the `generated` directory.
 
 ## 4.2: AI-Assisted Diagnosis
 
 KPI report includes a "Diagnose with AI" Action, that automatically executes pre-defined steps in your AI agent to diagnose a performance issue in your App.
 
-> If your AI agent is not accessible from Vega Studio, it displays the prompt content in a text editor that you can manually copy and execute in your AI Agent.
-
 **[1] In the KPI report UI, click on "Diagnose with AI" action next to 'Time To Fully Drawn (TTFD) (s)' KPI**
 
-This should kick off AI-Assisted Diagnosis for TTFD KPI in your AI Agent. You should expect a response similar to the following indicating that `reportFullyDrawnCallback()` callback is not invoked in the App.
+This should kick off AI-Assisted Diagnosis for TTFD KPI in your AI Agent.
 
-```
-Key Changes:
+_If your AI agent is not accessible by Vega Studio, the prompt content is opened in a text editor. Copy-paste the prompt content shown the active text editor in your AI agent's chat window. You should see the following notification pop-up in VS Code in this case:_
 
-Import useReportFullyDrawn from @amazon-devices/kepler-performance-api
-Import useKeplerAppStateManager from @amazon-devices/react-native-kepler
-Add state management for app state tracking
-Call reportFullyDrawnCallback() in useEffect after first render (handles Cold Start)
-Implement app state change listener to call reportFullyDrawnCallback() on foreground transitions (handles Warm Start)
-```
+<img src="../images/vegastudio-prompt-notification.png" height="100">
+
+If your App is already meeting KPI guidelines (GREEN), your AI Agent may respond with a message like: _the KPI is already meeting expected standards, no further diagnosis is required._
+
+In this case ask your AI Agent to ignore the thresholds and further optimize the KPI; prompt: _"Please help improve this KPI with the instructions provided earlier in the prompt. Ignore the KPI threshold check, I want to improve the KPI value even though it is within the threshold."_
+
+You should expect a response indicating that `useReportFullyDrawn()` callback is not invoked in the App.
 
 If your AI Agent doesn't automatically implement the recommended changes, ask your AI Agent to implement them by giving a prompt: `"implement the recommended changes"`.
 
@@ -144,9 +144,12 @@ export const App = () => {
 };
 ```
 
-**\*⚠️ Important**: Check the placement of "useReportFullyDrawn()" callback. It must be invoked after the component the user first sees is fully mounted. Adjust the placement of useReportFullyDrawn() in the useEffect accordingly.\*
+**⚠️ Important**: Check the placement of "useReportFullyDrawn()" callback. Invoking `useReportFullyDrawn()` pre-maturely leads to incorrect TTFD KPI values.
 
-For example, in case of an app that displays the first screen in a HomeScreen.tsx component, move the call to `useReportFullyDrawn()` in a useEffect of HomeScreen _& remove it from App.tsx. Invoking useReportFullyDrawn() results in duplicate markers, that leads to incorrect KPI values._
+- For cool start, it must be invoked in the component that is first shown to the user on launch, after the component is fully mounted. Adjust the placement of useReportFullyDrawn() in the useEffect accordingly.
+- For warm start, it must be invoked within app state manager handlers
+
+For example, in case of an app that displays the first screen in a HomeScreen.tsx component, move the call to `useReportFullyDrawn()` in a `useEffect` of HomeScreen **& remove it from App.tsx**.
 
 ```typescript
 import {useReportFullyDrawn} from '@amazon-devices/kepler-performance-api';
@@ -157,8 +160,8 @@ export const HomeScreen = ({navigation}: Props) => {
   const [focusedId, setFocusedId] = useState<string | null>(null);
   const reportFullyDrawnCallback = useReportFullyDrawn();
 
-  // Using a useEffect Hook to have the fully drawn reporting performed
-  // post first render after cool launch.
+  // Example of calling useReportFullyDrawn() after the
+  // component that is first shown to the user is mounted
   useEffect(() => {
     reportFullyDrawnCallback();
   }, [reportFullyDrawnCallback]);
@@ -168,7 +171,7 @@ export const HomeScreen = ({navigation}: Props) => {
   }, []);
 ```
 
-After you apply the code changes, re-build your App in "release" mode again and re-run KPI Visualizer with "Application Cool Start Latency Test". You can optionally include "Application Warm Start Latency Test" as well to test warm start launch scenario
+After you apply the code changes, re-build your App in **"release"** mode again and re-run KPI Visualizer with "Application Cool Start Latency Test". You can optionally include "Application Warm Start Latency Test" as well to test warm start launch scenario
 
 Once the test is complete, you should see that TTFD KPI has a value instead of N/A
 
@@ -178,31 +181,29 @@ Once the test is complete, you should see that TTFD KPI has a value instead of N
 
 This should kick off AI-Assisted Diagnosis for TTFF KPI in your AI Agent.
 
-You AI Agent may respond with a message saying the KPI is already meeting expected standards, no further diagnosis is required.
+_If your AI agent is not accessible by Vega Studio, the prompt content is opened in a text editor. Copy-paste the prompt content shown the active text editor in your AI agent's chat window. You should see the following notification pop-up in VS Code in this case:_
+
+<img src="../images/vegastudio-prompt-notification.png" height="100">
+
+If your App is already meeting KPI guidelines (GREEN), your AI Agent may respond with a message like: _the KPI is already meeting expected standards, no further diagnosis is required._
 
 In this case ask your AI Agent to ignore the thresholds and further optimize the KPI; prompt: `"Please help improve this KPI with the instructions provided earlier in the prompt. Ignore the KPI threshold check, I want to improve the KPI value even though it is within the threshold."`
 
-You should expect a response similar to the following indicating that Native Splash Screen is not implemented in the App.
+You should expect a response indicating that **Native Splash Screen is NOT implemented in the App.**
 
-```
-The app does NOT have Native Splash Screen implementation,
-which is causing the TTFF to be measured from launch to the app's first
-rendered frame without any splash screen buffer.
-```
+AI Agent should then automatically implement the SplashScreen manager APIs in your app.
 
-AI Agent should automatically implement the SplashScreen manager APIs in your app.
+SplashScreen Manager requires a 'SplashScreenImages.zip' file that includes splash screen assets.
 
-SplashScreen Manager requires a 'SplashScreenImages.zip' file to maintain splash screen assets. Ask your AI agent to create this file, by providing an input image; prompt: `"Please create the SplahScreenImages.zip file using this image "./src/assets/background.png".` Alternatively, you can provide any 1920x1080 pixels .png image of your choice.
+Ask your AI agent to create this file, by providing an input image; prompt: _"Please create the SplahScreenImages.zip file using this image "./src/assets/background.png"._
+
+Alternatively, you can provide any 1920x1080 pixels .png image of your choice.
 
 Follow the agent workflow and verify the zip file is created properly in `<project-root>/assets/raw/SplashScreenImages.zip`.
 
-Apply the code changes, then re-build your app in "release" mode & re-run your app to verify Splash Screen shows up when you launch the app on the device.
+Apply the code changes, then re-build your app in **"release"** mode & re-run your app to verify Splash Screen shows up when you launch the app on the device.
 
 After confirming Splash screen is working, re-run KPI Visualizer and verify improvements in TTFF KPI.
-
-Review & apply suggested optimizations
-
-Re-run performance test
 
 ---
 
