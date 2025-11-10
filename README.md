@@ -27,6 +27,9 @@ You'll create a 3-screen media streaming app optimized for TV, featuring:
 0. **[Prerequisites](workshop_steps/0_prerequisites.md)** - Install Vega SDK and development tools
 1. **[Create a Hello World App](workshop_steps/1_create_hello_world_app.md)** - Set up your environment and create your first Vega app
 2. **[Set Up MCP Server](workshop_steps/2_set_up_mcp_server.md)** - Configure AI-powered development assistance
+
+**[CHECKPOINT: set up your Vega Fire TV Stick](workshop_steps/2_zCheckpoint_get_firetv_device.md)** - Validate progress and get your Fire TV Stick from us.
+
 3. **[Create a 3 Screen App](workshop_steps/3_create_3_screen_app.md)** - Build the home screen, details screen, and video player
 4. **[Performance Testing](workshop_steps/4_performance_testing.md)** - Run your app on Fire TV Stick and benchmark performance
 5. **[Performance Improvements](workshop_steps/5_performance_improvements.md)** - Optimize with native Vega components
