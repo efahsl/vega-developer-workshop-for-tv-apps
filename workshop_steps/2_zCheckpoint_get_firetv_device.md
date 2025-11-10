@@ -34,7 +34,7 @@ You will need to connect to wifi and complete login/registration steps on the Fi
 
 **Developer Mode:**
 
-Developer Mode provides access to the device shell, it is required for you to be able to side-load, test, and debug apps on physical devices. For more details see [here](https://developer.amazon.com/docs/vega/0.21/developer-mode.html). For Vega based devices, only registered developers can enable developer mode. We have already allow-listed the devices to access developer mode but developer mode is not enabled, refer step-3 in the page [here](https://developer.amazon.com/docs/vega/0.21/run-apps.html#ftv-tab) to enable developer mode on your device. 
+Developer Mode provides access to the device shell, it is required for you to be able to side-load, test, and debug apps on physical devices. For more details see [here](https://developer.amazon.com/docs/vega/0.21/developer-mode.html). For Vega based devices, only registered developers can enable access and enable developer mode shell. We have already allow-listed the devices we shared to access developer mode but the developer mode is not yet enabled, refer step-3 in the page [here](https://developer.amazon.com/docs/vega/0.21/run-apps.html#ftv-tab) to enable developer mode on your device. 
 
 **Run your app**
 
