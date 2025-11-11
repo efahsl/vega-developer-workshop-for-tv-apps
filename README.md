@@ -22,6 +22,10 @@ You'll create a 3-screen media streaming app optimized for TV, featuring:
 - Performance testing and optimization techniques for TV apps
 - Best practices for 10-foot UI design and D-pad navigation
 
+## Prequisites
+
+Check out our [Prerequisites](workshop_steps/0_prerequisites.md) page to install the Vega Developer Tools and learn more about Model Context Protocol. We also highly recommend reading about the Vega architecture and component APIs to have a better understanding of the SDK capabilities as you run through this workshop.
+
 ## Workshop Steps
 
 0. **[Prerequisites](workshop_steps/0_prerequisites.md)** - Install Vega SDK and development tools
