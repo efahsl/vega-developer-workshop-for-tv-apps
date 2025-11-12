@@ -123,9 +123,11 @@ You should see a response that includes the following tools:
 
 ### 2.1.3 Add Vega Context to AI Agent
 
-The final step to using the MCP server is to add specific project configuration to look up additional prompts/context when using Vega-specific commands/components/libraries/etc. _Make sure you are in your project directory_.
+The final step to using the MCP server is to add specific project configuration to look up additional prompts/context when using Vega-specific commands/components/libraries/etc.
 
 Run the following command **within your App project**, to initialize Vega context for your AI Coding agent.
+
+This tool installs Vega App development context document in your project. The context document guides AI agents to efficiently answer queries related to app development for Vega OS
 
 ```bash
 npx vega-devtools-mcp --init-context
