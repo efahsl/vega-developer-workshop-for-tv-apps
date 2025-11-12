@@ -12,7 +12,7 @@ While you can use most AI Agent models as-is to make changes to the Vega Hello W
 >
 > ℹ️ Don't have an AI agent/tool? Try Amazon Kiro, it comes with 500 free credits upon first use and should more than suffice for this workshop: <https://kiro.dev/>. We use it quite a bit and is one of our favorites!
 
-**Download our Vega MCP Server tarball** _(in the future we will improve this experience, but for now it requires a manual download)_ - Download [vega-devtools-mcp.tgz](https://quip-amazon.com/-/blob/XHR9AAz7WE2/Ovlq-285mjReHWvC_FEeHg?name=vega-devtools-mcp.tgz&s=ROPyAzh306H2). Note down the download path
+**Download our Vega MCP Server tarball** _(in the future we will improve this experience, but for now it requires a manual download)_ - Download [vega-devtools-mcp.tgz](../vega-devtools-mcp.tgz). Note down the download path
 
 Run an npm install from the tarball as global scope (or local to your project if you prefer)
 
