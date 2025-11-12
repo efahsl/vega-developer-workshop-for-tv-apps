@@ -12,44 +12,29 @@ While you can use most AI Agent models as-is to make changes to the Vega Hello W
 >
 > ℹ️ Don't have an AI agent/tool? Try Amazon Kiro, it comes with 500 free credits upon first use and should more than suffice for this workshop: <https://kiro.dev/>. We use it quite a bit and is one of our favorites!
 
-**Download our Vega MCP Server tarball** \_(in the future we will improve this experience, but for now it requires a manual download)
+### 2.1.1 Download our Vega MCP Server tarball
 
-Run the following command to download [vega-devtools-mcp.tgz](../vega-devtools-mcp.tgz)
+_(in the future we will improve this experience, but for now it requires a manual download)_
+
+[1] Run the following command to download [vega-devtools-mcp.tgz](../vega-devtools-mcp.tgz)
 
 ```bash
 curl -L -o vega-devtools-mcp.tgz https://raw.githubusercontent.com/efahsl/vega-developer-workshop-for-tv-apps/main/vega-devtools-mcp.tgz
 
 ```
 
-Run an npm install from the tarball as global scope (or local to your project if you prefer)
+[2] Run an npm install from the tarball as global scope (or local to your project if you prefer)
 
 ```bash
 npm install -g vega-devtools-mcp.tgz
 ```
 
-**Install MCP server to your AI Agent**
+**🏁 Checkpoint: Verify MCP Installation**
 
-You will now need to add the MCP configuration in your AI Agent's MCP settings, so that your agent can call our MCP. Each Agent has slightly different instructions, but many involve using an "mcp.json" (or similar) file where you can add the specific configuration for this new MCP server we just installed.
-
-Below we list some popular AI agents and the link to how to install MCP servers - note that we are using local/stdio MCPs.
-
-| #   | AI Agent        | MCP Setup Instructions Link                                                                                                                                    | MCP Settings File Location                                                                                    |
-| --- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| 1   | Cursor          | [Instructions](https://cursor.com/docs/context/mcp#using-mcpjson)                                                                                              | ~/.cursor/mcp.json                                                                                            |
-| 2   | Github Copilot  | [Instructions](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp) then choose "Configuring MCP Servers Manually" | ~/.config/mcp-config.json<br/><project-root>/.vscode/mcp.json                                                 |
-| 3   | Claude Code CLI | [Instructions](https://code.claude.com/docs/en/mcp#option-3%3A-add-a-local-stdio-server)                                                                       | ~/.claude.json<br/>/Library/Application Support/ClaudeCode/managed-mcp.json                                   |
-| 4   | Amazon Q        | [Instructions](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-mcp-config-CLI.html)                                                      | ~/.aws/amazonq/mcp.json                                                                                       |
-| 5   | Kiro            | [Instructions](https://kiro.dev/docs/mcp/)                                                                                                                     | ~/.kiro/settings/mcp.json                                                                                     |
-| 6   | Cline           | [Instructions](https://docs.cline.bot/mcp/configuring-mcp-servers)                                                                                             | ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json |
-
-_If your agent is not listed, please ensure it supports MCP before continuing._
-
-Now for the content to update, we have a few short steps:
-
-First, run the following command to get the binary location and copy the location
+Run the following commands to verify Vega DevTools MCP is installed
 
 ```bash
-% which vega-devtools-mcp
+which vega-devtools-mcp
 ```
 
 And you'll get an output that _could_ be something like the following (your node version may be different)
@@ -64,11 +49,51 @@ or the following if node installed via homebrew
 /opt/homebrew/bin/vega-devtools-mcp
 ```
 
-Save this path, you will need for the next step, which is to update your MCP server configuration to add the "vega-devtools-mcp" server to your list of servers. Replace the `{YOUR_PATH_TO_VEGA-DEVTOOLS-MCP-BINARY}` below with the path you just stored. Note that your specific tool may have minor variances, check your tools documentation as-needed to add new MCP servers.
+_Save this path, you will need for the next step to add Vega DevTools MCP in your AI Agent._
+
+Run the help command to make sure Vega DevTools MCP is installed properly
+
+```
+npx vega-devtools-mcp --help
+
+🚀 Vega Developer MCP Server
+============================
+
+Vega Developer MCP Server provides Vega development tools and capabilities.
+
+CONFIGURATION:
+To use this MCP server with your AI client, add the following configuration:
+```
+
+### 2.1.2 Install MCP server in your AI Agent
+
+You will now need to add the MCP configuration in your AI Agent's MCP settings, so that your agent can call the Vega DevTools MCP.
+
+Each Agent has slightly different instructions, but many involve using an "mcp.json" (or similar) file where you can add the specific configuration for this new MCP server we just installed.
+
+Below we list some popular AI agents and the link to how to install MCP servers - note that we are using local/stdio MCPs.
+
+| #   | AI Agent               | MCP Setup Instructions Link                                                                                                                                    | MCP Settings File Location                                                                                    |
+| --- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| 1   | Cursor                 | [Instructions](https://cursor.com/docs/context/mcp#using-mcpjson)                                                                                              | ~/.cursor/mcp.json                                                                                            |
+| 2   | Github Copilot         | [Instructions](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp) then choose "Configuring MCP Servers Manually" | ~/.config/mcp-config.json<br/><project-root>/.vscode/mcp.json                                                 |
+| 3   | Claude Code CLI        | [Instructions](https://code.claude.com/docs/en/mcp#option-3%3A-add-a-local-stdio-server)                                                                       | ~/.claude.json<br/>/Library/Application Support/ClaudeCode/managed-mcp.json                                   |
+| 4   | Amazon Q IDE Extension | [Instructions](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/mcp-ide.html)                                                                          | ~/.aws/amazonq/mcp.json                                                                                       |
+| 5   | Amazon Q CLI           | [Instructions](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-mcp-config-CLI.html)                                                      | ~/.aws/amazonq/mcp.json                                                                                       |
+| 6   | Kiro                   | [Instructions](https://kiro.dev/docs/mcp/)                                                                                                                     | ~/.kiro/settings/mcp.json                                                                                     |
+| 7   | Cline                  | [Instructions](https://docs.cline.bot/mcp/configuring-mcp-servers)                                                                                             | ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json |
+
+_If your agent is not listed, please ensure it supports MCP before continuing._
+
+Update your AI Agent's MCP server configuration to add the "vega-devtools-mcp" server to your list of servers.
+
+Replace the `{YOUR_PATH_TO_VEGA-DEVTOOLS-MCP-BINARY}` below with the vega-devtools-mcp path (run `which vega-devtools-mcp` to get the path).
+
+Note that your specific tool may have minor variances, check your tools documentation as-needed to add new MCP servers.
 
 ```json
 {
-  "mcpServers|servers": {
+  " mcpServers | servers ": {
     ...,
     "vega-devtools-mcp": {
       "type": "stdio",
@@ -83,9 +108,22 @@ Save this path, you will need for the next step, which is to update your MCP ser
 
 > ℹ️ Important: Start the MCP Server from Agent's MCP config, if not already started - check your current running MCPs to ensure the vega-devtools-mcp is listed as running/connected.
 
-## 2.2 Add Vega Context to AI Agent
+**🏁 Checkpoint: Verify Vega DevTools MCP is installed in your AI Agent**
 
-The final step to using the MCP server is to add specific project configuration to look up additional prompts/context when using Vega-specific commands/components/libraries/etc. Make sure you are in your project directory.
+In your AI Agent's chat interface, run the following prompt
+
+```
+List the tools provided by Vega DevTools MCP
+```
+
+You should see a response that includes the following tools:
+
+- analyze_perfetto_traces
+- read_document
+
+### 2.1.3 Add Vega Context to AI Agent
+
+The final step to using the MCP server is to add specific project configuration to look up additional prompts/context when using Vega-specific commands/components/libraries/etc. _Make sure you are in your project directory_.
 
 Run the following command **within your App project**, to initialize Vega context for your AI Coding agent.
 
@@ -135,7 +173,7 @@ Select an AI agent (1-7):
 
 If these do not properly load for you, you can always say the following at the start of any AI agent session: `use AGENTS.md for context`
 
-**Verify AI agent is configured with Vega Context:**
+**🏁 Checkpoint: Verify AI agent is configured with Vega Context:**
 
 In your AI Agent's chat interface, run the following prompt:
 
