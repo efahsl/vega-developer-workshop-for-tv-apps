@@ -17,7 +17,8 @@ While you can use most AI Agent models as-is to make changes to the Vega Hello W
 Run the following command to download [vega-devtools-mcp.tgz](../vega-devtools-mcp.tgz)
 
 ```bash
-curl -L -o vega-devtools-mcp.tgz https://github.com/efahsl/vega-developer-workshop-for-tv-apps/blob/main/vega-devtools-mcp.tgz
+curl -L -o vega-devtools-mcp.tgz https://raw.githubusercontent.com/efahsl/vega-developer-workshop-for-tv-apps/main/vega-devtools-mcp.tgz
+
 ```
 
 Run an npm install from the tarball as global scope (or local to your project if you prefer)
