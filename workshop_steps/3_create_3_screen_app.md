@@ -220,3 +220,7 @@ const handleVideoEnded = () => {
 ---
 
 **Previous:** [Checkpoint: Get Fire TV Device](2_zCheckpoint_get_firetv_device.md) | **Next:** [Performance Testing](4_performance_testing.md)
+
+OR ...
+
+Short on time? Go straight to [Wrap Up and Next Steps](6_wrap_up_and_next_steps.md)
