@@ -6,7 +6,7 @@ First we are going to create a Hello World app from our template for which we ca
 
 Verify your Vega CLI version
 
-Run `kepler --version` command in a terminal window and confirm version is 0.21.4726 or higher
+Run `kepler --version` command in a terminal window and confirm version is 0.21.X (or higher).
 
 Launch VS Code and verify the Vega Studio side bar appears in VS Code
 
