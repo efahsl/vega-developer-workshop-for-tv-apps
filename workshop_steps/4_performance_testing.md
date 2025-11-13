@@ -25,7 +25,7 @@ You might see a warning in VS Code settings, you can safely ignore it:
 
 <img src="../images/XHRe7a7958d561849339bef6389b.png" width="640">
 
-**Run Performance Performance test:**
+### Run performance test: App Launch Latency
 
 Connect a FireTV stick device and run "App KPI Visualizer" tool from Vega Studio side bar in VS Code
 
@@ -43,26 +43,17 @@ Uncheck "Record CPU Profiler" - _this option records a CPU profiler trace to dee
 
 Select defaults for all other options in the wizard
 
-Select "No" for the following:
-
-_This option is only shown for subset of test cases. Selecting "No" will run a default UI automation script. Otherwise you can create a new custom Appium based UI automation script and use that._
-
-<img src="../images/XHR5b7b6421529748e1bc4b3f38d.png" height="400">
-
 Once KPI Visualizer starts, you should see a notification window as below
 
 <img src="../images/XHR3063643309f34a39a1a4f2ea8.png"  width="640">
 
-After the test starts, KPI Visualizer will automatically run the app and measure KPIs:
+After the test starts, KPI Visualizer will automatically run the app and measure KPIs.
 
-- For _"Application Cool Start Latency"_ test, KPI Visualizer launches the App and measure launch latency
-- For _"Application UI Fluidity"_ test, KPI Visualizer runs a pre-defined D-Pad remote automation script in the App and automatically measures UI Fluidity, Dropped Frames and Application Responsiveness time.
-
-**Analyze performance report**
+### Analyze performance report
 
 The Performance report is automatically opened after performance test is completed
 
-<img src="../images/XHR4a169ce96cb043feab89728f0.png" height="400">
+<img src="../images/app-launch-kpi-report.png" height="400">
 
 You can also manually open the KPI report file, by navigating to the `<project-root>/generated` directory and clicking on the `app-launch-kpi-report-*.json` file.
 
@@ -204,6 +195,32 @@ Follow the agent workflow and verify the zip file is created properly in `<proje
 Apply the code changes, then re-build your app in **"release"** mode & re-run your app to verify Splash Screen shows up when you launch the app on the device.
 
 After confirming Splash screen is working, re-run KPI Visualizer and verify improvements in TTFF KPI.
+
+## Run performance test: UI Fluidity (optional)
+
+Next, you can run a UI Fluidity test for your App using KPI Visualizer.
+
+To do so, follow the steps listed in https://developer.amazon.com/docs/vega/0.21/fluidity-foreground.html to set up KPI Visualizer to measure UI Fluidity in your app.
+
+Make sure to install Appium https://developer.amazon.com/docs/vega/0.21/appium-install.html, Appium is required to run UI automation in the app during the test.
+
+You may skip the steps to create a new UI automation script and just use the default one that is built-in KPI Visualizer
+
+Run KPI Visualizer as you did before in this exercise - [Run Performance Test](#run-performance-performance-test-app-launch-latency)
+
+- Chose the KPI Visualizer options as before
+
+- Select "No" for the following:
+
+_This option is only shown for subset of test cases. Selecting "No" will run a default UI automation script. Otherwise you can create a new custom Appium based UI automation script and use that._
+
+<img src="../images/XHR5b7b6421529748e1bc4b3f38d.png" height="400">
+
+## Explore other performance tools
+
+- Activity Monitor to inspect and record app CPU Usage https://developer.amazon.com/docs/vega/0.21/monitor-cpu-usage.html
+- Memory Monitor to inspect and record App memory breakdown https://developer.amazon.com/docs/vega/0.21/monitor-record-app-memory.html
+- Check out best practices, FAQ & other performance tools: https://developer.amazon.com/docs/vega/0.21/improve-performance-overview.html
 
 ---
 
