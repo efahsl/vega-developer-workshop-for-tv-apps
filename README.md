@@ -46,3 +46,5 @@ Begin with the [Prerequisites](workshop_steps/0_prerequisites.md) to ensure you 
 ## Toubleshooting
 
 Running into issues? Check out our [troubleshooting guide](https://developer.amazon.com/docs/vega/0.21/troubleshoot-overview.html) on our [Vega Developer Docs](https://developer.amazon.com/apps-and-games/vega).
+
+Prefer to see a working code example to compare what you have built? Check out our reference code example in this repo [here](./reference/RnlConfApp/).
