@@ -174,7 +174,9 @@ For this workshop, we're going to use URL mode as we're just dealing with simple
 Add a new VideoPlayerScreen following the Vega Video Player Example. Add it to the existing navigation structure - the video URL should be passed/linked from the Detail Screen (via navigation prop) when the user presses the "Play Video" button.
 ```
 
-Given that we are updating app manifest entries, you will likely need to rebuild/relaunch your app.
+Given that we are updating app manifest entries, you will need to rebuild/relaunch your app (An easy way is to press the "build" icon below in Vega Studio):
+
+<img src="../images/build-icon.png" height="150">
 
 To test your app, navigate to the details page and play the video. Note that the Vega Virtual Device at times has trouble playing mp4 videos with a "debug" build. To remedy, you can run a "release" build which should have better stability (but you can't use Fast Refresh) or run on a Fire TV Stick which is the next section.
 
