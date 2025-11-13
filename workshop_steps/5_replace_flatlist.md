@@ -1,4 +1,4 @@
-# Phase 5: Performance Improvements
+# Phase 5: Replace FlatList
 
 ## Use Vega Native UI Components
 

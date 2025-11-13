@@ -36,7 +36,7 @@ Check out our [Prerequisites](workshop_steps/0_prerequisites.md) page to install
 
 3. **[Create a 3 Screen App](workshop_steps/3_create_3_screen_app.md)** - Build the home screen, details screen, and video player
 4. **[Performance Testing](workshop_steps/4_performance_testing.md)** - Run your app on Fire TV Stick and benchmark performance
-5. **[Performance Improvements](workshop_steps/5_performance_improvements.md)** - Optimize with native Vega components
+5. **[Replace FlatList](workshop_steps/5_replace_flatlist.md)** - Optimize with native Vega components
 6. **[Wrap Up and Next Steps](workshop_steps/6_wrap_up_and_next_steps.md)** - Explore additional project ideas and app submission
 
 ## Getting Started

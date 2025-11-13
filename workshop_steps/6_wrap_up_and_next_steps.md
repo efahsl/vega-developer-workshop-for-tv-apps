@@ -127,4 +127,4 @@ A visually rich weather app that transforms your TV into a weather station.
 
 ---
 
-**Previous:** [Performance Improvements](5_performance_improvements.md)
+**Previous:** [Replace FlatList](5_replace_flatlist.md)

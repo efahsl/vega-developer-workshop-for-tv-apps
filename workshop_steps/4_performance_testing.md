@@ -207,4 +207,4 @@ After confirming Splash screen is working, re-run KPI Visualizer and verify impr
 
 ---
 
-**Previous:** [Create a 3 Screen App](3_create_3_screen_app.md) | **Next:** [Performance Improvements](5_performance_improvements.md)
+**Previous:** [Create a 3 Screen App](3_create_3_screen_app.md) | **Next:** [Replace FlatList](5_replace_flatlist.md)
