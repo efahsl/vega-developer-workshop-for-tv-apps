@@ -1,6 +1,6 @@
 # Phase 4: Performance Testing & Analysis
 
-Now let's do some performance benchmarking! Note that performance tools are only supported on the physical Vega Fire TV stick. If you have not set up your Fire TV stick in previous steps, please go back and do so.
+Now let's do some performance benchmarking! Note that performance tools are only supported on a physical Vega Fire TV stick with [developer mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) configured.
 
 ## 4.1: Performance Analysis
 

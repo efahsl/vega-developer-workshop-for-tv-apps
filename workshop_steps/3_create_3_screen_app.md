@@ -221,7 +221,7 @@ const handleVideoEnded = () => {
 
 ---
 
-**Previous:** [Checkpoint: Get Fire TV Device](2_zCheckpoint_get_firetv_device.md) | **Next:** [Performance Testing](4_performance_testing.md)
+**Previous:** [Set Up MCP Server](2_set_up_mcp_server.md) | **Next:** [Performance Testing](4_performance_testing.md)
 
 OR ...
 
