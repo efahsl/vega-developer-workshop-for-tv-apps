@@ -26,12 +26,6 @@ You'll create a 3-screen media streaming app optimized for TV, featuring:
 
 Check out our [Prerequisites](workshop_steps/0_prerequisites.md) page to install the Vega Developer Tools and learn more about Model Context Protocol. In order to run any of the performance capabilities, you will need a Vega Fire TV Stick with [Developer Mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) enabled. We also highly recommend reading about the Vega architecture and component APIs to have a better understanding of the SDK capabilities as you run through this workshop.
 
-## WiFI Setup
-
-- **SSID**: REACTNAT1VE
-
-- **PWD**: sounding-stony-locate
-
 ## Workshop Steps
 
 0. **[Prerequisites](workshop_steps/0_prerequisites.md)** - Install Vega SDK and development tools
