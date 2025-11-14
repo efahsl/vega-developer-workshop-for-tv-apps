@@ -2,12 +2,6 @@
 
 ## 1. Install Vega Developer Tools
 
-If you dont have a Amazon Developer Account, run the following command in your terminal window to install Vega Dev Tools:
-
-```
-curl -fsSL https://kepler-static-artifacts.kepler.labcollab.net/ac/ac49b8ada5a344c94cf217bc79e428c16fe9c7b7c54de35518b998d08a594ec1 | /bin/bash -s -- --sdk-url=https://kepler-static-artifacts.kepler.labcollab.net/e0/e08aa6eac37743f5e33a34ffe47ef6d5a1a5b36a74fa23afc7eaf0f7855e3d49 --sim-url=https://kepler-static-artifacts.kepler.labcollab.net/2f/2f0d567689712f1606577dacd88388c46c965de62cc66260da2b53c2202d02ec --version=0.21.4839
-```
-
 In order to participate in this workshop, you will need to have the Vega SDK installed: [Download and Installation Guide](https://developer.amazon.com/docs/vega/0.21/setup-overview.html)
 
 Vega requires macOS 10.15+ or Ubuntu 20.4+. We recommend M-series macs for the best experience.
