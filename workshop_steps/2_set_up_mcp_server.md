@@ -91,19 +91,14 @@ Replace the `{YOUR_PATH_TO_VEGA-DEVTOOLS-MCP-BINARY}` below with the vega-devtoo
 
 Note that your specific tool may have minor variances, check your tools documentation as-needed to add new MCP servers.
 
+Vega DevTools MCP Configuration in MCP settings file example:
+
 ```json
-{
-  " mcpServers | servers ": {
-    ...,
-    "vega-devtools-mcp": {
-      "type": "stdio",
-      "command": "node",
-      "args": [
-        "{YOUR_PATH_TO_VEGA-DEVTOOLS-MCP_BINARY}"
-      ]
-    }
+  "vega-devtools-mcp": {
+    "type": "stdio",
+    "command": "node",
+    "args": ["{YOUR_PATH_TO_VEGA-DEVTOOLS-MCP_BINARY}"]
   }
-}
 ```
 
 > ℹ️ Important: Start the MCP Server from Agent's MCP config, if not already started - check your current running MCPs to ensure the vega-devtools-mcp is listed as running/connected.
