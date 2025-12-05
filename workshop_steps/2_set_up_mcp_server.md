@@ -49,7 +49,7 @@ or the following if node installed via homebrew
 /opt/homebrew/bin/vega-devtools-mcp
 ```
 
-_Save this path, you will need for the next step to add Vega DevTools MCP in your AI Agent._
+_Save this path, you may need it for the next step to add Vega DevTools MCP in your AI Agent._
 
 Run the help command to make sure Vega DevTools MCP is installed properly
 
@@ -83,21 +83,21 @@ Below we list some popular AI agents and the link to how to install MCP servers 
 | 6   | Kiro                   | [Instructions](https://kiro.dev/docs/mcp/)                                                                                                                     | ~/.kiro/settings/mcp.json                                                                                     |
 | 7   | Cline                  | [Instructions](https://docs.cline.bot/mcp/configuring-mcp-servers)                                                                                             | ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json |
 
-_If your agent is not listed, please ensure it supports MCP before continuing._
+_You may need to create a new MCP config JSON file for your AI Agent. The file may not exist if you haven't added any MCP servers before._
+
+_If your agent is not listed, please ensure it supports MCP before continuing. Check if your agent is listed in [MCP Client List](https://modelcontextprotocol.io/clients) to verify._
 
 Update your AI Agent's MCP server configuration to add the "vega-devtools-mcp" server to your list of servers.
 
-Replace the `{YOUR_PATH_TO_VEGA-DEVTOOLS-MCP-BINARY}` below with the vega-devtools-mcp path (run `which vega-devtools-mcp` to get the path).
-
 Note that your specific tool may have minor variances, check your tools documentation as-needed to add new MCP servers.
 
-Vega DevTools MCP Configuration in MCP settings file example:
+Include the following configuration within `servers` or `mcpServers` JSON object of your agent's MCP settings JSON:
 
 ```json
   "vega-devtools-mcp": {
     "type": "stdio",
-    "command": "node",
-    "args": ["{YOUR_PATH_TO_VEGA-DEVTOOLS-MCP_BINARY}"]
+    "command": "npx",
+    "args": ["vega-devtools-mcp"]
   }
 ```
 
