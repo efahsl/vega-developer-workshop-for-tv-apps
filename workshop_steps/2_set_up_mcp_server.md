@@ -29,33 +29,17 @@ curl -L -o vega-devtools-mcp.tgz https://raw.githubusercontent.com/efahsl/vega-d
 npm install -g vega-devtools-mcp.tgz
 ```
 
-**🏁 Checkpoint: Verify MCP Installation**
-
-Run the following commands to verify Vega DevTools MCP is installed
-
-```bash
-which vega-devtools-mcp
-```
-
-And you'll get an output that _could_ be something like the following (your node version may be different)
-
-```
-/Users/YOUR_HOME_FOLDER/.nvm/versions/node/v20.19.4/bin/vega-devtools-mcp
-```
-
-or the following if node installed via homebrew
-
-```
-/opt/homebrew/bin/vega-devtools-mcp
-```
-
-_Save this path, you may need it for the next step to add Vega DevTools MCP in your AI Agent._
+**Verify MCP Installation**
 
 Run the help command to make sure Vega DevTools MCP is installed properly
 
 ```
 npx vega-devtools-mcp --help
+```
 
+You shold see an output like the following:
+
+```
 🚀 Vega Developer MCP Server
 ============================
 
@@ -63,6 +47,7 @@ Vega Developer MCP Server provides Vega development tools and capabilities.
 
 CONFIGURATION:
 To use this MCP server with your AI client, add the following configuration:
+...
 ```
 
 ### 2.1.2 Install MCP server in your AI Agent
