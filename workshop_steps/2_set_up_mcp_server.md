@@ -86,6 +86,16 @@ Include the following configuration within `servers` or `mcpServers` JSON object
   }
 ```
 
+In case your AI Agent is not able to find the installed path of `vega-devtools-mcp`, try including the absolute path of `vega-devtools-mcp` binary in the MCP settings instead. You can get the installed path by running `which vega-devtools-mcp` in a terminal window.
+
+```json
+"vega-devtools-mcp": {
+    "type": "stdio",
+    "command": "npx",
+    "args": ["<ABSOLUTE_PATH-TO-MCP-BINARY>"]
+  }
+```
+
 > ℹ️ Important: Start the MCP Server from Agent's MCP config, if not already started - check your current running MCPs to ensure the vega-devtools-mcp is listed as running/connected.
 
 **🏁 Checkpoint: Verify Vega DevTools MCP is installed in your AI Agent**
