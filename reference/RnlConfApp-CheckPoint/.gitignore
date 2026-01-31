@@ -12,3 +12,5 @@ node_modules
 CMakeUserPresets.json
 npm-debug.log
 CLAUDE.md
+
+buildinfo.json
