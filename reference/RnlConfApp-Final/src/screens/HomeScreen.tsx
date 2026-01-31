@@ -40,15 +40,19 @@ interface CatalogData {
 interface ThumbnailItemProps {
   item: MovieItem;
   onPress: () => void;
+  onFocus: () => void;
 }
 
-const ThumbnailItem = ({item, onPress}: ThumbnailItemProps) => {
+const ThumbnailItem = ({item, onPress, onFocus}: ThumbnailItemProps) => {
   const [focused, setFocused] = useState(false);
 
   return (
     <Pressable
       style={[styles.thumbnail, focused && styles.thumbnailFocused]}
-      onFocus={() => setFocused(true)}
+      onFocus={() => {
+        setFocused(true);
+        onFocus();
+      }}
       onBlur={() => setFocused(false)}
       onPress={onPress}>
       <Image
@@ -64,11 +68,18 @@ interface ContentRowProps {
   title: string;
   items: MovieItem[];
   onItemPress: (item: MovieItem) => void;
+  onItemFocus: (item: MovieItem) => void;
 }
 
-const ContentRow = ({title, items, onItemPress}: ContentRowProps) => {
+const ContentRow = ({title, items, onItemPress, onItemFocus}: ContentRowProps) => {
   const renderItem = ({item}: {item: MovieItem}) => {
-    return <ThumbnailItem item={item} onPress={() => onItemPress(item)} />;
+    return (
+      <ThumbnailItem
+        item={item}
+        onPress={() => onItemPress(item)}
+        onFocus={() => onItemFocus(item)}
+      />
+    );
   };
 
   return (
@@ -92,6 +103,7 @@ interface HomeScreenProps {
 export const HomeScreen = ({navigation}: HomeScreenProps) => {
   const [movies, setMovies] = useState<MovieItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [backgroundImage, setBackgroundImage] = useState<string>('');
 
   useEffect(() => {
     fetchMovies();
@@ -118,6 +130,11 @@ export const HomeScreen = ({navigation}: HomeScreenProps) => {
       description: item.description,
       videoUrl: item.sources[0]?.url || '',
     });
+  };
+
+  const handleItemFocus = (item: MovieItem) => {
+    // setBackgroundImage(item.images.poster_16x9);
+    setBackgroundImage(item.images.thumbnail_450x253);    
   };
 
   // Group movies by category
@@ -152,26 +169,43 @@ export const HomeScreen = ({navigation}: HomeScreenProps) => {
   const categories = Object.keys(moviesByCategory);
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* Trending Now Row */}
-      {trendingMovies.length > 0 && (
-        <ContentRow
-          title="Trending Now"
-          items={trendingMovies}
-          onItemPress={handleItemPress}
+    <View style={styles.container}>
+      {/* Background Image */}
+      {backgroundImage ? (
+        <Image
+          source={{uri: backgroundImage}}
+          style={styles.backgroundImage}
+          resizeMode="cover"
         />
-      )}
+      ) : null}
 
-      {/* Category Rows */}
-      {categories.map((category) => (
-        <ContentRow
-          key={category}
-          title={category}
-          items={moviesByCategory[category]}
-          onItemPress={handleItemPress}
-        />
-      ))}
-    </ScrollView>
+      {/* Dark Overlay */}
+      <View style={styles.overlay} />
+
+      {/* Content */}
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+        {/* Trending Now Row */}
+        {trendingMovies.length > 0 && (
+          <ContentRow
+            title="Trending Now"
+            items={trendingMovies}
+            onItemPress={handleItemPress}
+            onItemFocus={handleItemFocus}
+          />
+        )}
+
+        {/* Category Rows */}
+        {categories.map((category) => (
+          <ContentRow
+            key={category}
+            title={category}
+            items={moviesByCategory[category]}
+            onItemPress={handleItemPress}
+            onItemFocus={handleItemFocus}
+          />
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 
@@ -179,6 +213,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1a1a1a',
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+  content: {
+    flex: 1,
     paddingTop: 60,
   },
   loadingContainer: {

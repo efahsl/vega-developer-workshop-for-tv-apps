@@ -1,3 +1,5 @@
 .DS_Store
 *.docx
 word_to_markdown_instructions.md
+
+.kiro/*
