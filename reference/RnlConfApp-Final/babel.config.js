@@ -13,4 +13,10 @@ module.exports = {
     ],
   ],
   plugins: [['@babel/plugin-transform-react-jsx', {runtime: 'automatic'}]],
+  
+  env: {
+    development: {
+      plugins: [['@babel/plugin-transform-react-jsx', {runtime: 'classic'}]],
+    },
+  },
 };

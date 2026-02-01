@@ -2,7 +2,9 @@
   "name": "@amazon-devices/rnlconfapp",
   "version": "0.0.1",
   "private": true,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "clean": "rm -rf node_modules buildinfo.json dist build",
     "start": "react-native start",
@@ -36,6 +38,7 @@
     "@types/react": "^18.0.24",
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@welldone-software/why-did-you-render": "^8.0.3",
     "babel-jest": "^28.0.0",
     "eslint": "^8.12.0",
     "jest": "^28.0.0",
@@ -50,6 +53,8 @@
   "kepler": {
     "projectType": "application",
     "appName": "RnlConfApp",
-    "targets": ["tv"]
+    "targets": [
+      "tv"
+    ]
   }
 }
