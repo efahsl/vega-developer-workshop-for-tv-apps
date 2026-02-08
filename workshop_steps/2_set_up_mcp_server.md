@@ -4,168 +4,62 @@
 
 You can learn more about the protocol specification at [modelcontextprotocol.io/](http://modelcontextprotocol.io/).
 
-## 2.1 Install & Configure Vega MCP Server
+## 2.1 Install & Configure Amazon Devices Builder Tools MCP
 
-While you can use most AI Agent models as-is to make changes to the Vega Hello World App, for better results developing Vega Apps with AI we have a Vega MCP server to provide additional relevant context to your AI Agent. Below we walk through the three required steps to set up the Vega MCP server with your Vega project.
+While you can use most AI Agent models as-is to make changes to the Vega Hello World App, for better results developing Vega Apps with AI we have an MCP server to provide additional relevant context to your AI Agent.
 
 > ℹ️ The steps in these guide have primarily been tested with Claude Sonnet 3.5, 4 & 4.5, using Copilot, Kiro, Claude Code, and Amazon Q. While we expect other models and tools to behave similarly, we cannot control the response of every model/tool.
 >
 > ℹ️ Don't have an AI agent/tool? Try Amazon Kiro, it comes with 500 free credits upon first use and should more than suffice for this workshop: <https://kiro.dev/>. We use it quite a bit and is one of our favorites!
 
-### 2.1.1 Download our Vega MCP Server tarball
+> ⚠️ **Migration Notice**: If you previously installed `vega-devtools-mcp`, please remove it from your MCP settings and follow the steps below to install the new `@amazon-devices/amazon-devices-buildertools-mcp` package.
 
-_(in the future we will improve this experience, but for now it requires a manual download)_
+### 2.1.1 Install MCP Server & Add Vega Context
 
-[1] Run the following command to download [vega-devtools-mcp.tgz](../vega-devtools-mcp.tgz)
+The easiest way to install is via one-click install from the npm package page:
+
+**[Install from npm →](https://www.npmjs.com/package/@amazon-devices/amazon-devices-buildertools-mcp)**
+
+The page provides one-click install buttons for Kiro, Cursor, and VSCode.
+
+For other AI agents, or to install manually, run the following command **within your App project**:
 
 ```bash
-curl -L -o vega-devtools-mcp.tgz https://raw.githubusercontent.com/efahsl/vega-developer-workshop-for-tv-apps/main/vega-devtools-mcp.tgz
-
+npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest --init-context
 ```
 
-[2] Run an npm install from the tarball as global scope (or local to your project if you prefer)
+This interactive command will:
+1. Display available AI agents and let you select your preferred one
+2. Update your agent's MCP settings to configure the MCP server
+3. Create the appropriate Vega context file for your chosen AI agent
 
-```bash
-npm install -g vega-devtools-mcp.tgz
-```
-
-**Verify MCP Installation**
-
-Run the help command to make sure Vega DevTools MCP is installed properly
-
-```
-npx vega-devtools-mcp --help
-```
-
-You shold see an output like the following:
-
-```
-🚀 Vega Developer MCP Server
-============================
-
-Vega Developer MCP Server provides Vega development tools and capabilities.
-
-CONFIGURATION:
-To use this MCP server with your AI client, add the following configuration:
-...
-```
-
-### 2.1.2 Install MCP server in your AI Agent
-
-You will now need to add the MCP configuration in your AI Agent's MCP settings, so that your agent can call the Vega DevTools MCP.
-
-Each Agent has slightly different instructions, but many involve using an "mcp.json" (or similar) file where you can add the specific configuration for this new MCP server we just installed.
-
-Below we list some popular AI agents and the link to how to install MCP servers - note that we are using local/stdio MCPs.
-
-| #   | AI Agent               | MCP Setup Instructions Link                                                                                                                                    | MCP Settings File Location                                                                                    |
-| --- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| 1   | Cursor                 | [Instructions](https://cursor.com/docs/context/mcp#using-mcpjson)                                                                                              | ~/.cursor/mcp.json                                                                                            |
-| 2   | Github Copilot         | [Instructions](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp) then choose "Configuring MCP Servers Manually" | ~/.config/mcp-config.json<br/><project-root>/.vscode/mcp.json                                                 |
-| 3   | Claude Code CLI        | [Instructions](https://code.claude.com/docs/en/mcp#option-3%3A-add-a-local-stdio-server)                                                                       | ~/.claude.json<br/>/Library/Application Support/ClaudeCode/managed-mcp.json                                   |
-| 4   | Amazon Q IDE Extension | [Instructions](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/mcp-ide.html)                                                                          | ~/.aws/amazonq/mcp.json                                                                                       |
-| 5   | Amazon Q CLI           | [Instructions](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-mcp-config-CLI.html)                                                      | ~/.aws/amazonq/mcp.json                                                                                       |
-| 6   | Kiro                   | [Instructions](https://kiro.dev/docs/mcp/)                                                                                                                     | ~/.kiro/settings/mcp.json                                                                                     |
-| 7   | Cline                  | [Instructions](https://docs.cline.bot/mcp/configuring-mcp-servers)                                                                                             | ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json |
-
-_You may need to create a new MCP config JSON file for your AI Agent. The file may not exist if you haven't added any MCP servers before._
-
-_If your agent is not listed, please ensure it supports MCP before continuing. Check if your agent is listed in [MCP Client List](https://modelcontextprotocol.io/clients) to verify._
-
-Update your AI Agent's MCP server configuration to add the "vega-devtools-mcp" server to your list of servers.
-
-Note that your specific tool may have minor variances, check your tools documentation as-needed to add new MCP servers.
-
-Include the following configuration within `servers` or `mcpServers` JSON object of your agent's MCP settings JSON:
+To manually configure the MCP server, add the following to your AI Agent's MCP settings JSON:
 
 ```json
-  "vega-devtools-mcp": {
-    "type": "stdio",
+"amazon-devices-buildertools-mcp": {
     "command": "npx",
-    "args": ["vega-devtools-mcp"]
-  }
+    "args": ["-y", "@amazon-devices/amazon-devices-buildertools-mcp@latest"],
+    "type": "stdio"
+}
 ```
 
-In case your AI Agent is not able to find the installed path of `vega-devtools-mcp`, try including the absolute path of `vega-devtools-mcp` binary in the MCP settings instead. You can get the installed path by running `which vega-devtools-mcp` in a terminal window.
+> ℹ️ Important: Start the MCP Server from Agent's MCP config, if not already started - check your current running MCPs to ensure the amazon-devices-buildertools-mcp is listed as running/connected.
 
-```json
-"vega-devtools-mcp": {
-    "type": "stdio",
-    "command": "npx",
-    "args": ["<ABSOLUTE_PATH-TO-MCP-BINARY>"]
-  }
-```
+**🏁 Checkpoint: Verify MCP is installed in your AI Agent**
 
-> ℹ️ Important: Start the MCP Server from Agent's MCP config, if not already started - check your current running MCPs to ensure the vega-devtools-mcp is listed as running/connected.
-
-**🏁 Checkpoint: Verify Vega DevTools MCP is installed in your AI Agent**
-
-In your AI Agent's chat interface, run the following prompt
+In your AI Agent's chat interface, run the following prompt:
 
 ```
-List the tools provided by Vega DevTools MCP
+List the tools provided by Amazon Devices Builder Tools MCP
 ```
 
-You should see a response that includes the following tools:
+You should see a response that includes 4 tools:
+- `read_document`
+- `list_documents`
+- `analyze_perfetto_traces`
+- `get_app_hot_functions`
 
-- analyze_perfetto_traces
-- read_document
-
-### 2.1.3 Add Vega Context to AI Agent
-
-The final step to using the MCP server is to add specific project configuration to look up additional prompts/context when using Vega-specific commands/components/libraries/etc.
-
-Run the following command **within your App project**, to initialize Vega context for your AI Coding agent.
-
-This tool installs Vega App development context document in your project. The context document guides AI agents to efficiently answer queries related to app development for Vega OS
-
-```bash
-npx vega-devtools-mcp --init-context
-```
-
-Choose the AI Agent from the list. Enter 7 for "Other" AI agents not included in the list, to manually copy the Vega context in your project directory
-
-```
-% npx vega-devtools-mcp --init-context
-
-====================================================
-🚀 Vega Developer Tools - Initialize Vega Context
-====================================================
-
-This tool installs Vega App development context document in your project.
-The context document guides AI agents to efficiently answer queries related to app development for Vega OS
-
-Choose from the following options to automatically install Agent specific preset in your app project:
-
-   1. Cursor - Adds AGENTS.md file
-
-   2. Claude Code - Adds CLAUDE.md file
-
-   3. GitHub Copilot - Adds AGENTS.md file
-
-   4. Amazon Q - Adds .amazonq/rules/ directory
-
-   5. Kiro - Adds .kiro/steering/ directory
-
-   6. Cline - Adds .clinerules/ directory
-
-   7. Other AI agent or custom setup - View content only
-
-Select an AI agent (1-7):
-```
-
-| #   | AI Agent       | Project Context Location           |
-| --- | -------------- | ---------------------------------- |
-| 1   | Cursor         | project-root/AGENTS.md file        |
-| 2   | Claude Code    | project-root/CLAUDE.md file        |
-| 3   | Github Copilot | project-root/AGENTS.md file        |
-| 4   | Amazon Q       | project-root/.amazonq/rules folder |
-| 5   | Kiro           | project-root/.kiro/steering folder |
-| 6   | Cline          | project-root/.clinerules/ folder   |
-
-If these do not properly load for you, you can always say the following at the start of any AI agent session: `use AGENTS.md for context`
-
-**🏁 Checkpoint: Verify AI agent is configured with Vega Context:**
+**🏁 Checkpoint: Verify AI agent is configured with Vega Context**
 
 In your AI Agent's chat interface, run the following prompt:
 
@@ -173,10 +67,10 @@ In your AI Agent's chat interface, run the following prompt:
 Can you describe the Vega Platform Architecture in one sentence?
 ```
 
-> ℹ️ **Important**: ensure the MCP tool read_document is triggered! You will need to grant permission to read, we recommend always allowing for the given workspace. It may look something like the following:
+> ℹ️ **Important**: ensure the MCP tool `read_document` is triggered! You will need to grant permission to read, we recommend always allowing for the given workspace. It may look something like the following:
 
 ```
-vega-devtools-mcp - read_document (MCP)(document_name: "react_native_for_vega_architecture.md")
+amazon-devices-buildertools-mcp - read_document (MCP)(document_name: "react_native_for_vega_architecture.md")
 ⎿ #react_native_for_vega_architecture.md
 
 ## High-Level Architecture
