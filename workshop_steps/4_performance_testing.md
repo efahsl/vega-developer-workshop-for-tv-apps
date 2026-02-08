@@ -224,4 +224,4 @@ _This option is only shown for subset of test cases. Selecting "No" will run a d
 
 ---
 
-**Previous:** [Create a 3 Screen App](3_create_3_screen_app.md) | **Next:** [Replace FlatList](5_replace_flatlist.md)
+**Previous:** [Create a 3 Screen App](3_create_3_screen_app.md) | **Next:** [Optimize Re-rendering Performance](5_optimize_rerendering_performance.md)

@@ -1,8 +1,8 @@
-# Phase X: Optimize App Performance
+# Phase 5: Optimize App Performance
 
 TV apps require smooth 60fps performance for a good user experience. In this phase, we'll identify and fix common React Native performance issues—specifically unnecessary re-renders that cause lag during D-pad navigation.
 
-## X.1: Create a Performance Problem
+## 5.1: Create a Performance Problem
 
 Before optimizing, let's add a feature that can further expose performance issues. We'll add a dynamic background image that changes based on the focused item.
 
@@ -50,7 +50,7 @@ This happens because every focus change triggers a state update, causing the ent
 
 ---
 
-## X.2: Detect Unnecessary Re-renders
+## 5.2: Detect Unnecessary Re-renders
 
 Now let's identify exactly which components are re-rendering and why. We'll use **Why Did You Render (WDYR)**, a tool that logs unnecessary re-renders to the console.
 
@@ -99,9 +99,9 @@ This runs through the setup, testing, and analysis automatically. But you will s
 
 ---
 
-## X.3: Understanding the Fixes
+## 5.3: Understanding the Fixes
 
-> **Already familiar with React.memo, useCallback, and useMemo?** Skip to [X.4: Additional Tools](#x4-additional-optimization-tools) or [X.5: FlatList Optimization](#x5-optimize-flatlist-performance).
+> **Already familiar with React.memo, useCallback, and useMemo?** Skip to [5.4: Additional Tools](#54-additional-optimization-tools) or [5.5: FlatList Optimization](#55-optimize-flatlist-performance).
 
 For this app, WDYR typically identifies these types of issues:
 
@@ -270,7 +270,7 @@ The 75.9% CPU reduction proves the app was wasting most of its processing power 
 
 ---
 
-## X.4: Additional Optimization Tools
+## 5.4: Additional Optimization Tools
 
 ### React DevTools Profiler
 
@@ -319,7 +319,7 @@ The plugin catches patterns that prevent automatic optimization: mutating state 
 
 ---
 
-## X.5: Optimize FlatList Performance
+## 5.5: Optimize FlatList Performance
 
 FlatList itself can be a bottleneck. You have two options:
 
@@ -382,4 +382,4 @@ These patterns are essential for TV apps where D-pad navigation triggers frequen
 
 ---
 
-**Previous:** [Phase 5: Replace FlatList](5_replace_flatlist.md) | **Next:** [Wrap Up](6_wrap_up_and_next_steps.md)
+**Previous:** [Performance Testing](4_performance_testing.md) | **Next:** [Accessibility](6_accessibility.md)

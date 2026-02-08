@@ -1,4 +1,4 @@
-# Phase X2: TV Accessibility
+# Phase 6: TV Accessibility
 
 TV apps have unique accessibility requirements. Users navigate with D-pad remotes from 10 feet away, and some rely on screen readers or have visual impairments. In this phase, we'll implement critical accessibility improvements for HomeScreen—focusing on focus management, screen reader support, and visual indicators.
 
@@ -14,7 +14,7 @@ Poor accessibility on TV isn't just an inconvenience—it can make your app comp
 
 ---
 
-## X2.1: Add TVFocusGuideView for Predictable Navigation
+## 6.1: Add TVFocusGuideView for Predictable Navigation
 
 **The Problem:**
 
@@ -76,7 +76,7 @@ After implementing, navigate through your content rows:
 
 ---
 
-## X2.2: Add Accessibility Labels to Interactive Elements
+## 6.2: Add Accessibility Labels to Interactive Elements
 
 **The Problem:**
 
@@ -140,7 +140,7 @@ Now screen readers announce: "Inception, Sci-Fi, button. Press to view details."
 
 ---
 
-## X2.3: Implement Initial Focus Management
+## 6.3: Implement Initial Focus Management
 
 **The Problem:**
 
@@ -230,7 +230,7 @@ Update HomeScreen to pass isFirstRow to the first ContentRow:
 
 ---
 
-## X2.4: Improve Focus Indicator Visibility
+## 6.4: Improve Focus Indicator Visibility
 
 **The Problem:**
 
@@ -330,4 +330,4 @@ These changes ensure your app is usable by all viewers, regardless of ability.
 
 ---
 
-**Previous:** [Phase X: Optimize App Performance](x_optimize_app.md) | **Next:** [Wrap Up](6_wrap_up_and_next_steps.md)
+**Previous:** [Optimize Re-rendering Performance](5_optimize_rerendering_performance.md) | **Next:** [Replace FlatList](7_replace_flatlist.md)

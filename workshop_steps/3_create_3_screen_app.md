@@ -225,4 +225,4 @@ const handleVideoEnded = () => {
 
 OR ...
 
-Short on time? Go straight to [Wrap Up and Next Steps](6_wrap_up_and_next_steps.md)
+Short on time? Go straight to [Wrap Up and Next Steps](8_wrap_up_and_next_steps.md)

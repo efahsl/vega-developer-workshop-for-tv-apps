@@ -1,4 +1,4 @@
-# Phase 5: Replace FlatList
+# Phase 7: Replace FlatList
 
 ## Use Vega Native UI Components
 
@@ -20,4 +20,4 @@ _AFTER_
 
 ---
 
-**Previous:** [Performance Testing](4_performance_testing.md) | **Next:** [Wrap Up and Next Steps](6_wrap_up_and_next_steps.md)
+**Previous:** [Accessibility](6_accessibility.md) | **Next:** [Wrap Up and Next Steps](8_wrap_up_and_next_steps.md)

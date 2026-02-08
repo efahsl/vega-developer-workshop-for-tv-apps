@@ -1,8 +1,6 @@
-# Phase 6: Wrap up and Next Steps
+# Phase 8: Wrap up and Next Steps
 
 This concludes the official agenda for our workshop. We hope you had fun building app for the big-screen with the Vega OS (and AI).
-
-We would appreciate if you can take few more mins to complete the survey here (<https://amazon6.qualtrics.com/jfe/form/SV_2fRvQv0Cdap2UtM>) and let us know about your experience.
 
 We look forward to seeing you build and submit more apps by using [Vega Developer Tools](https://developer.amazon.com/apps-and-games/vega#vegadevtools). You are welcome to continue enhancing your current app by adding more features like [turbo module](https://developer.amazon.com/docs/kepler-tv/create-turbo-module.html), and [media players](https://developer.amazon.com/docs/vega/0.21/media-player.html), you could decide to fork one of the [sample apps](https://developer.amazon.com/docs/vega/0.21/sample-app-home.html), or develop a brand new app (see below for some additional ideas/inspiration). During your development if you run into issues including slow app performance, app not responding, or crashes then use the [Debugging](https://developer.amazon.com/docs/vega/0.21/debug-apps-overview.html), [Performance](https://developer.amazon.com/docs/vega/0.21/improve-performance-overview.html), and Vega MCP Developer Tools to root cause and fix issues. After testing, you can submit your app for publishing in the Fire-TV App marketplace, refer [here](https://developer.amazon.com/docs/vega/0.21/app-submission.html) for more details on submission and publishing.
 
@@ -127,4 +125,4 @@ A visually rich weather app that transforms your TV into a weather station.
 
 ---
 
-**Previous:** [Replace FlatList](5_replace_flatlist.md)
+**Previous:** [Replace FlatList](7_replace_flatlist.md)
