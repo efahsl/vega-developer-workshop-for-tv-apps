@@ -2,6 +2,8 @@
 
 TV apps have unique accessibility requirements. Users navigate with D-pad remotes from 10 feet away, and some rely on screen readers or have visual impairments. In this phase, we'll implement critical accessibility improvements for HomeScreen—focusing on focus management, screen reader support, and visual indicators.
 
+> **Prerequisite:** This phase builds on the code from [Phase 5: Optimize App Performance](5_optimize_rerendering_performance.md). The code samples below assume your `ThumbnailItem` already has an `onFocus` callback and `ContentRow` accepts `onItemFocus` — both introduced during the background image feature in Phase 5.
+
 ## Why TV Accessibility Matters
 
 Unlike mobile apps where users tap directly on elements, TV users must navigate sequentially using D-pad controls. This makes focus management critical:
@@ -29,7 +31,7 @@ This happens because React Native's default focus engine doesn't understand the 
 **Prompt your agent:**
 
 ```
-Add TVFocusGuideView to the ContentRow component in HomeScreen.tsx to improve D-pad navigation between rows. The focus guide should help users navigate vertically between content rows in a predictable way. Wrap the FlatList in TVFocusGuideView with autoFocus enabled.
+Add TVFocusGuideView to the ContentRow component in `HomeScreen.tsx` to improve D-pad navigation between rows. The focus guide should help users navigate vertically between content rows in a predictable way. Wrap the FlatList in TVFocusGuideView.
 ```
 
 **Expected result:**
@@ -51,12 +53,12 @@ const ContentRow = ({title, items, onItemPress, onItemFocus}: ContentRowProps) =
   return (
     <View style={styles.rowContainer}>
       <Text style={styles.rowTitle}>{title}</Text>
-      <TVFocusGuideView autoFocus>
+      <TVFocusGuideView>
         <FlatList
           data={items}
           horizontal
           renderItem={renderItem}
-          keyExtractor={(item, index) => `${index}-${item.id}`}
+          keyExtractor={item => item.id.toString()}
           showsHorizontalScrollIndicator={false}
         />
       </TVFocusGuideView>
@@ -65,7 +67,9 @@ const ContentRow = ({title, items, onItemPress, onItemFocus}: ContentRowProps) =
 };
 ```
 
-**Why it works:** `TVFocusGuideView` creates a focus "container" that helps the focus engine understand your layout. When users press up/down, focus moves to the nearest focusable element in the adjacent `TVFocusGuideView` rather than jumping unpredictably.
+**Why it works:** `TVFocusGuideView` creates a focus "container" that helps the focus engine understand your layout. It groups all focusable children (the thumbnails) into a logical region. When users press up/down, focus moves to the nearest focusable element in the adjacent `TVFocusGuideView` rather than jumping unpredictably.
+
+> **Note:** `TVFocusGuideView` supports an `autoFocus` prop that automatically focuses the first focusable child when the view mounts. We intentionally omit it here because we'll handle initial focus explicitly in section 6.3 — using both can cause the last-mounted row to steal focus.
 
 ### Test the Navigation
 
@@ -134,9 +138,11 @@ const ThumbnailItem = ({item, onPress, onFocus}: ThumbnailItemProps) => {
 - `accessibilityLabel` tells screen readers what the element represents
 - `accessibilityHint` explains what action will occur
 - `accessibilityRole="button"` indicates it's interactive
-- `accessibilityElementsHidden` on the Image prevents redundant announcements
+- `accessibilityElementsHidden` on the Image prevents the screen reader from separately announcing the image as an unlabeled element inside the button
 
 Now screen readers announce: "Inception, Sci-Fi, button. Press to view details."
+
+> **Dynamic content tip:** If your HomeScreen updates a hero/background image when items receive focus (as implemented in Phase 5), consider adding `accessibilityLiveRegion="polite"` to the hero container so screen readers announce the featured content change without interrupting the current announcement.
 
 ---
 
@@ -278,6 +284,8 @@ thumbnailFocused: {
 - **Larger scale (1.1)** — Makes the focused item "pop" more noticeably
 - **elevation** — Ensures shadow renders on Android/Fire TV
 
+> **Optional enhancement:** For smoother focus transitions, consider wrapping the scale change with React Native's `Animated` API or `LayoutAnimation`. An abrupt jump from 1.0 to 1.1 scale can feel jarring on large TV screens — a short 150ms ease-in animation makes focus movement feel polished.
+
 ### Additional Enhancement: Add Semantic Headers
 
 While updating styles, also add semantic structure to the row titles:
@@ -302,17 +310,17 @@ Add accessibility role "header" to the row title Text components in ContentRow s
 
 ## Testing Your Accessibility Improvements
 
-TODO: ADD INSTRUCTIONS FOR ENABLING ACCESSIBILITY IN THE VEGA TV DEVICE.
+> **Note:** To enable VoiceView on your Vega TV device, go to **Settings > Accessibility > VoiceView** and toggle it on. You can also use the Vega remote shortcut by long-pressing the **Mute** button to quickly enable or disable the VoiceView during testing.
 
-After implementing all Phase 1 fixes, verify:
+After implementing all changes, verify:
 
 | Test | Expected Behavior |
 |------|-------------------|
-| App loads | First thumbnail is focused, screen reader announces it |
+| App loads | First thumbnail is focused, VoiceView announces it |
 | Press Down | Focus moves to item below in next row |
 | Press Up | Focus returns to previous row predictably |
 | Focus any item | White border with shadow clearly visible |
-| Screen reader on | Announces movie title, category, and "Press to view details" |
+| VoiceView on | Announces movie title, category, and "Press to view details" |
 | Navigate rows | Row titles announced as headers |
 
 ---
@@ -322,7 +330,7 @@ After implementing all Phase 1 fixes, verify:
 In this phase, you implemented critical TV accessibility improvements:
 
 1. **TVFocusGuideView** — Predictable D-pad navigation between content rows
-2. **Accessibility Labels** — Screen reader support with meaningful announcements
+2. **Accessibility Labels** — VoiceView support with meaningful announcements
 3. **Initial Focus** — Automatic focus on first item when screen loads
 4. **Focus Indicators** — High-contrast visual feedback for focused elements
 
@@ -330,4 +338,14 @@ These changes ensure your app is usable by all viewers, regardless of ability.
 
 ---
 
-**Previous:** [Optimize Re-rendering Performance](5_optimize_rerendering_performance.md) | **Next:** [Replace FlatList](7_replace_flatlist.md)
+## Going Further
+
+If you want to deepen your app's accessibility beyond this phase, consider these additional techniques:
+
+- **`accessible={true}` on container Views** — Groups children into a single focusable unit. Useful for card-style layouts where the title, image, and metadata should be announced together rather than individually.
+- **`accessibilityViewIsModal={true}`** — When displaying modals or overlays (e.g., a detail popup), this prop tells the screen reader to ignore elements outside the modal. Without it, users can navigate to hidden content behind the overlay.
+- **`accessibilityActions`** — Define custom actions (e.g., "Add to watchlist", "Play trailer") that screen reader users can trigger via the actions menu, giving them access to long-press or swipe gestures they can't perform with a D-pad.
+
+---
+
+**Previous:** [Optimize App Performance](5_optimize_rerendering_performance.md) | **Next:** [Replace FlatList](7_replace_flatlist.md)
