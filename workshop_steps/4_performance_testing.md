@@ -1,226 +1,48 @@
 # Phase 4: Performance Testing & Analysis
 
-Now let's do some performance benchmarking! Note that performance tools are only supported on a physical Vega Fire TV stick with [developer mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) configured.
+In this phase, we'll establish a performance baseline for your app using Vega's KPI visualization tools. This baseline will help us measure the impact of optimizations in the next phase.
 
-## 4.1: Performance Analysis
+> Note: Performance tools are only supported on a physical Vega Fire TV stick with [developer mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) configured.
 
-Next, we will run a performance test of the app on our physical device to get a performance baseline.
+## 4.1: Run Baseline UI Fluidity Test
 
-Build your app in **“release”** mode before running a performance test. A release build is required to accurately measure performance, apply targeted performance optimizations and re-measure to verify performance improvements.
+We can use prompts to run a baseline UI fluidity test for our app.
 
-Add the following config to your VS Code settings file. This config enables _"AI-Assisted Diagnosis"_ feature in Vega Studio.
-
-```json
-{
- ...,
- "kepler.features.aiAssistedDiagnostics.perf": true
-}
+**Prompt:**
+```
+Use the Vega CLI tool to run the ui-fluidity test from the Vega kpi-visualizer tool. Save the results to a file (ui-fluidity-baseline.md), because in the future, we are going to make changes and run another test for comparison.
 ```
 
-You can open VS code settings JSON, by running the following command in VS Code Command Pallet:
+You should get a result that looks something similar to the following:
+```
+Performance analyzer Performance KPIs Report
 
-<img src="../images/XHRfc0c08d1cf16434d8d2c9f14d.png" width="640">
+Firmware version: vvrp-tv-arm64-user OS 1.1 (TV Ship day60/10503430), serial number: bfb50198152XXXXX
+Date: 02/11/2026, test: scrolling, iterations requested: 3, iterations completed: 3, duration: 30 seconds
 
-You might see a warning in VS Code settings, you can safely ignore it:
 
-<img src="../images/XHRe7a7958d561849339bef6389b.png" width="640">
+                                 Fluidity                                 |     n     |       min       |       mean      |       max       |      stdev      |     ci (+/-)   
+3+ Consecutive Dropped Frames, frame                                      |         3 |              28 |              28 |              28 |             0.0 |             0.0
+5+ Consecutive Delayed Events - Focus, event                              |         3 |               0 |               0 |               0 |             0.0 |             0.0
+5+ Consecutive Dropped Frames, frame                                      |         3 |              28 |              28 |              28 |             0.0 |             0.0
+App Event Response Time - Focus, ms                                       |        84 |             0.2 |             2.7 |            33.8 |             4.9 |             0.9 √ 
+Fluidity %, %                                                             |         3 |            97.4 |            97.6 |            97.8 |             0.2 |             0.3
+Granular Fluidity %, %                                                    |       128 |             0.0 |            83.2 |           100.0 |            20.0 |             2.9 √ 
 
-### Run performance test: App Launch Latency
 
-Connect a FireTV stick device and run "App KPI Visualizer" tool from Vega Studio side bar in VS Code
+The √ signifies statistically sound data for a KPI. If missing,consider running more test iterations and consult CI (+/-) column for confidence interval.
+You can also run perf doctor command to check the stability of the target device.
 
-<img src="../images/XHR7994f428b5be4518b97c52ce9.png">
+KPI Value Analysis Results: output/2026-02-11_14-26-14/scrolling-kpi-validator-results2026-02-11_14-26-14.json
+KPI Report File:output/2026-02-11_14-26-14/scrolling-kpi-report-2026-02-11_14-26-14.json
+Output Folder: output/2026-02-11_14-26-14
+Data successfully appended to file
+Data successfully appended to file
+Shutting down telemetry client.
 
-Select following options in the wizard:
-
-KPIs: Choose - 'Cool Start Latency' - _you may choose additional KPIs in the check list. Each test runs sequentially, so takes longer to execute_
-
-<img src="../images/app-cool-start-latency-test.png" width="640">
-
-Uncheck "Record CPU Profiler" - _this option records a CPU profiler trace to deep-dive further into performance issues_
-
-<img src="../images/XHR5ea09e4481a7473d9d2033a49.png" width="640">
-
-Select defaults for all other options in the wizard
-
-Once KPI Visualizer starts, you should see a notification window as below
-
-<img src="../images/XHR3063643309f34a39a1a4f2ea8.png"  width="640">
-
-After the test starts, KPI Visualizer will automatically run the app and measure KPIs.
-
-### Analyze performance report
-
-The Performance report is automatically opened after performance test is completed
-
-<img src="../images/app-launch-kpi-report.png" height="400">
-
-You can also manually open the KPI report file, by navigating to the `<project-root>/generated` directory and clicking on the `app-launch-kpi-report-*.json` file.
-
-If you run multiple tests at once a `aggregated-kpi-report-.json` file is created in the `generated` directory.
-
-## 4.2: AI-Assisted Diagnosis
-
-KPI report includes a "Diagnose with AI" Action, that automatically executes pre-defined steps in your AI agent to diagnose a performance issue in your App.
-
-**[1] In the KPI report UI, click on "Diagnose with AI" action next to 'Time To Fully Drawn (TTFD) (s)' KPI**
-
-This should kick off AI-Assisted Diagnosis for TTFD KPI in your AI Agent.
-
-_If your AI agent is not accessible by Vega Studio, the prompt content is opened in a text editor. Copy-paste the prompt content shown the active text editor in your AI agent's chat window. You should see the following notification pop-up in VS Code in this case:_
-
-<img src="../images/vegastudio-prompt-notification.png" height="100">
-
-If your App is already meeting KPI guidelines (GREEN), your AI Agent may respond with a message like: _the KPI is already meeting expected standards, no further diagnosis is required._
-
-In this case ask your AI Agent to ignore the thresholds and further optimize the KPI; prompt: _"Please help improve this KPI with the instructions provided earlier in the prompt. Ignore the KPI threshold check, I want to improve the KPI value even though it is within the threshold."_
-
-You should expect a response indicating that `useReportFullyDrawn()` callback is not invoked in the App.
-
-If your AI Agent doesn't automatically implement the recommended changes, ask your AI Agent to implement them by giving a prompt: `"implement the recommended changes"`.
-
-Your AI Agent should then install `npm install @amazon-devices/kepler-performance-api` library and invoke the `useReportFullyDrawn()` callback.
-
-Example of AI Agent changes in App.tsx to invoke `useReportFullyDrawn()`:
-
-```typescript
-import {useKeplerAppStateManager} from '@amazon-devices/react-native-kepler';
-import {useReportFullyDrawn} from '@amazon-devices/kepler-performance-api';
-...
-export const App = () => {
-  const reportFullyDrawnCallback = useReportFullyDrawn();
-  const keplerAppStateManager = useKeplerAppStateManager();
-  const [appState, setAppState] = useState(
-    keplerAppStateManager.getCurrentState(),
-  );
-
-  // Emit fully drawn marker on the first draw after warm launch.
-  const handleAppStateChange = useCallback(
-    (stateChange: any) => {
-      if (
-        appState.match(/^(inactive|background)$/) &&
-        stateChange === 'active'
-      ) {
-        reportFullyDrawnCallback();
-      }
-      if (stateChange.match(/^(inactive|background|active|unknown)$/)) {
-        setAppState(stateChange);
-      }
-    },
-    [appState, reportFullyDrawnCallback],
-  );
-
-  useEffect(() => {
-    const changeSubscription = keplerAppStateManager.addAppStateListener(
-      'change',
-      handleAppStateChange,
-    );
-    return () => {
-      changeSubscription.remove();
-    };
-  }, [handleAppStateChange, keplerAppStateManager]);
-
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
 ```
 
-**⚠️ Important**: Check the placement of "useReportFullyDrawn()" callback. Invoking `useReportFullyDrawn()` pre-maturely leads to incorrect TTFD KPI values.
-
-- For cool start, it must be invoked in the component that is first shown to the user on launch, after the component is fully mounted. Adjust the placement of useReportFullyDrawn() in the useEffect accordingly.
-- For warm start, it must be invoked within app state manager handlers
-
-For example, in case of an app that displays the first screen in a HomeScreen.tsx component, move the call to `useReportFullyDrawn()` in a `useEffect` of HomeScreen **& remove it from App.tsx**.
-
-```typescript
-import {useReportFullyDrawn} from '@amazon-devices/kepler-performance-api';
-
-export const HomeScreen = ({navigation}: Props) => {
-  const [contentRows, setContentRows] = useState<ContentRow[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [focusedId, setFocusedId] = useState<string | null>(null);
-  const reportFullyDrawnCallback = useReportFullyDrawn();
-
-  // Example of calling useReportFullyDrawn() after the
-  // component that is first shown to the user is mounted
-  useEffect(() => {
-    reportFullyDrawnCallback();
-  }, [reportFullyDrawnCallback]);
-
-  useEffect(() => {
-    fetchMovies();
-  }, []);
-```
-
-After you apply the code changes, re-build your App in **"release"** mode again and re-run KPI Visualizer with "Application Cool Start Latency Test". You can optionally include "Application Warm Start Latency Test" as well to test warm start launch scenario
-
-Once the test is complete, you should see that TTFD KPI has a value instead of N/A
-
-<img src="../images/XHR48a3ab3002954b999107fe46d.png" height="400">
-
-**[2] In the KPI report UI, click on "Diagnose with AI" action next to 'Time To First Frame (TTFF) (s)' KPI**
-
-This should kick off AI-Assisted Diagnosis for TTFF KPI in your AI Agent.
-
-_If your AI agent is not accessible by Vega Studio, the prompt content is opened in a text editor. Copy-paste the prompt content shown the active text editor in your AI agent's chat window. You should see the following notification pop-up in VS Code in this case:_
-
-<img src="../images/vegastudio-prompt-notification.png" height="100">
-
-If your App is already meeting KPI guidelines (GREEN), your AI Agent may respond with a message like: _the KPI is already meeting expected standards, no further diagnosis is required._
-
-In this case ask your AI Agent to ignore the thresholds and further optimize the KPI; prompt: `"Please help improve this KPI with the instructions provided earlier in the prompt. Ignore the KPI threshold check, I want to improve the KPI value even though it is within the threshold."`
-
-You should expect a response indicating that **Native Splash Screen is NOT implemented in the App.**
-
-AI Agent should then automatically implement the SplashScreen manager APIs in your app.
-
-SplashScreen Manager requires a 'SplashScreenImages.zip' file that includes splash screen assets.
-
-Ask your AI agent to create this file, by providing an input image; prompt: _"Please create the SplahScreenImages.zip file using this image "./src/assets/background.png"._
-
-Alternatively, you can provide any 1920x1080 pixels .png image of your choice.
-
-Follow the agent workflow and verify the zip file is created properly in `<project-root>/assets/raw/SplashScreenImages.zip`.
-
-Apply the code changes, then re-build your app in **"release"** mode & re-run your app to verify Splash Screen shows up when you launch the app on the device.
-
-After confirming Splash screen is working, re-run KPI Visualizer and verify improvements in TTFF KPI.
-
-## Run performance test: UI Fluidity (optional)
-
-Next, you can run a UI Fluidity test for your App using KPI Visualizer.
-
-To do so, follow the steps listed in https://developer.amazon.com/docs/vega/0.21/fluidity-foreground.html to set up KPI Visualizer to measure UI Fluidity in your app.
-
-Make sure to install Appium https://developer.amazon.com/docs/vega/0.21/appium-install.html, Appium is required to run UI automation in the app during the test.
-
-You may skip the steps to create a new UI automation script and just use the default one that is built-in KPI Visualizer
-
-Run KPI Visualizer as you did before in this exercise - [Run Performance Test](#run-performance-performance-test-app-launch-latency)
-
-- Chose the KPI Visualizer options as before
-
-- Select "No" for the following:
-
-_This option is only shown for subset of test cases. Selecting "No" will run a default UI automation script. Otherwise you can create a new custom Appium based UI automation script and use that._
-
-<img src="../images/XHR5b7b6421529748e1bc4b3f38d.png" height="400">
-
-## Explore other performance tools
-
-- Activity Monitor to inspect and record app CPU Usage https://developer.amazon.com/docs/vega/0.21/monitor-cpu-usage.html
-- Memory Monitor to inspect and record App memory breakdown https://developer.amazon.com/docs/vega/0.21/monitor-record-app-memory.html
-- Check out best practices, FAQ & other performance tools: https://developer.amazon.com/docs/vega/0.21/improve-performance-overview.html
+**🏁 Checkpoint:** Your agent should save these results to a .md file. Look for metrics like "Fluidity %" and "App Event Response Time" — we'll compare against these after making optimizations. 
 
 ---
 
