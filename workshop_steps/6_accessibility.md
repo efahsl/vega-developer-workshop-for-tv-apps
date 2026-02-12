@@ -140,7 +140,7 @@ const ThumbnailItem = ({item, onPress, onFocus}: ThumbnailItemProps) => {
 - `accessibilityRole="button"` indicates it's interactive
 - `accessibilityElementsHidden` on the Image prevents the screen reader from separately announcing the image as an unlabeled element inside the button
 
-Now screen readers announce: "Inception, Sci-Fi, button. Press to view details."
+Now screen readers announce something like: "The Feline Assistant, Trending Now, button. Press to view details."
 
 > **Dynamic content tip:** If your HomeScreen updates a hero/background image when items receive focus (as implemented in Phase 5), consider adding `accessibilityLiveRegion="polite"` to the hero container so screen readers announce the featured content change without interrupting the current announcement.
 
@@ -310,7 +310,24 @@ Add accessibility role "header" to the row title Text components in ContentRow s
 
 ## Testing Your Accessibility Improvements
 
-> **Note:** To enable VoiceView on your Vega TV device, go to **Settings > Accessibility > VoiceView** and toggle it on. You can also use the Vega remote shortcut by long-pressing the **Mute** button to quickly enable or disable the VoiceView during testing.
+### Testing with VoiceView on a Fire TV Device
+
+To verify your accessibility labels are working correctly, you should test with VoiceView — the screen reader built into Fire TV devices. When VoiceView is enabled, you'll hear an announcement of the selected content item each time you change focus with the D-pad.
+
+**To turn on VoiceView:**
+
+1. Go to **Settings** on your Fire TV
+2. Select **Accessibility**
+3. Select **VoiceView**
+4. Select **VoiceView** again to turn it on
+
+> For more details on VoiceView setup and usage, see the [Amazon VoiceView guide](https://www.amazon.com/gp/help/customer/display.html?nodeId=202105320).
+
+Once enabled, navigate through your app with the D-pad remote. As you move focus between thumbnails, VoiceView should announce the movie title, category, and hint text you defined in your `accessibilityLabel` and `accessibilityHint` props (e.g., "The Feline Assistant, Trending Now, button. Press to view details."). This is the real-world validation that your accessibility implementation is working as intended.
+
+> **Tip:** You can also quickly toggle VoiceView on and off by long-pressing the **Mute** button on your Vega remote — handy for switching between regular testing and accessibility testing.
+
+### Verification Checklist
 
 After implementing all changes, verify:
 
@@ -348,4 +365,4 @@ If you want to deepen your app's accessibility beyond this phase, consider these
 
 ---
 
-**Previous:** [Optimize App Performance](5_optimize_rerendering_performance.md) | **Next:** [Replace FlatList](7_replace_flatlist.md)
+**Previous:** [Optimize App Performance](5_optimize_rerendering_performance.md) | **Next:** [Wrap Up and Next Steps](7_wrap_up_and_next_steps.md)

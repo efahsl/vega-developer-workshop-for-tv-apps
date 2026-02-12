@@ -60,7 +60,62 @@ Use the Vega CLI tool to again run the ui-fluidity test from the Vega kpi-visual
 
 ---
 
-## 5.2: Detect Unnecessary Re-renders
+## 5.2: Optimize FlatList Performance
+
+FlatList itself can be a bottleneck. We have two options, we can tune/optimize the FlatList or we can replace with a native Vega Carousel component. 
+
+### Option A: Tune FlatList Props
+
+**Prompt:**
+
+```
+Optimize the FlatList components in HomeScreen for TV performance. Add windowSize, maxToRenderPerBatch, initialNumToRender, removeClippedSubviews, and getItemLayout.
+```
+
+**Expected result:**
+```typescript
+<FlatList
+  data={items}
+  renderItem={renderItem}
+  keyExtractor={item => item.id}
+  horizontal
+  windowSize={5}
+  maxToRenderPerBatch={5}
+  initialNumToRender={5}
+  removeClippedSubviews={true}
+  getItemLayout={(data, index) => ({
+    length: ITEM_WIDTH,
+    offset: ITEM_WIDTH * index,
+    index,
+  })}
+/>
+```
+
+### Option B: Replace with Vega Carousel
+
+The Vega Carousel is a native component optimized for TV navigation.
+
+> **Note:** The Vega Carousel component requires native modules that may not available on the virtual device. If you are using the Vega Virtual Device, you may encounter crashes or missing module errors (e.g., `INativeUiComponents_13`). For best results, use a physical Vega Fire TV stick for this step. If you only have a virtual device, consider sticking with the optimized FlatList approach.
+
+**Prompt:**
+
+```
+Replace the FlatList rows in HomeScreen.tsx with the Vega Carousel from @amazon-devices/kepler-ui-components. Keep the same images and dimensions. Use FocusIndicator="fixed".
+```
+
+The Carousel provides smoother scrolling and better performance, especially on-device.
+
+**Before (FlatList):**
+
+<img src="../images/vega-flatlist-animated.gif">
+
+**After (Carousel):**
+
+<img src="../images/vega-carousel-animated.gif">
+
+---
+
+## 5.3: Detect Unnecessary Re-renders
 
 Now let's identify exactly which components are re-rendering and why. We'll use our BuilderTools built-in prompt capability to set up **Why Did You Render (WDYR)**, a tool that logs unnecessary re-renders to the console, and then provide analysis before/after the changes.
 
@@ -108,7 +163,8 @@ Once this is complete, the agent will provide a detailed breakdown of the root c
 
 ---
 
-## 5.3: Understanding the Fixes
+<details>
+<summary><strong>Understanding the Fixes</strong> — To see details on the types of fixes most commonly made, expand this section.</summary>
 
 For this app, WDYR _typically_ identifies these types of issues:
 
@@ -154,58 +210,7 @@ The 75.9% CPU reduction proves the app was wasting most of its processing power 
 
 Coming soon, we are going to re-measure the UI fluidity metrics to validate the improvements.
 
----
-
-## 5.4: Optimize FlatList Performance
-
-FlatList itself can be a bottleneck. We have two options, we can tune/optimize the FlatList or we can replace with a native Vega Carousel component. 
-
-### Option A: Tune FlatList Props
-
-**Prompt:**
-
-```
-Optimize the FlatList components in HomeScreen for TV performance. Add windowSize, maxToRenderPerBatch, initialNumToRender, removeClippedSubviews, and getItemLayout.
-```
-
-**Expected result:**
-```typescript
-<FlatList
-  data={items}
-  renderItem={renderItem}
-  keyExtractor={item => item.id}
-  horizontal
-  windowSize={5}
-  maxToRenderPerBatch={5}
-  initialNumToRender={5}
-  removeClippedSubviews={true}
-  getItemLayout={(data, index) => ({
-    length: ITEM_WIDTH,
-    offset: ITEM_WIDTH * index,
-    index,
-  })}
-/>
-```
-
-### Option B: Replace with Vega Carousel
-
-The Vega Carousel is a native component optimized for TV navigation.
-
-**Prompt:**
-
-```
-Replace the FlatList rows in HomeScreen.tsx with the Vega Carousel from @amazon-devices/kepler-ui-components. Keep the same images and dimensions. Use FocusIndicator="fixed".
-```
-
-The Carousel provides smoother scrolling and better performance, especially on-device.
-
-**Before (FlatList):**
-
-<img src="../images/vega-flatlist-animated.gif">
-
-**After (Carousel):**
-
-<img src="../images/vega-carousel-animated.gif">
+</details>
 
 ---
 
@@ -254,6 +259,18 @@ While WDYR detects *unnecessary* re-renders, the React DevTools Profiler shows t
 - Render cascades from parent to children
 
 **Note:** For Vega apps on Fire TV, use remote debugging.
+
+### Apply Performance Best Practices (MCP Prompt)
+
+The Builder Tools MCP server includes an `apply_performance_best_practices` prompt that can automatically diagnose and optimize your React Native app's performance. It analyzes your source code for common performance anti-patterns and suggests fixes.
+
+**Prompt:**
+
+```
+@apply_performance_best_practices ./src
+```
+
+This will scan your app source path and provide recommendations for memoization, render optimization, and other React Native performance improvements specific to Vega.
 
 ### ESLint Plugin for React Compiler
 

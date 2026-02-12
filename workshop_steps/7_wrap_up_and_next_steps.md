@@ -1,4 +1,4 @@
-# Phase 8: Wrap up and Next Steps
+# Phase 7: Wrap up and Next Steps
 
 This concludes the official agenda for our workshop. We hope you had fun building app for the big-screen with the Vega OS (and AI).
 
@@ -125,4 +125,4 @@ A visually rich weather app that transforms your TV into a weather station.
 
 ---
 
-**Previous:** [Replace FlatList](7_replace_flatlist.md)
+**Previous:** [Accessibility](6_accessibility.md)
