@@ -148,7 +148,7 @@ A lot of activity happening here. One thing to note is that in your Home Screen 
 ```typescript
 const handleItemPress = (item: MovieItem) => {
   navigation.navigate("Detail", {
-    bannerImage: item.images.thumbnail_450x253,
+    bannerImage: item.images.poster_16x9,
     title: item.title,
     description: item.description,
     videoUrl: item.sources[0]?.url || "",
