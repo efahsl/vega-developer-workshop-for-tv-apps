@@ -16,7 +16,7 @@ We can use prompts to run a baseline UI fluidity test for our app.
 
 **Prompt:**
 ```
-Use the Vega CLI tool to run the ui-fluidity test from the Vega kpi-visualizer tool. Save the results to a file (ui-fluidity-baseline.md), because in the future, we are going to make changes and run another test for comparison.
+Rebuild and re-run the app in release mode. Use the Vega CLI tool to run the ui-fluidity test from the Vega kpi-visualizer tool. Save the results to a file (ui-fluidity-baseline.md), because in the future, we are going to make changes and run another test for comparison.
 ```
 
 You should get a result that looks something similar to the following:

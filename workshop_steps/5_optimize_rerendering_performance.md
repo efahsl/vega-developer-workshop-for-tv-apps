@@ -55,7 +55,7 @@ We can measure an additional UI fluidity baseline to see how this change negativ
 **Prompt:**
 
 ```
-Use the Vega CLI tool to again run the ui-fluidity test from the Vega kpi-visualizer tool. Save the results to another file (ui-fluidity-after-changes.md), and compare these results to our original baseline (ui-fluidity-baseline.md).
+Rebuild in release mode and re-install the app to the device. Use the Vega CLI tool to again run the ui-fluidity test from the Vega kpi-visualizer tool. Save the results to another file (ui-fluidity-after-changes.md), and compare these results to our original baseline (ui-fluidity-baseline.md).
 ```
 
 ---
@@ -221,7 +221,7 @@ Let's do a final UI fluidity measurement to see how we have improved the perform
 **Prompt:**
 
 ```
-Use the Vega CLI tool to again run the ui-fluidity test from the Vega kpi-visualizer tool. Save the results to another file (ui-fluidity-after-optimizations.md), and compare these results to our previously measured measurement files.
+Rebuild the app in release mode and re-install the app to the device. Use the Vega CLI tool to again run the ui-fluidity test from the Vega kpi-visualizer tool. Save the results to another file (ui-fluidity-after-optimizations.md), and compare these results to our previously measured measurement files.
 ```
 
 ## Summary
