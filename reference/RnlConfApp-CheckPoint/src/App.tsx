@@ -14,7 +14,6 @@ import {NavigationContainer} from '@amazon-devices/react-navigation__native';
 import {HomeScreen} from './screens/HomeScreen';
 import {DetailsScreen} from './screens/DetailsScreen';
 import {VideoPlayerScreen} from './screens/VideoPlayerScreen';
-import {BlitsDemoScreen} from './screens/BlitsDemoScreen';
 
 // Enable optimizations
 enableScreens();
@@ -49,7 +48,6 @@ export const App = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Detail" component={DetailsScreen} />
         <Stack.Screen name="VideoPlayer" component={VideoPlayerScreen} />
-        <Stack.Screen name="BlitsDemo" component={BlitsDemoScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -7,8 +7,8 @@ import {
   ActivityIndicator,
   Pressable,
   ScrollView,
+  FlatList,
 } from 'react-native';
-import {Carousel, ItemInfo} from '@amazon-devices/kepler-ui-components';
 import type {NativeStackNavigationProp} from '@amazon-devices/react-native-screens/native-stack';
 import type {RootStackParamList} from '../App';
 
@@ -71,27 +71,15 @@ const ContentRow = ({title, items, onItemPress}: ContentRowProps) => {
     return <ThumbnailItem item={item} onPress={() => onItemPress(item)} />;
   };
 
-  const itemInfo: ItemInfo[] = [
-    {
-      view: ThumbnailItem,
-      dimension: {
-        width: 415,
-        height: 235,
-      },
-    },
-  ];
-
   return (
     <View style={styles.rowContainer}>
       <Text style={styles.rowTitle}>{title}</Text>
-      <Carousel
+      <FlatList
         data={items}
-        orientation="horizontal"
-        itemDimensions={itemInfo}
+        horizontal
         renderItem={renderItem}
-        getItemForIndex={() => ThumbnailItem}
-        keyProvider={(item, index) => `${index}-${item.id}`}
-        focusIndicatorType="fixed"
+        keyExtractor={(item, index) => `${index}-${item.id}`}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );

@@ -4,6 +4,17 @@ Now the fun part! We are going to build our TV-based UI, a basic 3-screen video 
 
 _If you do not wish to use AI (or were unable to use AI), you can always follow our tutorial on our tech docs: <https://developer.amazon.com/docs/vega-tutorial/0.21/introduction.html>_
 
+<details>
+<summary><strong>Speed Run: Execute All Steps at Once</strong></summary>
+
+Already familiar with this tutorial and want to skip the step-by-step walkthrough? Run the following prompt within your project folder to execute all steps sequentially:
+
+```
+Within this project folder is a Vega app. We are going to scaffold/create a 3-screen app based off the workshop instructions here (https://raw.githubusercontent.com/efahsl/vega-developer-workshop-for-tv-apps/refs/heads/optimization-flow/workshop_steps/3_create_3_screen_app.md). I want you to read those instructions, there are 9 Prompt instructions that I want you to run/execute for this app. Run through all of the steps sequentially, performing validations as needed in between steps. Run commands to install any dependencies as needed. Report back with the progress on each of the steps. Any questions?
+```
+
+</details>
+
 ## 3.1: Add a home screen
 
 First we are going create a home screen component that will replace the main screen from the hello world app. This home screen will contains a grid of movie titles (that we will retrieve via a network API call) and eventually allow the user to play back one of these titles. We are going to use AI Prompts (with our Vega MCP server) to assist us in developing.
@@ -225,4 +236,4 @@ const handleVideoEnded = () => {
 
 OR ...
 
-Short on time? Go straight to [Wrap Up and Next Steps](6_wrap_up_and_next_steps.md)
+Short on time? Go straight to [Wrap Up and Next Steps](7_wrap_up_and_next_steps.md)
