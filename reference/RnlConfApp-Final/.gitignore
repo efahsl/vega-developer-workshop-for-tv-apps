@@ -12,5 +12,10 @@ node_modules
 CMakeUserPresets.json
 npm-debug.log
 CLAUDE.md
-
+build
+output
+node_modules
+.kiro
+.claude
 buildinfo.json
+**/__pycache__

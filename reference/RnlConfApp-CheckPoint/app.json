@@ -1,5 +1,0 @@
-{
-  "//": "The declared app name must follow this pattern to be KRL-compatible",
-  "name": "com.amazondeveloper.rnlconfapp.main",
-  "displayName": "RnlConfApp"
-}
