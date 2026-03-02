@@ -2,6 +2,5 @@
 *.docx
 word_to_markdown_instructions.md
 
-.kiro/*
 reference/RnlConfApp-CheckPoint/.kiro/*
 reference/RnlConfApp-Final/.kiro/*
