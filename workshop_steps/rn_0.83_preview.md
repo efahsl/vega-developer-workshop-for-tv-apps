@@ -191,9 +191,23 @@ npm install
 yarn install
 ```
 
-## Step 6: Test the Upgrade
+## Step 6: Build and Test the Upgrade
 
-Build and deploy your app to verify the upgrade:
+You can build and test your app using AI assistance or manual commands.
+
+### AI-Driven Build and Test (Recommended)
+
+Simply ask your AI assistant:
+
+```
+Build and run this app on the connected Vega device
+```
+
+The AI will handle the build process, deployment, and launch automatically.
+
+### Manual Build and Test
+
+Alternatively, run these commands manually:
 
 ```bash
 # Clean build
@@ -245,10 +259,25 @@ If you encounter build errors:
 
 ### Runtime Errors
 
-If the app crashes or behaves unexpectedly:
-1. Check the device logs: `vega log --device <device-id>`
-2. Review deprecated API usage flagged by the AI
-3. Test on Vega Virtual Device for easier debugging
+If the app crashes or behaves unexpectedly, you can check logs using AI assistance or manual commands.
+
+**AI-Driven Logging (Recommended):**
+
+Ask your AI assistant:
+```
+Run this app in release mode on the connected Vega device and track device logs
+```
+
+**Manual Logging:**
+
+```bash
+vega device start-log-stream
+```
+
+Then review the logs for:
+- Deprecated API usage flagged during the upgrade
+- Runtime errors or crashes
+- Test on Vega Virtual Device for easier debugging
 
 ### Focus Management Issues
 
