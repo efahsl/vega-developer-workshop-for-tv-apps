@@ -41,7 +41,7 @@ Check out our [Prerequisites](workshop_steps/0_prerequisites.md) page to install
 After the MCP workshop, choose one of the following hands-on breakout sessions:
 
 - **[Android Web App Migration](workshop_steps/android_web_app_migration_breakout_room_steps.md)** - Migrate an Android web app to Vega WebView
-- **RN 0.83 Preview** - Upgrade your app to React Native 0.83 on Vega (TODO: add steps)
+- **[RN 0.83 Preview](workshop_steps/rn_0.83_preview.md)** - Upgrade your app to React Native 0.83 on Vega
 
 ## Optional: Follow-Up Exercises
 
