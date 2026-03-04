@@ -24,7 +24,6 @@ The preview packages for this workshop are on a private npm registry — this st
    npm cache clean --force
    ```
 
-> ⚠️ **Important:** After the workshop, restore your original `.npmrc` with `cp ~/.npmrc.bak ~/.npmrc`.
 
 ## Step 2: Install MCP Server
 
@@ -72,6 +71,12 @@ Help me install Vega SDK
 
 The MCP server will guide your AI assistant through the SDK installation.
 
+For full public SDK setup details, see the [Download and Installation Guide](https://developer.amazon.com/docs/vega/0.22/setup-overview.html).
+
+Depending on network speeds, this installation can take 5-15 minutes. We strongly recommend you download and install prior to the workshop.
+
+Additionally, to use our MCP (Model Context Protocol) server or AI prompts you will need at-least one AI Coding assistant such as Cursor, Claude Code, Copilot, Kiro, Amazon Q, Cline, etc. We have included support for these first 6 and have tested primarily on Kiro, Claude Code, and Amazon Q with Claude Sonnet 4/4.5 models - but we expect these prompts to work across most models. To learn more about MCPs, visit [modelcontextprotocol.io/](http://modelcontextprotocol.io/) or see our footnote below.
+
 ## Step 4: Install Preview SDK (Required for RN 0.83 Upgrade)
 
 > Skip this step if you are not participating in the RN 0.83 upgrade session.
@@ -118,7 +123,22 @@ The MCP server will guide your AI assistant through the SDK installation.
    vega --version   # verify 0.23.6188 or higher appears
    ```
 
-## Step 5: Fire TV 4K Select with Developer Mode
+> **SDK and .npmrc Cleanup After Workshop:**
+> 
+> To uninstall the preview SDK after the workshop:
+> ```bash
+> vega sdk uninstall 0.23.6188  # or the preview SDK version at the time of the workshop
+> ```
+> 
+> If you previously had a production SDK installed, validate that the production version is being used once again by running:
+> ```bash
+> vega -v
+> ```
+
+
+> ⚠️ **Important:** After the workshop, restore your original `.npmrc` with `cp ~/.npmrc.bak ~/.npmrc`.
+
+## Step 6: Fire TV 4K Select with Developer Mode
 
 You will need a Fire TV Stick 4K Select running Vega OS with Developer Mode enabled. See the [Developer Mode setup guide](https://developer.amazon.com/docs/vega/0.22/developer-mode.html) for instructions.
 
