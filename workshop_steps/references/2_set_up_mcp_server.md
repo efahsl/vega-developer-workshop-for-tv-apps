@@ -23,6 +23,7 @@ npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest init-context
 ```
 
 This interactive command will:
+
 1. Display available AI agents and let you select your preferred one
 2. Update your agent's MCP settings to configure the MCP server
 3. Create the appropriate Vega context file for your chosen AI agent
@@ -58,6 +59,7 @@ List the tools provided by Amazon Devices Builder Tools MCP
 ```
 
 You should see a response that includes tools such as:
+
 - `read_document`
 - `list_documents`
 - and more
@@ -101,6 +103,11 @@ Build and install my app on the Vega device
 ```
 
 Your agent should use the MCP tools to build the app and deploy it to your connected Vega device.
+
+## Additional Resources
+
+- [MCP Server Documentation](https://developer.amazon.com/docs/vega/latest/mcp-server.html)
+- [MCP Server Troubleshooting](https://developer.amazon.com/docs/vega/latest/mcp-server-issues.html)
 
 ---
 
