@@ -80,6 +80,11 @@ To start the upgrade, use your AI coding assistant and run the following prompt 
 /prompt react_native_for_vega_ai_assisted_rn_upgrade
 ```
 
+**Alternatively, ask directly:**
+```
+Use the React Native Upgrade workflow from @amazon-devices/amazon-devices-buildertools-mcp to upgrade my application to RN83.
+```
+
 The upgrade helper will:
 1. Ask for your working directory (or detect it if you're already in the project)
 2. Detect your current React Native version from `package.json`
