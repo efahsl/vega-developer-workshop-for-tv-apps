@@ -222,10 +222,10 @@ If you need to pause and resume:
 
 If you encounter build errors, the upgrade helper with MCP can help walk you through the problems and provide solutions.
 
-You can also try these manual troubleshooting steps:
-1. Clear the Metro cache: `vega clean`
-2. Delete `node_modules` and reinstall: `rm -rf node_modules && npm install`
-3. Check for incompatible dependencies in `package.json`
+You can also engage with your AI assistant for specific troubleshooting. For example, ask:
+```
+Based on the @amazon-devices/amazon-devices-buildertools-mcp knowledge base, what are the package.json dependency changes that need to happen for an RN83 upgrade?
+```
 
 ## Additional Resources
 
@@ -237,3 +237,5 @@ You can also try these manual troubleshooting steps:
 You've successfully upgraded your Vega app to React Native 0.83 using AI-assisted workflows. This process demonstrates how AI tools can streamline complex migration tasks while ensuring best practices are followed.
 
 Remember that RN 0.83 for Vega is still in preview, so keep an eye on the Vega Developer Portal for updates and the official public release announcement later this year. Once released publicly, you'll be able to submit your upgraded app to the Amazon Appstore.
+
+> **After the Workshop:** If you installed the preview SDK for this workshop, see the [Prerequisites](0_prerequisites.md) page for instructions on how to uninstall the preview SDK and revert to your production SDK version.

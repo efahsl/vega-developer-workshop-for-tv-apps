@@ -50,6 +50,18 @@ curl -fsSL https://sdk-installer.vega.labcollab.net/get_vvm.sh | bash && source 
    vega sdk use 0.23.6188
    ```
 
+> **SDK Cleanup After Workshop:**
+> 
+> To uninstall the preview SDK after the workshop:
+> ```bash
+> vega sdk uninstall 0.23.6188  # or the preview SDK version at the time of the workshop
+> ```
+> 
+> If you previously had a production SDK installed, validate that the production version is being used once again by running:
+> ```bash
+> vega -v
+> ```
+
 ### Step 3: Configure npm for Preview Registry
 
 1. Back up your existing `.npmrc`:
