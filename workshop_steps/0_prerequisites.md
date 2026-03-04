@@ -24,7 +24,6 @@ The preview packages for this workshop are on a private npm registry — this st
    npm cache clean --force
    ```
 
-> ⚠️ **Important:** After the workshop, restore your original `.npmrc` with `cp ~/.npmrc.bak ~/.npmrc`.
 
 ## Step 2: Install MCP Server
 
@@ -118,7 +117,7 @@ The MCP server will guide your AI assistant through the SDK installation.
    vega --version   # verify 0.23.6188 or higher appears
    ```
 
-> **SDK Cleanup After Workshop:**
+> **SDK and .npmrc Cleanup After Workshop:**
 > 
 > To uninstall the preview SDK after the workshop:
 > ```bash
@@ -130,27 +129,8 @@ The MCP server will guide your AI assistant through the SDK installation.
 > vega -v
 > ```
 
-### Step 5: Configure npm for Preview Registry
 
-1. Back up your existing `.npmrc`:
-   ```bash
-   cp ~/.npmrc ~/.npmrc.bak
-   ```
-
-2. Create a new `.npmrc` in your home directory (or project root) with:
-   ```
-   @amazon-devices:registry=https://k-artifactory-external.labcollab.net/artifactory/api/npm/rnpreview-npm-prod-local/
-   always-auth=true
-   strict-ssl=true
-   ```
-
-3. Clean your npm cache to avoid conflicts with the public registry:
-   ```bash
-   rm -rf node_modules package-lock.json
-   npm cache clean --force
-   ```
-
-> **After the workshop:** run the same cleanup commands above and restore your original `.npmrc` (`cp ~/.npmrc.bak ~/.npmrc`).
+> ⚠️ **Important:** After the workshop, restore your original `.npmrc` with `cp ~/.npmrc.bak ~/.npmrc`.
 
 For full public SDK setup details, see the [Download and Installation Guide](https://developer.amazon.com/docs/vega/0.22/setup-overview.html).
 
