@@ -15,11 +15,11 @@ This breakout session guides you through upgrading your Vega app to React Native
 
 ## Choosing Your Starting App
 
-For this upgrade exercise, you have two options:
+For this upgrade exercise, we recommend using the reference app:
 
-1. **Recommended: Use the Reference App** - Start with the complete reference app from the `reference/RnlConfApp-Final` folder in this repository. This is a fully-featured TV streaming app that demonstrates best practices and provides a solid foundation for testing the upgrade.
+**Recommended: Use the Reference App** - Start with the complete reference app from the `reference/RnlConfApp-Final` folder in this repository. This is a clean, working React Native 0.72 app that demonstrates best practices and provides a solid foundation for testing the upgrade process.
 
-2. **Use Your Own App** - If you have an existing Vega app you'd like to upgrade, you can use that instead. This is a good option if you want to see how the upgrade process works with your specific codebase.
+> **Note:** You can also try this upgrade on your own Vega app if you prefer to see how the process works with your specific codebase.
 
 ## What You'll Learn
 
@@ -38,33 +38,28 @@ The upgrade helper is specifically designed for Vega platform migrations and und
 
 ## Step 1: Prepare Your Project
 
-### If Using the Reference App
+### Using the Reference App (Recommended)
 
-Copy the reference app to a new working directory:
+If you've been following the workshop, you should already have this repository cloned. If not, clone the repository first.
+
+Navigate to the reference app directory:
 
 ```bash
-# From the workshop root directory
-cp -r reference/RnlConfApp-Final ~/vega-rn83-upgrade
-cd ~/vega-rn83-upgrade
-
-# Initialize git if not already a repository
-git init
-git add .
-git commit -m "Initial commit - Reference app before RN 0.83 upgrade"
+cd reference/RnlConfApp-Final
 ```
 
-### If Using Your Own App
-
-Ensure your project is in a clean state:
+Ensure you have a clean git state:
 
 ```bash
-# Commit any pending changes
+# Check status
+git status
+
+# If there are uncommitted changes, commit or stash them
 git add .
 git commit -m "Pre-upgrade checkpoint"
-
-# Create a new branch for the upgrade
-git checkout -b upgrade-rn-0.83
 ```
+
+> **Note:** If using your own app instead, navigate to your app directory and ensure your project is in a clean state with all changes committed before starting the upgrade.
 
 ## Step 2: Trigger the AI-Assisted Upgrade
 
@@ -83,17 +78,6 @@ To start the upgrade, use your AI coding assistant and run the following prompt 
 **For Kiro / Claude Code / Cline:**
 ```
 /prompt react_native_for_vega_ai_assisted_rn_upgrade
-```
-
-Alternatively, you can ask directly:
-```
-Help me upgrade my application to RN 0.83
-```
-
-or
-
-```
-Upgrade my Vega app from React Native [current-version] to 0.83
 ```
 
 The upgrade helper will:
@@ -131,6 +115,8 @@ The TODO file includes:
 - Detailed implementation steps for each change
 - Code examples and file references
 - Links to relevant documentation
+
+> **Note:** One of the TODO items will guide you to run `npm install` to update dependencies. The upgrade helper will assist with this step and help troubleshoot any installation errors.
 
 Review this list to understand the scope of changes before proceeding. The upgrade helper will work through each item systematically.
 
@@ -181,21 +167,13 @@ The helper automatically:
 
 You can pause at any time and resume later - your progress is saved automatically in `.rn-upgrade-checkpoint.json`.
 
-## Step 5: Install Dependencies
+## Step 5: Build and Test the Upgrade
 
-After the upgrade helper updates your `package.json`:
+Once you've completed the upgrade changes, you can build and test your app using AI assistance.
 
-```bash
-npm install
-# or
-yarn install
-```
+> **Note:** For more detailed information about building and testing Vega apps, see [Create a 3 Screen App](3_create_3_screen_app.md).
 
-## Step 6: Build and Test the Upgrade
-
-You can build and test your app using AI assistance or manual commands.
-
-### AI-Driven Build and Test (Recommended)
+### AI-Driven Build and Test
 
 Simply ask your AI assistant:
 
@@ -204,21 +182,6 @@ Build and run this app on the connected Vega device
 ```
 
 The AI will handle the build process, deployment, and launch automatically.
-
-### Manual Build and Test
-
-Alternatively, run these commands manually:
-
-```bash
-# Clean build
-vega clean
-
-# Build the app
-vega build
-
-# Install on your device
-vega install --device <device-id>
-```
 
 ### Build Error Assistance
 
@@ -231,7 +194,7 @@ If you encounter build errors, the upgrade helper can assist:
 
 The helper uses knowledge-grounded solutions (no guessing) and will direct you to external resources if the error isn't in the knowledge base.
 
-## Step 7: Validate Functionality
+## Step 6: Validate Functionality
 
 Test critical app features:
 
@@ -252,72 +215,17 @@ If you need to pause and resume:
 
 ### Build Errors
 
-If you encounter build errors:
+If you encounter build errors, the upgrade helper with MCP can help walk you through the problems and provide solutions.
+
+You can also try these manual troubleshooting steps:
 1. Clear the Metro cache: `vega clean`
 2. Delete `node_modules` and reinstall: `rm -rf node_modules && npm install`
 3. Check for incompatible dependencies in `package.json`
-
-### Runtime Errors
-
-If the app crashes or behaves unexpectedly, you can check logs using AI assistance or manual commands.
-
-**AI-Driven Logging (Recommended):**
-
-Ask your AI assistant:
-```
-Run this app in release mode on the connected Vega device and track device logs
-```
-
-**Manual Logging:**
-
-```bash
-vega device start-log-stream
-```
-
-Then review the logs for:
-- Deprecated API usage flagged during the upgrade
-- Runtime errors or crashes
-- Test on Vega Virtual Device for easier debugging
-
-### Focus Management Issues
-
-RN 0.83 may have changes to focus behavior:
-1. Review `TVFocusGuideView` usage
-2. Test D-pad navigation thoroughly
-3. Check focus indicators are rendering correctly
-
-## Verification Checklist
-
-- [ ] App builds without errors
-- [ ] App installs and launches successfully
-- [ ] All screens are accessible via navigation
-- [ ] Media playback works correctly
-- [ ] D-pad navigation and focus management work as expected
-- [ ] No console warnings about deprecated APIs
-- [ ] Performance is equal to or better than before
-
-## Next Steps
-
-After successfully upgrading to RN 0.83:
-
-1. **Performance Testing** - Run benchmarks to measure improvements
-2. **Feature Exploration** - Explore new RN 0.83 features applicable to TV apps
-3. **Documentation** - Document any app-specific migration notes for your team
-4. **Rollout** - Plan your production deployment strategy
 
 ## Additional Resources
 
 - [React Native 0.83 Release Notes](https://github.com/facebook/react-native/releases)
 - [Vega Developer Documentation](https://developer.amazon.com/apps-and-games/vega)
-
-## Troubleshooting
-
-If you encounter issues during the upgrade:
-
-1. Ask your AI assistant specific questions about errors
-2. Check the Vega Developer Portal for known issues
-3. Review the `react_native_for_vega_version_specific_knowledge_base.md` document
-4. Reach out to the Vega developer community
 
 ## Summary
 
