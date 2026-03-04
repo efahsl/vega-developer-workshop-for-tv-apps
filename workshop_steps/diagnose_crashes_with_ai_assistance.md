@@ -166,9 +166,9 @@ The Amazon Devices BuilderTools MCP server provides AI-assisted crash analysis f
 - Native crashes (C++ exceptions, segmentation faults)
 
 **Coming Soon:**
-- ANR (Application Not Responding) analysis
+- Provide more actionable insights to debug crashes that orginate from the Amazon code
+- ANR (Application Not Responding) diagnostics
 - LMK (Low Memory Killer) diagnostics
-- Additional crash types and performance issues
 
 The crash analysis workflow follows these steps:
 
