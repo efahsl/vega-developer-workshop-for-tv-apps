@@ -71,6 +71,12 @@ Help me install Vega SDK
 
 The MCP server will guide your AI assistant through the SDK installation.
 
+For full public SDK setup details, see the [Download and Installation Guide](https://developer.amazon.com/docs/vega/0.22/setup-overview.html).
+
+Depending on network speeds, this installation can take 5-15 minutes. We strongly recommend you download and install prior to the workshop.
+
+Additionally, to use our MCP (Model Context Protocol) server or AI prompts you will need at-least one AI Coding assistant such as Cursor, Claude Code, Copilot, Kiro, Amazon Q, Cline, etc. We have included support for these first 6 and have tested primarily on Kiro, Claude Code, and Amazon Q with Claude Sonnet 4/4.5 models - but we expect these prompts to work across most models. To learn more about MCPs, visit [modelcontextprotocol.io/](http://modelcontextprotocol.io/) or see our footnote below.
+
 ## Step 4: Install Preview SDK (Required for RN 0.83 Upgrade)
 
 > Skip this step if you are not participating in the RN 0.83 upgrade session.
@@ -131,12 +137,6 @@ The MCP server will guide your AI assistant through the SDK installation.
 
 
 > ⚠️ **Important:** After the workshop, restore your original `.npmrc` with `cp ~/.npmrc.bak ~/.npmrc`.
-
-For full public SDK setup details, see the [Download and Installation Guide](https://developer.amazon.com/docs/vega/0.22/setup-overview.html).
-
-Depending on network speeds, this installation can take 5-15 minutes. We strongly recommend you download and install prior to the workshop.
-
-Additionally, to use our MCP (Model Context Protocol) server or AI prompts you will need at-least one AI Coding assistant such as Cursor, Claude Code, Copilot, Kiro, Amazon Q, Cline, etc. We have included support for these first 6 and have tested primarily on Kiro, Claude Code, and Amazon Q with Claude Sonnet 4/4.5 models - but we expect these prompts to work across most models. To learn more about MCPs, visit [modelcontextprotocol.io/](http://modelcontextprotocol.io/) or see our footnote below.
 
 ## Step 6: Fire TV 4K Select with Developer Mode
 
