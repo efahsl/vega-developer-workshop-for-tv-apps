@@ -1,48 +1,116 @@
-# Diagnose and Fix UI Fluidity Issues 
+# Diagnose and Fix UI Fluidity Issues
 
-TV apps require smooth 60fps rendering for a good user experience. In this guide, we'll use the Amazon Devices BuilderTools MCP server to diagnose and fix UI fluidity issues.
+TV apps require smooth 60fps rendering for a good user experience. In this exercise, you'll use your AI agent to check out a branch with an intentional performance bug, build and run the app on your Fire TV device, then diagnose and fix UI fluidity issues — all through chat prompts.
+
+## Prompts at a Glance
+
+This exercise requires **3 prompts** to your AI agent. Here's the full sequence:
+
+| # | Type | What You Do |
+|---|------|-------------|
+| 🤖 Prompt 1 | AI Agent | `Checkout the perf-demo branch, clean previous builds (build and node_modules directories) and build the Debug variant via npm. Then install and launch the vega app on my Fire TV device using vega sdk` |
+| 🤖 Prompt 2 | AI Agent | `How is my app's UI fluidity performance? Can you check and make improvements using vega workflow?` |
+| 🤖 Prompt 3 | AI Agent | `Yes. Proceed with rebuilding and reinstalling the app` |
 
 ## Prerequisites
 
-Before starting this workshop, make sure you have the following ready:
+Before starting this exercise, make sure you have:
 
-- [ ] Open your IDE in the sample app root directory
-- [ ] Follow [Install Vega Developer Tools](https://developer.amazon.com/docs/vega/latest/install-vega-developer-tools.html) to install required Vega tools
-- [ ] [Install Appium 2.2.2 and the Kepler Appium driver](https://developer.amazon.com/docs/vega/0.22/appium-install.html) (required for KPI Visualizer)
-- [ ] Install the Amazon Devices BuilderTools MCP server and initialize steering context
-- [ ] Verify the MCP server is connected by asking the agent: "What is Vega Architecture?"
-  - The agent should read `react_native_for_vega_get_started.md` and respond with details about split bundle architecture, process pre-warming, and component types
+- [ ] Completed [Clone and Run Reference App](1_clone_and_run_reference_app.md)
+- [ ] Completed [Set Up MCP Server](2_set_up_mcp_server.md) and verified the MCP server is connected
+- [ ] A physical Fire TV device connected via ADB (Fire TV Stick, Fire TV Cube, etc.)
+---
+
+## Step 1: Check Out the Branch
+
+### 🤖 Prompt 1
+
+Copy and paste this into your AI agent's chat:
+
+```
+Checkout the perf-demo branch, clean previous builds (build and node_modules directories) and build the Debug variant via npm. Then install and launch the vega app on my Fire TV device using vega sdk
+```
+
+The agent will:
+1. Switch to the `perf-demo` branch (`git checkout perf-demo`)
+2. Clean any previous build artifacts (`rm -rf build node_modules`)
+3. Install npm dependencies (`npm install`)
+4. Build the app in Debug mode (`npm run build:debug`)
+5. Deploy and launch the app on your connected Fire TV device (`vega device install-app --dir . -b Debug` followed by `vega device launch-app --dir .`)
+
+**🏁 Checkpoint:** You should be on the `perf-demo` branch with a clean build directory. The app should launch and you can navigate with the D-pad. You may notice some lag while scrolling — that's the bug we're about to diagnose.
 
 ---
 
-## About the Bug
+## Step 2: Diagnose and Fix UI Fluidity
 
-Switch to the `perf-demo` branch, which already contains an intentional performance bug in `HomeScreen.tsx`:
+### 🤖 Prompt 2
 
-```bash
-git checkout perf-demo
+Copy and paste this into your AI agent's chat:
+
+```
+How is my app's UI fluidity performance? Can you check and make improvements using vega workflow?
 ```
 
-After switching branches, build and install the app on your device:
+The agent will follow the workflow from the MCP server. It will:
 
-```bash
-rm -rf build node_modules
-npm install
-npm run build:debug
-vega device install-app --dir . -b Debug
-vega device launch-app --dir .
+1. Read the workflow document `react_native_for_vega_diagnose_ui_fluidity`
+2. Analyze results, identify the time period where the biggest fluidity drop occured
+3. Identify hot functions in the above time period using `get_app_hot_functions`
+4. Apply code optimizations
+
+The agent will ask you several questions during setup. Here are the recommended answers:
+
+| Agent Question | Recommended Answer | Why |
+|---------------|-------------------|-----|
+| "Using app process name from manifest: `com.amazondeveloper.rnlconfapp`. Is this correct?" | **Yes** | Auto-detected from `manifest.toml` |
+| "Which build type should be used for analysis?" | **Debug** | Debug builds include sourcemaps needed for hot function analysis |
+| "Custom test scenario or default scrolling test?" | **Custom** — use `fluidity_test_scenario/send_d_pad_key_sample_test.py` | This test script sends D-pad key events that reliably trigger the fluidity bug |
+
+**🏁 Checkpoint:** The agent should report UI Fluidity KPI as FAILING and apply optimizations to `HomeScreen.tsx`.
+
+---
+
+## Step 3: Verify Improvements
+
+After the agent applies optimizations, it will ask if you'd like to rebuild and re-measure.
+
+### 🤖 Prompt 3
+
+Copy and paste this into your AI agent's chat:
+
+```
+Yes. Proceed with rebuilding and reinstalling the app
 ```
 
-Verify the app launches and you can navigate with the D-pad before proceeding.
+The agent will:
+1. Rebuild the app in Debug mode
+2. Reinstall on your device
+3. Re-run the KPI Visualizer to measure the new fluidity score
 
-The bug introduces render pipeline overload that causes real frame drops:
+**🏁 Checkpoint:** The fluidity score should improve significantly from the baseline toward the ≥99% target.
+
+---
+
+## Summary
+
+In this exercise, you learned to:
+1. Use the `diagnose_ui_fluidity` workflow to systematically identify UI fluidity failures
+2. Let the AI agent analyze CPU hot functions and apply targeted optimizations
+3. Verify improvements by re-running KPI measurements
+
+---
+
+## Appendix A: About the Bug
+
+The `perf-demo` branch introduces render pipeline overload that causes real frame drops in `HomeScreen.tsx`:
 
 - `FlatList` has been replaced with the native `Carousel` component (from `@amazon-devices/kepler-ui-components`), which continuously submits frames to the render pipeline — giving the fluidity metric something to measure even when JS is busy.
 - Each `ThumbnailItem` renders 12 shadow layer `View` elements (`SHADOW_LAYERS = 12`), each with `shadowColor`, `shadowRadius`, `shadowOpacity`, and `elevation`, plus a nested inner shadow `View` — totaling 24 shadow-rendering operations per thumbnail.
 - Three semi-transparent overlay `View`s are stacked on each thumbnail, forcing alpha blending on every frame.
 - `React.memo` has been removed, inline style objects and `JSON.parse(JSON.stringify())` deep clones are added, and `renderItem`/`itemInfo` are recreated on every render.
 
-Here's what the key problematic code looks like in `HomeScreen.tsx`:
+Here's what the key problematic code looks like:
 
 ```tsx
 const SHADOW_LAYERS = 12;
@@ -104,61 +172,23 @@ This overwhelms the CPU with excessive view hierarchy construction, style recalc
 
 ---
 
-## Tools Overview
+## Appendix B: Tools Overview
 
-This workshop uses three key tools from the Amazon Devices BuilderTools MCP server to diagnose and fix UI fluidity issues. Here's a quick summary before we dive in:
+This exercise uses three key tools from the Amazon Devices Builder Tools MCP server:
 
 | Tool | What It Does | When It's Used |
 |------|-------------|----------------|
-| `analyze_perfetto_traces` | Analyzes Perfetto trace files to extract KPI metrics and pinpoint the worst-performing time windows during UI interactions. | Step 2 — to find the exact time period with the worst frame drops |
-| `get_app_hot_functions` | Reads CPU trace data from the Activity Monitor and ranks the most CPU-intensive functions in your app code. Supports time-window filtering so you can focus on the problematic interval. | Step 2 — to identify which functions are burning the most CPU during fluidity dips |
-| `why-did-you-render` (WDYR) | A React debugging library that logs unnecessary component re-renders to the Metro console. Detects when components re-render even though their props/state haven't meaningfully changed. | Step 5 (optional) — to catch re-render issues that hot function analysis alone may not surface |
+| `analyze_perfetto_traces` | Analyzes Perfetto trace files to extract KPI metrics and pinpoint the worst-performing time windows during UI interactions. | To find the exact time period with the worst frame drops |
+| `get_app_hot_functions` | Reads CPU trace data from the Activity Monitor and ranks the most CPU-intensive functions in your app code. Supports time-window filtering so you can focus on the problematic interval. | To identify which functions are burning the most CPU during fluidity dips |
+| `why-did-you-render` (WDYR) | A React debugging library that logs unnecessary component re-renders to the Metro console. Detects when components re-render even though their props/state haven't meaningfully changed. | Optional deeper analysis to catch re-render issues that hot function analysis alone may not surface |
 
 The first two are MCP server tools invoked by the agent automatically. WDYR is an npm package that gets installed into your project and produces logs during app interaction.
 
 ---
 
-## Step 1: Measure Baseline UI Fluidity
+## Appendix C: Generated Artifacts
 
-First, build and install the buggy app, then measure the current UI fluidity KPI.
-
-**Prompt:**
-
-```
-How is my app's UI fluidity performance? Can you check and make improvements using vega workflow?
-```
-
-The agent will follow the `diagnose_ui_fluidity` workflow from the MCP server. It will:
-
-1. Read the `react_native_for_vega_diagnose_ui_fluidity.md` workflow document
-2. Verify prerequisites (Appium 2.2.2, kepler driver)
-3. Resolve the app process name from `manifest.toml`
-4. Ask which build type to use and whether you have a custom test scenario
-
-The agent will ask you several questions during setup. Here are the recommended answers for this workshop:
-
-| Agent Question | Recommended Answer | Why |
-|---------------|-------------------|-----|
-| "Using app process name from manifest: `com.amazondeveloper.rnlconfapp`. Is this correct?" | **Yes** | The process name is auto-detected from `manifest.toml` |
-| "Which build type should be used for analysis? (Debug or Release)" | **Debug** | Debug builds include sourcemaps needed for hot function analysis |
-| "Custom test scenario or default scrolling test?" | **Custom** — use `fluidity_test_scenario/send_d_pad_key_sample_test.py` | This test script sends D-pad key events that reliably trigger the fluidity bug |
-
-The agent will then run the KPI Visualizer:
-
-```bash
-vega exec perf kpi-visualizer \
-  --kpi ui-fluidity \
-  --record-cpu-profiling \
-  --app-name com.amazondeveloper.rnlconfapp \
-  --sourcemap-file-path <sourcemap_file_path> \
-  --test-scenario reference/RnlConfApp-Final/fluidity_test_scenario/send_d_pad_key_sample_test.py
-```
-
-Wait for the test to complete. The KPI report will show fluidity around ~79% — well below the 99% target.
-
-### Generated Artifacts
-
-After the KPI Visualizer completes, it produces several files in `generated/<timestamp>/` that the agent uses in subsequent steps:
+After the KPI Visualizer completes, it produces several files in `generated/<timestamp>/` that the agent uses:
 
 ```
 generated/<timestamp>/
@@ -176,204 +206,17 @@ generated/<timestamp>/
 | `iter_*_vs_trace` | Perfetto binary | `analyze_perfetto_traces` | System-level trace with frame submission/vsync data — used to find worst time windows |
 | `iter_*_trace*-converted.json` | Chrome Trace Event JSON | `get_app_hot_functions` | JS CPU profiler data with function names, durations, and source locations |
 
-The agent reads the KPI report first to find the worst iteration and timestamp, then feeds the corresponding trace files to the MCP tools for deeper analysis.
-
-**🏁 Checkpoint:** The agent should report UI Fluidity KPI as FAILING with values around 79%.
-
 ---
 
-## Step 2: Hot Function Analysis
+## Appendix D: Expected Optimizations
 
-After identifying the KPI failure, the agent automatically proceeds to analyze CPU hot functions. This uses the `get_app_hot_functions` tool from the Amazon Devices BuilderTools MCP server.
+The agent typically applies these optimizations based on hot function analysis:
 
-### What the Agent Does
-
-1. Finds the worst iteration from the KPI report (lowest fluidity %)
-2. Locates the worst time window using Granular Fluidity % data
-3. Calculates a ±1 second analysis window around the worst timestamp
-4. Calls `get_app_hot_functions` with `useSelfTime: true` to isolate actual bottleneck functions
-
-### Expected Hot Function Results
-
-The tool should identify functions like:
-
-| Rank | Function | Duration | % of Total | Location |
-|------|----------|----------|------------|----------|
-| 1 | `ThumbnailItem` (render) | ~51ms | ~2.55% | `HomeScreen.tsx:86` |
-| 2 | `[anonymous]` (shadow `.map()` callback) | ~11ms | ~0.55% | `HomeScreen.tsx:69` |
-| 3 | `ThumbnailItem` (shadowLayers array creation) | ~11ms | ~0.55% | `HomeScreen.tsx:68` |
-
-The hot function results directly map to the shadow layer rendering loop — both the `Array(SHADOW_LAYERS).fill(null).map(...)` construction (line 68) and the `.map()` rendering callback (line 69) are flagged as hot spots.
-
-**🏁 Checkpoint:** The agent should identify `ThumbnailItem` and the shadow layer rendering as the primary CPU bottlenecks.
-
----
-
-## Step 3: Apply Optimizations
-
-The agent will propose optimizations based on both the hot function analysis and its own code review. When asked, approve the changes.
-
-### Optimizations Typically Applied
-
-1. Remove the 12 shadow layer `View`s — replace with a single lightweight shadow style on the container
-2. Remove the 3 semi-transparent overlay `View`s
+1. Reduce shadow layers from 12 to a lightweight count and pre-compute them as a module-level constant
+2. Remove the 3 semi-transparent overlay `View`s (nearly invisible at 3% opacity)
 3. Eliminate the `JSON.parse(JSON.stringify(item))` deep clone in `renderItem`
 4. Wrap `ThumbnailItem` and `ContentRow` with `React.memo()`
 5. Add `useCallback` for event handlers and `useMemo` for data grouping
 6. Hoist static values (`itemInfo`, `rowStyle`, `titleStyle`) outside the render function
 
-### Before → After
-
-**ThumbnailItem: 24 shadow ops → single shadow style**
-
-```tsx
-// AFTER: Wrapped with React.memo, shadow layers replaced with one lightweight style
-const ThumbnailItem = React.memo(({item, onPress}: ThumbnailItemProps) => {
-  const [focused, setFocused] = useState(false);
-  return (
-    <Pressable
-      style={[styles.thumbnail, focused && styles.thumbnailFocused]}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
-      onPress={onPress}>
-      <View style={styles.thumbnailShadow}>
-        <Image source={{uri: item.images.thumbnail_450x253}} style={styles.thumbnailImage} />
-      </View>
-    </Pressable>
-  );
-});
-```
-
-```tsx
-// thumbnailShadow replaces 12 shadowBox + 3 overlay Views
-thumbnailShadow: {
-  width: 400, height: 225,
-  shadowColor: '#000000',
-  shadowOffset: {width: 4, height: 4},
-  shadowOpacity: 0.4,
-  shadowRadius: 8,
-  elevation: 6,
-},
-```
-
-**ContentRow: deep clone removed, static values hoisted, memoized**
-
-```tsx
-// Static values hoisted outside render
-const ITEM_INFO: ItemInfo[] = [
-  { view: ThumbnailItem, dimension: { width: 415, height: 235 } },
-];
-const ROW_STYLE = {marginBottom: 40};
-const TITLE_STYLE = {fontSize: 48, color: '#FFFFFF', fontWeight: 'bold' as const, marginBottom: 20, paddingLeft: 60};
-
-const ContentRow = React.memo(({title, items, onItemPress}: ContentRowProps) => {
-  // No more JSON.parse/stringify — item passed directly
-  const renderItem = useCallback(({item}: {item: MovieItem}) => {
-    return <ThumbnailItem item={item} onPress={() => onItemPress(item)} />;
-  }, [onItemPress]);
-
-  return (
-    <View style={ROW_STYLE}>
-      <Text style={TITLE_STYLE}>{title}</Text>
-      <Carousel data={items} itemDimensions={ITEM_INFO} renderItem={renderItem} />
-    </View>
-  );
-});
-```
-
 ---
-
-## Step 4: Verify Improvements
-
-After the optimizations are applied, the agent will:
-
-1. Rebuild the app: `npm run build:debug`
-2. Reinstall: `vega device install-app --dir . -b Debug`
-3. Re-run the KPI Visualizer to measure the new fluidity score
-
-**Prompt (if the agent doesn't automatically re-measure):**
-
-```
-Rebuild the app and re-run the UI fluidity KPI test to verify improvements.
-```
-
-The fluidity score should improve significantly from the ~79% baseline toward the ≥99% target. If the score is still below 99%, proceed to Step 5 for deeper re-render analysis.
-
-**🏁 Checkpoint:** The agent should report improved fluidity numbers after rebuilding and re-measuring.
-
----
-
-## Step 5: (Optional) Detect Component Re-renders
-
-If the KPI is still below 99% after hot function optimizations, or if you want deeper analysis, you can run the component re-render detection workflow. This uses the `detect_component_re-renders` prompt from the MCP server.
-
-**Prompt:**
-
-```
-@detect_component_re-renders ./
-```
-
-### What Happens
-
-The agent will:
-
-1. Install `@welldone-software/why-did-you-render` as a dev dependency
-2. Configure `babel.config.js` for Hermes compatibility (switches JSX runtime to `classic` in development)
-3. Create a `wdyr.tsx` config file with `trackAllPureComponents: true` and `trackAllComponents: true`
-4. Import it as the first line in `index.js`
-5. Build and run the app with WDYR enabled, capturing Metro logs to a temp file
-6. Ask you to interact with the app using the remote control — navigate, scroll, press buttons for 2-3 minutes
-7. Ask you to type **STOP** when done
-8. Analyze the captured logs
-
-### Example WDYR Log Output
-
-After interacting with the app, the Metro logs will contain entries like:
-
-```
-ContentRow Re-rendered because of props changes:
-  props.renderItem: different functions with the same name
-
-ThumbnailItem Re-rendered because of props changes:
-  props.onPress: different functions with the same name
-  props.item: different objects that are equal by value
-
-SpatialNavigationVirtualizedList Re-rendered because of props changes:
-  props.renderItem: different functions with the same name
-  Rendered by Grid: Re-rendered because of hook changes
-```
-
-### What These Logs Tell You
-
-| Log Pattern | Root Cause | Fix |
-|-------------|-----------|-----|
-| `different functions with the same name` | Function recreated on every render | Wrap with `useCallback` |
-| `different objects that are equal by value` | Object/array recreated with same data | Wrap with `useMemo` or hoist outside render |
-| `Re-rendered because of hook changes` | Hook dependency causing re-render | Check `useEffect`/`useState` dependencies |
-| Component re-renders but WDYR is silent | Component is not wrapped in `React.memo` | Add `React.memo()` wrapper |
-
-### Expected Impact
-
-```
-Without optimization:
-Focus change → HomeScreen renders → ContentRow renders → ThumbnailItem renders (×50)
-
-With optimization:
-Focus change → HomeScreen renders → ContentRow skips → ThumbnailItem skips
-```
-
-After applying the recommended fixes (`React.memo`, `useCallback`, `useMemo`), component renders per focus change should drop from ~150+ to just 1 (HomeScreen only).
-
-**🏁 Checkpoint:** After running WDYR analysis, the agent should identify specific components causing unnecessary re-renders and recommend targeted fixes.
-
----
-
-## Summary
-
-In this guide, you learned to:
-1. Use the `diagnose_ui_fluidity` workflow to systematically identify UI fluidity failures
-2. Analyze CPU hot functions with the `get_app_hot_functions` MCP tool to pinpoint rendering bottlenecks
-3. Combine tool-driven analysis with code review to produce comprehensive fixes
-4. Verify improvements by re-running KPI measurements
-
-The hot function analysis approach is particularly effective for CPU-side issues like excessive view hierarchy construction, redundant object allocation, and unnecessary re-renders — problems that consume CPU cycles on the JS and UI threads during frame production.

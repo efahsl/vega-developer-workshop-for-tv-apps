@@ -113,9 +113,9 @@ The MCP server will guide your AI assistant through the SDK installation.
 5. **Do not** export any environment variables or PATH from the bootstrapper output.
 6. Link and activate the preview SDK:
    ```bash
-   vega sdk link --path ~/vega_sdk_preview
-   vega --version   # verify 0.23.6188 or higher appears
+   vega sdk link --path ~/vega_sdk_preview # Found SDKs should include 0.23.6188 or higher
    vega sdk use 0.23.6188
+   vega --version   # verify 0.23.6188 or higher appears
    ```
 
 ## Step 5: Fire TV 4K Select with Developer Mode
