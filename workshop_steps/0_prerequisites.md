@@ -158,6 +158,8 @@ Depending on network speeds, this installation can take 5-15 minutes. We strongl
 
 Additionally, to use our MCP (Model Context Protocol) server or AI prompts you will need at-least one AI Coding assistant such as Cursor, Claude Code, Copilot, Kiro, Amazon Q, Cline, etc. We have included support for these first 6 and have tested primarily on Kiro, Claude Code, and Amazon Q with Claude Sonnet 4/4.5 models - but we expect these prompts to work across most models. To learn more about MCPs, visit [modelcontextprotocol.io/](http://modelcontextprotocol.io/) or see our footnote below.
 
+## Step 6: Fire TV 4K Select with Developer Mode
+
 You will need a Fire TV Stick 4K Select running Vega OS with Developer Mode enabled. See the [Developer Mode setup guide](https://developer.amazon.com/docs/vega/0.22/developer-mode.html) for instructions.
 
 > We recommend bringing an HDMI video capture card if you have one, as we will not have spare TV screens.
