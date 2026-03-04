@@ -16,19 +16,14 @@ While you can use most AI Agent models as-is to make changes to the Vega Hello W
 
 ### 2.1.1 Install MCP Server & Add Vega Context
 
-The easiest way to install is via one-click install from the npm package page:
-
-**[Install from npm →](https://www.npmjs.com/package/@amazon-devices/amazon-devices-buildertools-mcp)**
-
-The page provides one-click install buttons for Kiro, Cursor, and VSCode.
-
-For other AI agents, or to install manually, run the following command **within your App project**:
+Run the following command **within your App project** to install the MCP server and add Vega context to your AI agent:
 
 ```bash
-npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest --init-context
+npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest init-context
 ```
 
 This interactive command will:
+
 1. Display available AI agents and let you select your preferred one
 2. Update your agent's MCP settings to configure the MCP server
 3. Create the appropriate Vega context file for your chosen AI agent
@@ -45,6 +40,16 @@ To manually configure the MCP server, add the following to your AI Agent's MCP s
 
 > ℹ️ Important: Start the MCP Server from Agent's MCP config, if not already started - check your current running MCPs to ensure the amazon-devices-buildertools-mcp is listed as running/connected.
 
+**🏁 Checkpoint: Verify setup status**
+
+After installation, verify your setup is correct:
+
+```bash
+npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest check-status
+```
+
+You should see a summary showing your agent's context document and MCP configuration as ✅ Configured.
+
 **🏁 Checkpoint: Verify MCP is installed in your AI Agent**
 
 In your AI Agent's chat interface, run the following prompt:
@@ -53,11 +58,11 @@ In your AI Agent's chat interface, run the following prompt:
 List the tools provided by Amazon Devices Builder Tools MCP
 ```
 
-You should see a response that includes 4 tools:
+You should see a response that includes tools such as:
+
 - `read_document`
 - `list_documents`
-- `analyze_perfetto_traces`
-- `get_app_hot_functions`
+- and more
 
 **🏁 Checkpoint: Verify AI agent is configured with Vega Context**
 
@@ -89,6 +94,21 @@ You should get a response similar to:
 Vega is a TV platform that uses a system-bundled React Native runtime (rather than app-bundled), where applications only package their JavaScript code and dynamically link to the OS-provided React Native framework and native services at runtime for optimized performance and resource sharing.
 ```
 
+**🏁 Checkpoint: Validate MCP**
+
+In your AI Agent's chat interface, run the following prompt to confirm the MCP can drive your app build and deployment:
+
+```
+Build and install my app on the Vega device
+```
+
+Your agent should use the MCP tools to build the app and deploy it to your connected Vega device.
+
+## Additional Resources
+
+- [MCP Server Documentation](https://developer.amazon.com/docs/vega/latest/mcp-server.html)
+- [MCP Server Troubleshooting](https://developer.amazon.com/docs/vega/latest/mcp-server-issues.html)
+
 ---
 
-**Previous:** [Create a Hello World App](1_create_hello_world_app.md) | **Next:** [Create a 3 Screen App](3_create_3_screen_app.md)
+**Previous:** [Clone and Run Reference App](1_clone_and_run_reference_app.md) | **Next:** [Create a 3 Screen App](3_create_3_screen_app.md)
