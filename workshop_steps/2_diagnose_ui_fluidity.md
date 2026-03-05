@@ -10,14 +10,14 @@ This exercise requires **3 prompts** to your AI agent. Here's the full sequence:
 |---|------|-------------|
 | 🤖 Prompt 1 | AI Agent | `Checkout the perf-demo branch, clean previous builds (build and node_modules directories) and build the Debug variant via npm. Then install and launch the vega app on my Fire TV device using vega sdk` |
 | 🤖 Prompt 2 | AI Agent | `How is my app's UI fluidity performance? Can you check and make improvements using vega workflow?` |
-| 🤖 Prompt 3 | AI Agent | `Yes. Proceed with rebuilding and reinstalling the app` |
+| 🤖 Prompt 3 | AI Agent | `Yes. Proceed with rebuilding, reinstalling the app, and remeasuring UI fluidity` |
 
 ## Prerequisites
 
 Before starting this exercise, make sure you have:
 
 - [ ] Completed [Clone and Run Reference App](1_clone_and_run_reference_app.md)
-- [ ] Completed [Prerequisites](0_prerequisites.md) and verified the MCP server is connected
+- [ ] Completed [Set Up MCP Server](2_set_up_mcp_server.md) and verified the MCP server is connected
 - [ ] A physical Fire TV device connected via ADB (Fire TV Stick, Fire TV Cube, etc.)
 ---
 
@@ -80,7 +80,7 @@ After the agent applies optimizations, it will ask if you'd like to rebuild and 
 Copy and paste this into your AI agent's chat:
 
 ```
-Yes. Proceed with rebuilding and reinstalling the app
+Yes. Proceed with rebuilding, reinstalling the app, and remeasuring UI fluidity
 ```
 
 The agent will:
@@ -88,7 +88,9 @@ The agent will:
 2. Reinstall on your device
 3. Re-run the KPI Visualizer to measure the new fluidity score
 
-**🏁 Checkpoint:** The fluidity score should improve significantly from the baseline toward the ≥99% target.
+**🏁 Checkpoint:** The fluidity score should improve significantly from the baseline toward the ≥99% target. Here's a representative before vs. after comparison:
+
+![UI Fluidity Before vs. After](fluidity-before-after.png)
 
 ---
 
@@ -101,7 +103,34 @@ In this exercise, you learned to:
 
 ---
 
-## Appendix A: About the Bug
+## Coming Soon
+
+1. AI-powered workflow to diagnose key press latency
+2. AI-powered GPU optimization to improve UI fluidity
+
+---
+
+<details>
+<summary>Appendix A: MCP Tools Used in Fluidity Diagnosis</summary>
+
+
+This exercise uses three key tools from the Amazon Devices Builder Tools MCP server:
+
+| Tool | What It Does | When It's Used |
+|------|-------------|----------------|
+| `analyze_perfetto_traces` | Analyzes Perfetto trace files to extract KPI metrics and pinpoint the worst-performing time windows during UI interactions. | To find the exact time period with the worst frame drops |
+| `get_app_hot_functions` | Reads CPU trace data from the Activity Monitor and ranks the most CPU-intensive functions in your app code. Supports time-window filtering so you can focus on the problematic interval. | To identify which functions are burning the most CPU during fluidity dips |
+| `why-did-you-render` (WDYR) | A React debugging library that logs unnecessary component re-renders to the Metro console. Detects when components re-render even though their props/state haven't meaningfully changed. | Optional deeper analysis to catch re-render issues that hot function analysis alone may not surface |
+
+The first two are MCP server tools invoked by the agent automatically. WDYR is an npm package that gets installed into your project and produces logs during app interaction.
+
+</details>
+
+---
+
+<details>
+<summary>Appendix B: About the Bug</summary>
+
 
 The `perf-demo` branch introduces render pipeline overload that causes real frame drops in `HomeScreen.tsx`:
 
@@ -170,23 +199,30 @@ const ContentRow = ({title, items, onItemPress}: ContentRowProps) => {
 
 This overwhelms the CPU with excessive view hierarchy construction, style recalculation, and object allocation on every render cycle, causing frames to miss their vsync window and producing measurable fluidity degradation (typically ~79% vs. the ≥99% target).
 
----
-
-## Appendix B: Tools Overview
-
-This exercise uses three key tools from the Amazon Devices Builder Tools MCP server:
-
-| Tool | What It Does | When It's Used |
-|------|-------------|----------------|
-| `analyze_perfetto_traces` | Analyzes Perfetto trace files to extract KPI metrics and pinpoint the worst-performing time windows during UI interactions. | To find the exact time period with the worst frame drops |
-| `get_app_hot_functions` | Reads CPU trace data from the Activity Monitor and ranks the most CPU-intensive functions in your app code. Supports time-window filtering so you can focus on the problematic interval. | To identify which functions are burning the most CPU during fluidity dips |
-| `why-did-you-render` (WDYR) | A React debugging library that logs unnecessary component re-renders to the Metro console. Detects when components re-render even though their props/state haven't meaningfully changed. | Optional deeper analysis to catch re-render issues that hot function analysis alone may not surface |
-
-The first two are MCP server tools invoked by the agent automatically. WDYR is an npm package that gets installed into your project and produces logs during app interaction.
+</details>
 
 ---
 
-## Appendix C: Generated Artifacts
+<details>
+<summary>Appendix C: Expected Optimizations</summary>
+
+
+The agent typically applies these optimizations based on hot function analysis:
+
+1. Reduce shadow layers from 12 to a lightweight count and pre-compute them as a module-level constant
+2. Remove the 3 semi-transparent overlay `View`s (nearly invisible at 3% opacity)
+3. Eliminate the `JSON.parse(JSON.stringify(item))` deep clone in `renderItem`
+4. Wrap `ThumbnailItem` and `ContentRow` with `React.memo()`
+5. Add `useCallback` for event handlers and `useMemo` for data grouping
+6. Hoist static values (`itemInfo`, `rowStyle`, `titleStyle`) outside the render function
+
+</details>
+
+---
+
+<details>
+<summary>Appendix D: Generated Artifacts</summary>
+
 
 After the KPI Visualizer completes, it produces several files in `generated/<timestamp>/` that the agent uses:
 
@@ -206,17 +242,4 @@ generated/<timestamp>/
 | `iter_*_vs_trace` | Perfetto binary | `analyze_perfetto_traces` | System-level trace with frame submission/vsync data — used to find worst time windows |
 | `iter_*_trace*-converted.json` | Chrome Trace Event JSON | `get_app_hot_functions` | JS CPU profiler data with function names, durations, and source locations |
 
----
-
-## Appendix D: Expected Optimizations
-
-The agent typically applies these optimizations based on hot function analysis:
-
-1. Reduce shadow layers from 12 to a lightweight count and pre-compute them as a module-level constant
-2. Remove the 3 semi-transparent overlay `View`s (nearly invisible at 3% opacity)
-3. Eliminate the `JSON.parse(JSON.stringify(item))` deep clone in `renderItem`
-4. Wrap `ThumbnailItem` and `ContentRow` with `React.memo()`
-5. Add `useCallback` for event handlers and `useMemo` for data grouping
-6. Hoist static values (`itemInfo`, `rowStyle`, `titleStyle`) outside the render function
-
----
+</details>
