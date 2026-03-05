@@ -27,10 +27,10 @@ The preview packages for this workshop are on a private npm registry — this st
 
 ## Step 2: Install MCP Server
 
-Install the Amazon Devices Builder Tools MCP server by running the following command:
+Install the Amazon Devices Builder Tools MCP server by running the following command in a terminal window:
 
 ```bash
-npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest init-context
+mkdir ~/vegaWorkshop && cd ~/vegaWorkshop && npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest init-context
 ```
 
 This will prompt you to select your AI coding assistant and configure the MCP server for it.
@@ -45,7 +45,7 @@ To manually configure the MCP server, add the following to your AI agent's MCP s
 }
 ```
 
-Verify your setup is correct:
+Verify your setup is correct, run the following command in the terminal window:
 
 ```bash
 npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest check-status
