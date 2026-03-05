@@ -4,7 +4,7 @@
 
 Ensure the `amazon-devices-buildertools-mcp` server is running/connected when you launch your AI agent. You should see it listed in your agent's MCP server list.
 
-If you haven't set it up yet, follow [Set Up MCP Server](2_set_up_mcp_server.md).
+If you haven't set it up yet, follow [Prerequisites](0_prerequisites.md).
 
 ## Step 2: Check Out Your Web App Source Code
 
@@ -40,4 +40,4 @@ Add media controls, DRM support, and valid required manifest privileges to WebVi
 
 ---
 
-**Previous:** [Wrap Up and Next Steps](7_wrap_up_and_next_steps.md)
+**Previous:** [Shaka Player Upgrade](4_shaka_player_upgrade.md)

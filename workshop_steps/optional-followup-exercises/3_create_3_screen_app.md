@@ -232,7 +232,7 @@ const handleVideoEnded = () => {
 
 ---
 
-**Previous:** [Set Up MCP Server](2_set_up_mcp_server.md) | **Next:** [Performance Testing](4_performance_testing.md)
+**Next:** [Performance Testing](4_performance_testing.md)
 
 OR ...
 

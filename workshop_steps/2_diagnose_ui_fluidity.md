@@ -17,7 +17,7 @@ This exercise requires **3 prompts** to your AI agent. Here's the full sequence:
 Before starting this exercise, make sure you have:
 
 - [ ] Completed [Clone and Run Reference App](1_clone_and_run_reference_app.md)
-- [ ] Completed [Set Up MCP Server](2_set_up_mcp_server.md) and verified the MCP server is connected
+- [ ] Completed [Prerequisites](0_prerequisites.md) and verified the MCP server is connected
 - [ ] A physical Fire TV device connected via ADB (Fire TV Stick, Fire TV Cube, etc.)
 ---
 
