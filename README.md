@@ -34,6 +34,7 @@ Check out our [Prerequisites](workshop_steps/0_prerequisites.md) page to set up 
 2. **[Performance Debugging](workshop_steps/2_diagnose_ui_fluidity.md)** - Checkout the `perf-demo` branch and debug UI fluidity via MCP
 3. **[Crash Debugging](workshop_steps/3_diagnose_crashes_with_ai_assistance.md)** - Checkout the `crash-demo` branch and debug the crash via MCP
 4. **[Shaka Player Upgrade](workshop_steps/4_shaka_player_upgrade.md)** - Download the Vega Video Sample App, check for Shaka Player updates via MCP, and upgrade
+5. **[Wrap Up and Next Steps](workshop_steps/7_wrap_up_and_next_steps.md)** - Survey, recap, and next steps
 
 ## Breakout Sessions
 
@@ -44,13 +45,10 @@ After the MCP workshop, choose one of the following hands-on breakout sessions:
 
 ## Optional: Follow-Up Exercises
 
-Want to keep going after the workshop? Try these additional exercises:
-
 6. **[Create a 3 Screen App](workshop_steps/optional-followup-exercises/3_create_3_screen_app.md)** - Build a home screen, details screen, and video player from scratch
 7. **[Performance Testing](workshop_steps/optional-followup-exercises/4_performance_testing.md)** - Run your app on Fire TV Stick and benchmark performance
 8. **[Optimize Re-rendering Performance](workshop_steps/optional-followup-exercises/5_optimize_rerendering_performance.md)** - Detect and fix unnecessary component re-renders
 9. **[Accessibility](workshop_steps/optional-followup-exercises/6_accessibility.md)** - Implement TV accessibility features
-10. **[Wrap Up and Next Steps](workshop_steps/optional-followup-exercises/7_wrap_up_and_next_steps.md)** - Explore additional project ideas and app submission
 
 ## Getting Started
 

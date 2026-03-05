@@ -233,7 +233,3 @@ const handleVideoEnded = () => {
 ---
 
 **Next:** [Performance Testing](4_performance_testing.md)
-
-OR ...
-
-Short on time? Go straight to [Wrap Up and Next Steps](7_wrap_up_and_next_steps.md)
