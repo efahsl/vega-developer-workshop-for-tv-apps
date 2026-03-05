@@ -17,7 +17,7 @@ This exercise requires **3 prompts** to your AI agent:
 Before starting this exercise, make sure you have:
 
 - [ ] Completed [Clone and Run Reference App](1_clone_and_run_reference_app.md)
-- [ ] Completed [Set Up MCP Server](2_set_up_mcp_server.md) and verified the MCP server is connected
+- [ ] Completed [Prerequisites](0_prerequisites.md) and verified the MCP server is connected
 - [ ] A physical Fire TV device connected via ADB (Fire TV Stick, Fire TV Cube, etc.)
 - [ ] **Your IDE (VS Code or Kiro) is open in the VegaWorkshopApp directory** - This is required for Vega Studio to automatically pull ACR (crash report) files from the device when crashes occur
 
@@ -257,4 +257,4 @@ vega device launch-app --dir .
 
 ---
 
-**Previous:** [Performance Debugging](diagnose_ui_fluidity.md) | **Next:** [Shaka Player Upgrade](shaka_player_upgrade.md)
+**Previous:** [Performance Debugging](2_diagnose_ui_fluidity.md) | **Next:** [Shaka Player Upgrade](4_shaka_player_upgrade.md)

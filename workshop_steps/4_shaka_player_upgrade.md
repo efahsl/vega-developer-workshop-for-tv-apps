@@ -18,7 +18,7 @@ This exercise requires **4 prompts** to your AI agent, plus **1 manual action** 
 
 Before starting this exercise, make sure you have:
 
-- [ ] Completed [Set Up MCP Server](2_set_up_mcp_server.md) and verified the MCP server is connected
+- [ ] Completed [Prerequisites](0_prerequisites.md) and verified the MCP server is connected
 - [ ] A physical Fire TV device connected via ADB (Fire TV Stick, Fire TV Cube, etc.)
 - [ ] Java Runtime Environment (JRE) or Java Development Kit (JDK) — required by Shaka Player's build system
 - [ ] Python — required by Shaka Player's build scripts
@@ -114,4 +114,4 @@ The AI agent will:
 
 ---
 
-**Previous:** [Crash Debugging](diagnose_crashes_with_ai_assistance.md) | **Next:** [Create a 3 Screen App](3_create_3_screen_app.md)
+**Previous:** [Crash Debugging](3_diagnose_crashes_with_ai_assistance.md)

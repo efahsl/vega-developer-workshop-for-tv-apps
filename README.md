@@ -31,16 +31,16 @@ Check out our [Prerequisites](workshop_steps/0_prerequisites.md) page to set up 
 
 0. **[Prerequisites](workshop_steps/0_prerequisites.md)** - Install Vega SDK and configure your environment
 1. **[Clone and Run Reference App](workshop_steps/1_clone_and_run_reference_app.md)** - Clone the workshop app and verify it runs
-2. **[Performance Debugging](workshop_steps/diagnose_ui_fluidity.md)** - Checkout the `perf-demo` branch and debug UI fluidity via MCP
-3. **[Crash Debugging](workshop_steps/diagnose_crashes_with_ai_assistance.md)** - Checkout the `crash-demo` branch and debug the crash via MCP
-4. **[Shaka Player Upgrade](workshop_steps/shaka_player_upgrade.md)** - Download the Vega Video Sample App, check for Shaka Player updates via MCP, and upgrade
+2. **[Performance Debugging](workshop_steps/2_diagnose_ui_fluidity.md)** - Checkout the `perf-demo` branch and debug UI fluidity via MCP
+3. **[Crash Debugging](workshop_steps/3_diagnose_crashes_with_ai_assistance.md)** - Checkout the `crash-demo` branch and debug the crash via MCP
+4. **[Shaka Player Upgrade](workshop_steps/4_shaka_player_upgrade.md)** - Download the Vega Video Sample App, check for Shaka Player updates via MCP, and upgrade
 
 ## Breakout Sessions
 
 After the MCP workshop, choose one of the following hands-on breakout sessions:
 
-- **[Android Web App Migration](workshop_steps/android_web_app_migration_breakout_room_steps.md)** - Migrate an Android web app to Vega WebView
-- **[RN 0.83 Preview](workshop_steps/rn_0.83_preview.md)** - Upgrade your app to React Native 0.83 on Vega
+- **[Android Web App Migration](workshop_steps/5_android_web_app_migration_breakout_room_steps.md)** - Migrate an Android web app to Vega WebView
+- **[RN 0.83 Preview](workshop_steps/6_rn_0.83_preview.md)** - Upgrade your app to React Native 0.83 on Vega
 
 ## Optional: Follow-Up Exercises
 

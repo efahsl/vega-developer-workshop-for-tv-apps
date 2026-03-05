@@ -109,6 +109,4 @@ Your agent should use the MCP tools to build the app and deploy it to your conne
 - [MCP Server Documentation](https://developer.amazon.com/docs/vega/latest/mcp-server.html)
 - [MCP Server Troubleshooting](https://developer.amazon.com/docs/vega/latest/mcp-server-issues.html)
 
----
 
-**Previous:** [Clone and Run Reference App](1_clone_and_run_reference_app.md) | **Next:** [Create a 3 Screen App](3_create_3_screen_app.md)

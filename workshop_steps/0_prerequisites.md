@@ -6,6 +6,8 @@ The preview packages for this workshop are on a private npm registry — this st
 
 1. Back up your existing `.npmrc`:
 
+   > If you don't have an existing `~/.npmrc` file, create a new one instead.
+
    ```bash
    cp ~/.npmrc ~/.npmrc.bak
    ```
@@ -20,16 +22,19 @@ The preview packages for this workshop are on a private npm registry — this st
 
 3. Clean your npm cache to avoid conflicts:
    ```bash
-   rm -rf node_modules package-lock.json
+   rm -rf node_modules package-lock.json &&
    npm cache clean --force
    ```
 
-
 ## Step 2: Install MCP Server
 
-Install the Amazon Devices Builder Tools MCP server by running the following command:
+Install the Amazon Devices Builder Tools MCP server by running the following command in a terminal window:
 
 ```bash
+# Create a workspace directory for the workshop
+mkdir ~/vegaWorkshop && cd ~/vegaWorkshop
+
+# Install MCP and steering document
 npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest init-context
 ```
 
@@ -45,7 +50,7 @@ To manually configure the MCP server, add the following to your AI agent's MCP s
 }
 ```
 
-Verify your setup is correct:
+Verify your setup is correct, run the following command in the terminal window:
 
 ```bash
 npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest check-status
@@ -53,17 +58,35 @@ npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest check-status
 
 You should see your agent's context document and MCP configuration as ✅ Configured.
 
+**Verify MCP Version**:
+
+Run the following command in the terminal window and ensure version is `0.1.25` or higher.
+
+```bash
+npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest --version
+```
+
 > Don't have an AI coding assistant? Try [Kiro](https://kiro.dev/) — it comes with free credits upon first use.
+
+> ⚠️ **Important:** Enable MCP in your AI Agent if its not enabled by default
+
+_For example, to enable MCP in Kiro IDE click on the 'Enable MCP' button:_
+
+<img src="../images/kiro-ide-enable-mcp.png" height="400">
 
 > For detailed MCP setup instructions and verification checkpoints, see the [MCP Server Setup Reference](references/2_set_up_mcp_server.md).
 
 ## Step 3: Install Vega SDK (Public)
 
-> Skip this step if you already have the Vega SDK installed.
+Skip this step if you already have the Vega SDK installed.
 
-> Public Vega SDK is sufficient for the MCP workshop exercises (performance debugging, crash debugging, Shaka player upgrade, and Android web app migration).
+Public Vega SDK is sufficient for the MCP workshop exercises (performance debugging, crash debugging, Shaka player upgrade, and Android web app migration).
 
-Open your AI coding assistant that you installed the MCP in and run the following prompt:
+> Supported operating systems: macOS 10.15+ or Ubuntu 20.4+
+
+> Important: Windows and Windows Subsystem for Linux (WSL) are not supported or tested. The Vega SDK requires native macOS or Linux/Ubuntu installations only.
+
+Open your AI coding assistant that you installed the MCP in the `~/vegaWorkshop` directory and run the following prompt:
 
 ```
 Help me install Vega SDK
@@ -77,11 +100,11 @@ Depending on network speeds, this installation can take 5-15 minutes. We strongl
 
 Additionally, to use our MCP (Model Context Protocol) server or AI prompts you will need at-least one AI Coding assistant such as Cursor, Claude Code, Copilot, Kiro, Amazon Q, Cline, etc. We have included support for these first 6 and have tested primarily on Kiro, Claude Code, and Amazon Q with Claude Sonnet 4/4.5 models - but we expect these prompts to work across most models. To learn more about MCPs, visit [modelcontextprotocol.io/](http://modelcontextprotocol.io/) or see our footnote below.
 
-## Step 4: Install Preview SDK (Required for RN 0.83 Upgrade)
+## Step 4: Install Preview SDK (Only required for RN 0.83 Upgrade)
 
 > Skip this step if you are not participating in the RN 0.83 upgrade session.
 
-1. Install the Vega CLI if you don't already have it (verify with `vega sdk -h`):
+1. Install the Vega CLI if you don't already have it (verify with `vega --version`):
 
    ```bash
    export SKIP_SDK_INSTALL=true
@@ -123,26 +146,27 @@ Additionally, to use our MCP (Model Context Protocol) server or AI prompts you w
    vega --version   # verify 0.23.6188 or higher appears
    ```
 
-> **SDK and .npmrc Cleanup After Workshop:**
-> 
-> To uninstall the preview SDK after the workshop:
-> ```bash
-> vega sdk uninstall 0.23.6188  # or the preview SDK version at the time of the workshop
-> ```
-> 
-> If you previously had a production SDK installed, validate that the production version is being used once again by running:
-> ```bash
-> vega -v
-> ```
-
-
-> ⚠️ **Important:** After the workshop, restore your original `.npmrc` with `cp ~/.npmrc.bak ~/.npmrc`.
-
-## Step 6: Fire TV 4K Select with Developer Mode
+## Step 5: Fire TV 4K Select with Developer Mode
 
 You will need a Fire TV Stick 4K Select running Vega OS with Developer Mode enabled. See the [Developer Mode setup guide](https://developer.amazon.com/docs/vega/0.22/developer-mode.html) for instructions.
 
 > We recommend bringing an HDMI video capture card if you have one, as we will not have spare TV screens.
+
+## SDK and .npmrc Cleanup After Workshop
+
+To uninstall the preview SDK after the workshop:
+
+```bash
+vega sdk uninstall 0.23.6188  # or the preview SDK version at the time of the workshop
+```
+
+If you previously had a production SDK installed, validate that the production version is being used once again by running:
+
+```bash
+vega -v
+```
+
+> ⚠️ **Important:** After the workshop, restore your original `.npmrc` with `cp ~/.npmrc.bak ~/.npmrc`.
 
 ---
 
