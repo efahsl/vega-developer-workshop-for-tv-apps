@@ -15,9 +15,22 @@ This breakout session guides you through upgrading your Vega app to React Native
 
 ## Choosing Your Starting App
 
-For this upgrade exercise, we recommend using the reference app:
+For this upgrade exercise, we recommend creating a fresh Hello World app:
 
-**Recommended: Use the Reference App** - Start with the complete reference app from the `reference/RnlConfApp-Final` folder in this repository. This is a clean, working React Native 0.72 app that demonstrates best practices and provides a solid foundation for testing the upgrade process.
+**Recommended: Create a Hello World App**
+
+1. Verify you have the latest SDK installed:
+   ```bash
+   vega -v
+   ```
+
+2. Create a new Hello World project:
+   ```bash
+   mkdir helloworld && cd helloworld
+   vega project generate --template helloWorld --name helloWorld
+   ```
+
+This creates a clean, working React Native 0.72 Hello World app that provides a solid foundation for testing the upgrade process.
 
 > **Note:** You can also try this upgrade on your own Vega app if you prefer to see how the process works with your specific codebase.
 
@@ -38,25 +51,28 @@ The upgrade helper is specifically designed for Vega platform migrations and und
 
 ## Step 1: Prepare Your Project
 
-### Using the Reference App (Recommended)
+### Create a Hello World App (Recommended)
 
-If you've been following the workshop, you should already have this repository cloned. If not, clone the repository first.
-
-Navigate to the reference app directory:
+If you followed the steps in "Choosing Your Starting App" above, you should already have a Hello World project created. If not, create it now:
 
 ```bash
-cd reference/RnlConfApp-Final
+mkdir helloworld && cd helloworld
+vega project generate --template helloWorld --name helloWorld
+```
+
+Navigate to the project directory:
+
+```bash
+cd helloworld
 ```
 
 Ensure you have a clean git state:
 
 ```bash
-# Check status
-git status
-
-# If there are uncommitted changes, commit or stash them
+# Initialize git if not already done
+git init
 git add .
-git commit -m "Pre-upgrade checkpoint"
+git commit -m "Initial commit - Hello World app before RN 0.83 upgrade"
 ```
 
 > **Note:** If using your own app instead, navigate to your app directory and ensure your project is in a clean state with all changes committed before starting the upgrade.
@@ -75,9 +91,9 @@ The Vega Developer Tools MCP server includes a specialized upgrade helper design
 
 To start the upgrade, use your AI coding assistant and run the following prompt command:
 
-**For Kiro / Claude Code / Cline:**
+**For Kiro:**
 ```
-/prompt react_native_for_vega_ai_assisted_rn_upgrade
+@react_native_for_vega_ai_assisted_rn_upgrade
 ```
 
 **Alternatively, ask directly:**
@@ -176,14 +192,12 @@ You can pause at any time and resume later - your progress is saved automaticall
 
 Once you've completed the upgrade changes, you can build and test your app using AI assistance.
 
-> **Note:** For more detailed information about building and testing Vega apps, see [Create a 3 Screen App](3_create_3_screen_app.md).
-
 ### AI-Driven Build and Test
 
 Simply ask your AI assistant:
 
 ```
-Build and run this app on the connected Vega device
+Launch the application for me in a connected device with fast refresh in a new item window
 ```
 
 The AI will handle the build process, deployment, and launch automatically.
@@ -198,15 +212,6 @@ If you encounter build errors, the upgrade helper can assist:
 4. **Guided Resolution** - For other issues, you'll get troubleshooting steps
 
 The helper uses knowledge-grounded solutions (no guessing) and will direct you to external resources if the error isn't in the knowledge base.
-
-## Step 6: Validate Functionality
-
-Test critical app features:
-
-- Navigation between screens
-- Media playback
-- Focus management and D-pad navigation
-- Any custom components or integrations
 
 ## Common Issues and Solutions
 
