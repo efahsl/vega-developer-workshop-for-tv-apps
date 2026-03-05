@@ -78,9 +78,13 @@ _For example, to enable MCP in Kiro IDE click on the 'Enable MCP' button:_
 
 ## Step 3: Install Vega SDK (Public)
 
-> Skip this step if you already have the Vega SDK installed.
+Skip this step if you already have the Vega SDK installed.
 
-> Public Vega SDK is sufficient for the MCP workshop exercises (performance debugging, crash debugging, Shaka player upgrade, and Android web app migration).
+Public Vega SDK is sufficient for the MCP workshop exercises (performance debugging, crash debugging, Shaka player upgrade, and Android web app migration).
+
+> Supported operating systems: macOS 10.15+ or Ubuntu 20.4+
+
+> Important: Windows and Windows Subsystem for Linux (WSL) are not supported or tested. The Vega SDK requires native macOS or Linux/Ubuntu installations only.
 
 Open your AI coding assistant that you installed the MCP in the `~/vegaWorkshop` directory and run the following prompt:
 
