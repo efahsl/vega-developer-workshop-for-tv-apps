@@ -90,7 +90,7 @@ The agent will:
 
 **🏁 Checkpoint:** The fluidity score should improve significantly from the baseline toward the ≥99% target. Here's a representative before vs. after comparison:
 
-![UI Fluidity Before vs. After](fluidity-before-after.png)
+![UI Fluidity Before vs. After](../images/fluidity-before-after.png)
 
 ---
 
