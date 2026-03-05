@@ -114,4 +114,4 @@ The AI agent will:
 
 ---
 
-**Previous:** [Crash Debugging](diagnose_crashes_with_ai_assistance.md) | **Next:** [Create a 3 Screen App](3_create_3_screen_app.md)
+**Previous:** [Crash Debugging](3_diagnose_crashes_with_ai_assistance.md) | **Next:** [Create a 3 Screen App](3_create_3_screen_app.md)

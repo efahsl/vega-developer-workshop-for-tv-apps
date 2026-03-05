@@ -69,4 +69,4 @@ Alternately, you can build & run your app by following the instructions included
 
 ---
 
-**Previous:** [Prerequisites](0_prerequisites.md) | **Next:** [Performance Debugging](diagnose_ui_fluidity.md)
+**Previous:** [Prerequisites](0_prerequisites.md) | **Next:** [Performance Debugging](2_diagnose_ui_fluidity.md)

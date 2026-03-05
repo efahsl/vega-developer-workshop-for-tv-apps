@@ -257,4 +257,4 @@ vega device launch-app --dir .
 
 ---
 
-**Previous:** [Performance Debugging](diagnose_ui_fluidity.md) | **Next:** [Shaka Player Upgrade](shaka_player_upgrade.md)
+**Previous:** [Performance Debugging](2_diagnose_ui_fluidity.md) | **Next:** [Shaka Player Upgrade](4_shaka_player_upgrade.md)
