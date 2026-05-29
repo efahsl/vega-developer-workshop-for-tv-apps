@@ -39,7 +39,8 @@ Check out our [Prerequisites](workshop_steps/0_prerequisites.md) page to install
 4. **[Performance Testing](workshop_steps/4_performance_testing.md)** - Run your app on Fire TV Stick and benchmark performance
 5. **[Optimize Re-rendering Performance](workshop_steps/5_optimize_rerendering_performance.md)** - Detect and fix unnecessary component re-renders
 6. **[Accessibility](workshop_steps/6_accessibility.md)** - Implement TV accessibility features for better user experience
-7. **[Wrap Up and Next Steps](workshop_steps/7_wrap_up_and_next_steps.md)** - Explore additional project ideas and app submission
+7. **[In-App Purchases](workshop_steps/7_in_app_purchases.md)** - Integrate Amazon IAP SDK for monetization
+8. **[Wrap Up and Next Steps](workshop_steps/8_wrap_up_and_next_steps.md)** - Explore additional project ideas and app submission
 
 ## Getting Started
 
