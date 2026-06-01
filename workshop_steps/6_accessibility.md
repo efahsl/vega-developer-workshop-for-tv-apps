@@ -365,4 +365,4 @@ If you want to deepen your app's accessibility beyond this phase, consider these
 
 ---
 
-**Previous:** [Optimize App Performance](5_optimize_rerendering_performance.md) | **Next:** [Wrap Up and Next Steps](7_wrap_up_and_next_steps.md)
+**Previous:** [Optimize App Performance](5_optimize_rerendering_performance.md) | **Next:** [In-App Purchases](7_in_app_purchases.md)
