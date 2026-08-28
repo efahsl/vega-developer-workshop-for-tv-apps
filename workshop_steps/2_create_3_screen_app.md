@@ -1,4 +1,4 @@
-# Phase 3: Create a 3-screen app
+# Phase 2: Create a 3-screen app
 
 Now the fun part! We are going to build our TV-based UI, a basic 3-screen video streaming app with some AI-generated videos. You can either use the Vega Virtual Device or a Fire TV 4K Select (with [developer mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) enabled). We generally recommend using the Vega Virtual Device for developing new screens, and using the Fire TV device for validating performance/video playback.
 
@@ -10,14 +10,14 @@ _If you do not wish to use AI (or were unable to use AI), you can always follow 
 Already familiar with this tutorial and want to skip the step-by-step walkthrough? Run the following prompt within your project folder to execute all steps sequentially:
 
 ```
-Within this project folder is a Vega app. We are going to scaffold/create a 3-screen app based off the workshop instructions here (https://raw.githubusercontent.com/efahsl/vega-developer-workshop-for-tv-apps/refs/heads/optimization-flow/workshop_steps/3_create_3_screen_app.md). I want you to read those instructions, there are 9 Prompt instructions that I want you to run/execute for this app. Run through all of the steps sequentially, performing validations as needed in between steps. Run commands to install any dependencies as needed. Report back with the progress on each of the steps. Any questions?
+Within this project folder is a Vega app. We are going to scaffold/create a 3-screen app based off the workshop instructions here (https://raw.githubusercontent.com/efahsl/vega-developer-workshop-for-tv-apps/refs/heads/main/workshop_steps/2_create_3_screen_app.md). I want you to read those instructions, there are 9 Prompt instructions that I want you to run/execute for this app. Run through all of the steps sequentially, performing validations as needed in between steps. Run commands to install any dependencies as needed. Report back with the progress on each of the steps. Any questions?
 ```
 
 </details>
 
 ## 3.1: Add a home screen
 
-First we are going create a home screen component that will replace the main screen from the hello world app. This home screen will contains a grid of movie titles (that we will retrieve via a network API call) and eventually allow the user to play back one of these titles. We are going to use AI Prompts (with our Vega MCP server) to assist us in developing.
+First we are going create a home screen component that will replace the main screen from the hello world app. This home screen will contains a grid of movie titles (that we will retrieve via a network API call) and eventually allow the user to play back one of these titles. We are going to use AI Prompts (with Amazon Devices Builder Tools for AI) to assist us in developing.
 
 **Important: AI is literally different every time and can make mistakes. It is important that you ensure each step is working BEFORE you proceed to the next step because it gets progressively harder to debug the farther you get (i.e. if your app is crashing, do not proceed until you resolve the error). We also highly recommend you inspect each code diff as you go along and also "git commit" after each step so you have an easy way to roll back any broken code. Raise your hand or flag us down if you get stuck at any point.**
 
@@ -29,7 +29,7 @@ For this Vega app, I want to create a new component called HomeScreen with just 
 
 Assuming you have Fast Refresh enabled, your app UI should automatically update to something like the following:
 
-<img src="../images/XHR5823cc7985054a889de068d78.png" width="640">
+<img src="../images/XHR5823cc7985054a889de068d78.jpg" width="640">
 
 You should have a new HomeScreen.tsx (likely in a new "screens" folder) with content similar to this:
 
@@ -88,7 +88,7 @@ We like to include a question at the end of our prompt to resolve any ambiguity 
 
 Once complete, you should have a UI that looks something like the below image:
 
-<img src="../images/XHR0e4c37191438420684935f77e.png" height="400">
+<img src="../images/XHR0e4c37191438420684935f77e.jpg" height="400">
 
 **Optional**: modify styling. Since we are going to be using TV Directional-Pad (D-Pad) controls to drive the experience, we will need to understand what item is selected. There should be some basic indicator of what is selected, but consider modifying the style such as setting/changing a background color when focused or setting/changing the scale transform to 1.15. Try using natural language to describe any changes you'd like to make. OR go into the code of your HomeScreen.tsx and make these changes directly.
 
@@ -110,6 +110,7 @@ We should see our package.json updated with the following dependencies:
 "@amazon-devices/react-navigation__native": "~7.0.0",
 "@amazon-devices/react-navigation__native-stack": "~7.0.0",
 "@amazon-devices/react-native-screens": "~2.0.0",
+"@amazon-devices/react-native-safe-area-context": "~2.0.0",
 ```
 
 You may need to run `npm install` to install these dependencies
@@ -166,7 +167,7 @@ Add actions/buttons to the screen. Now let's add some buttons to the screen so w
 Add "Play" and "Add to watchlist" buttons to my DetailsScreen; the button presses should log an acknowledgment message in the logs". Make sure the buttons indicate which one is focused; the "Play" button should be focused by default.
 ```
 
-<img src="../images/XHR96fe2b067f0c4c5abb0d47686.png" height="400">
+<img src="../images/XHR96fe2b067f0c4c5abb0d47686.jpg" height="400">
 
 Commit changes for safe-measure (`git add * / git commit`)
 
@@ -185,7 +186,13 @@ For this workshop, we're going to use URL mode as we're just dealing with simple
 Add a new VideoPlayerScreen following the Vega Video Player Example. Add it to the existing navigation structure - the video URL should be passed/linked from the Detail Screen (via navigation prop) when the user presses the "Play Video" button.
 ```
 
-Given that we are updating app manifest entries, you will need to rebuild/relaunch your app (An easy way is to press the "build" icon below in Vega Studio):
+Given that we are updating app manifest entries, you will need to rebuild/relaunch your app. In your agent's chat:
+
+```
+Rebuild and re-run the app.
+```
+
+ADBT's `amazon-devices-vega-build-and-run` skill handles the manifest re-parse and redeploy. If you use Vega Studio in VS Code, you can alternatively press the "build" icon in the side bar:
 
 <img src="../images/build-icon.png" height="150">
 
@@ -209,7 +216,7 @@ Let's update our focus management rules, I want to trap focus on each row such t
 
 _This should import TvFocusGuideView (if it's not already included - and you may have to "npm install" again) and implement the trapFocusLeft and trapFocusRight props._
 
-<img src="../images/XHRa9e779280eb94f8192f4393d7.png" height="400">
+<img src="../images/XHRa9e779280eb94f8192f4393d7.jpg" height="400">
 
 Finally, since our videos are short, let's add some logic that once the content finishes playing, it goes back to the previous detail screen:
 
@@ -232,8 +239,8 @@ const handleVideoEnded = () => {
 
 ---
 
-**Previous:** [Set Up MCP Server](2_set_up_mcp_server.md) | **Next:** [Performance Testing](4_performance_testing.md)
+**Previous:** [Create a Hello World App](1_create_hello_world_app.md) | **Next:** [Performance Testing](3_performance_testing.md)
 
 OR ...
 
-Short on time? Go straight to [Wrap Up and Next Steps](8_wrap_up_and_next_steps.md)
+Short on time? Go straight to [Wrap Up and Next Steps](6_wrap_up_and_next_steps.md)

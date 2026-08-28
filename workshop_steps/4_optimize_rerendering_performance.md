@@ -1,6 +1,6 @@
-# Phase 5: Optimize App Performance
+# Phase 4: Optimize App Performance
 
-TV apps require smooth 60fps performance for a good user experience. In this phase, we'll identify and fix common React Native performance issues—specifically unnecessary re-renders that cause lag during D-pad navigation.
+TV apps require smooth 60fps performance for a good user experience. In this phase, we'll identify and fix common React Native performance issues, specifically unnecessary re-renders that cause lag during D-pad navigation.
 
 ## 5.1: Create a Performance Problem
 
@@ -9,7 +9,7 @@ Before optimizing, let's add a feature that can further expose performance issue
 **Prompt:**
 
 ```
-Update HomeScreen.tsx to add a full-screen background image that matches the currently focused thumbnail. Use images.poster_16x9 from the data. Add a semi-transparent dark overlay so the content remains visible. Keep the implementation simple—no memoization yet.
+Update HomeScreen.tsx to add a full-screen background image that matches the currently focused thumbnail. Use images.poster_16x9 from the data. Add a semi-transparent dark overlay so the content remains visible. Keep the implementation simple, no memoization yet.
 ```
 
 **Expected result:**
@@ -46,7 +46,7 @@ Navigate through your content rows with the D-pad. You'll likely notice:
 - Lag or stuttering during quick navigation
 - The app feels less responsive
 
-This happens because every focus change triggers a state update, causing the entire HomeScreen and all its children to re-render—even components whose data hasn't changed.
+This happens because every focus change triggers a state update, causing the entire HomeScreen and all its children to re-render, even components whose data hasn't changed.
 
 ### Re-Measure KPIs
 
@@ -128,15 +128,19 @@ First let's check what prompts are available to us. In a CLI-based tool like Cla
 Which would display an output similar to the following:
 
 ```
-Prompt                               Description                              Arguments (* = required)
+Prompt                                                             Description                              Arguments (* = required)
 ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔
 amazon-devices-buildertools-mcp (MCP):
-- apply_performance_best_practices   Diagnose and optimize React Native ap... app_source_path*
-- detect_component_re-renders        Diagnose and optimize Vega applicatio... vega_app_package_path*
-- diagnose_kpi_ttfd                  Diagnose Vega application's Time to F... kpi_report_file_path*, kpi_to_diagnose*
-- diagnose_kpi_ttff                  Diagnose Vega application's Time to F... kpi_report_file_path*, kpi_to_diagnose*
-- fix_hot_functions                  Diagnose and optimize Vega applicatio... trace_data_file_path
-- upgrade_carousel_component         Assists in migrating to newer version... current_implementation_file_path*, current_version*, target_version*
+- apply_performance_best_practices                                  Diagnose and optimize React Native ap... app_source_path*
+- detect_component_re-renders                                       Diagnose and optimize Vega applicatio... vega_app_package_path*
+- diagnose-slowAppLaunch                                            Diagnose Vega application's slow app ... kpi_report_file_path*, kpi_to_diagnose*
+- diagnose_crash                                                    Diagnose crashes (JS/Native/LMK/ANR)   acr_file_path
+- diagnose_key_input_latency                                        Diagnose key input latency issues     vega_app_package_path*
+- diagnose_ui_fluidity                                              Diagnose UI fluidity KPI failures     vega_app_package_path*
+- fix_hot_functions                                                 Diagnose and optimize hot functions   vega_app_package_path*
+- react_native_for_vega_add_simple_media_playback_implementation    Add simple media playback              vega_app_package_path*
+- react_native_for_vega_ai_assisted_rn_upgrade                      AI-assisted RN version upgrade         vega_app_package_path*
+- upgrade_carousel_component                                        Migrate to newer Carousel versions    current_implementation_file_path*, current_version*, target_version*
 ```
 
 We are going to use the `detect_component_re-renders` prompt, which requires a single argument of the vega app package path.
@@ -164,13 +168,13 @@ Once this is complete, the agent will provide a detailed breakdown of the root c
 ---
 
 <details>
-<summary><strong>Understanding the Fixes</strong> — To see details on the types of fixes most commonly made, expand this section.</summary>
+<summary><strong>Understanding the Fixes</strong>: To see details on the types of fixes most commonly made, expand this section.</summary>
 
 For this app, WDYR _typically_ identifies these types of issues:
 
-1. **Components re-render when props haven't changed** — need `React.memo`
-2. **Functions are recreated every render** — need `useCallback`
-3. **Arrays/objects are recreated every render** — need `useMemo`
+1. **Components re-render when props haven't changed**: need `React.memo`
+2. **Functions are recreated every render**: need `useCallback`
+3. **Arrays/objects are recreated every render**: need `useMemo`
 
 ```
 Without optimization:
@@ -206,7 +210,7 @@ When making these fixes and running traces, we have seen dramatic improvements:
 - Before: ~150+ renders (HomeScreen + 5 ContentRows + ~50 ThumbnailItems each)
 - After: 1 render (just HomeScreen)
 
-The 75.9% CPU reduction proves the app was wasting most of its processing power on redundant renders - and remember this is a very simple app! The slight memory increase (~6 MB) is the cost of caching—a worthwhile trade-off.
+The 75.9% CPU reduction proves the app was wasting most of its processing power on redundant renders - and remember this is a very simple app! The slight memory increase (~6 MB) is the cost of caching, a worthwhile trade-off.
 
 Coming soon, we are going to re-measure the UI fluidity metrics to validate the improvements.
 
@@ -236,7 +240,7 @@ These patterns are essential for TV apps where D-pad navigation triggers frequen
 
 ---
 
-**Previous:** [Performance Testing](4_performance_testing.md) | **Next:** [Accessibility](6_accessibility.md)
+**Previous:** [Performance Testing](3_performance_testing.md) | **Next:** [Accessibility](5_accessibility.md)
 
 ---
 
@@ -274,7 +278,7 @@ This will scan your app source path and provide recommendations for memoization,
 
 ### ESLint Plugin for React Compiler
 
-React 19's compiler will automatically add memoization. While Vega currently uses React 18 (RN 0.72), you can prepare your code now.
+React 19's compiler will automatically add memoization. SDK 0.24 supports both RN 0.72 (React 18) and RN 0.83; on the RN 0.72 line you can prepare your code now.
 
 **Prompt:**
 
@@ -330,7 +334,7 @@ ContentRow Re-rendered because the props object itself changed
 but its values are all equal.
 ```
 
-This tells you the component re-rendered unnecessarily—the data was identical, but React saw different object references.
+This tells you the component re-rendered unnecessarily, the data was identical, but React saw different object references.
 
 You will need to _manually_ analyze the WDYR output back to your agent to find the exact components and props causing issues.
 
@@ -341,6 +345,6 @@ This is my console output...
 {PASTE LOG SNIPPET}
 ```
 
-(Beware context overflow — you likely will NOT be able to paste the entire log.)
+(Beware context overflow, you likely will NOT be able to paste the entire log.)
 
 </details>
