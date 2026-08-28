@@ -2,7 +2,7 @@
 
 Before you start the workshop, complete the following one-time setup. This gets your machine ready with **Amazon Devices Builder Tools for AI (ADBT for AI)**: the suite you'll use throughout the workshop, and installs the **Vega SDK** via a prompt.
 
-The full setup takes ~15–30 minutes depending on network speed. We strongly recommend completing it before the workshop starts.
+The full setup takes ~15–30 minutes depending on network speed.
 
 > **Version note:** This workshop is validated against ADBT for AI **1.0.9 or higher**. `npx ... @latest` always picks up the newest published version.
 
@@ -11,7 +11,7 @@ The full setup takes ~15–30 minutes depending on network speed. We strongly re
 ## 1. Hardware & Operating System
 
 - **macOS 10.15+** or **Ubuntu 20.04+** (M-series Macs recommended for the best experience).
-- (Recommended for Phases 3 and 4) A **Vega Fire TV Stick** with [Developer Mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) enabled. The Vega Virtual Device works for most phases, but real-device runs give the most accurate performance measurements.
+- (Recommended for Phases 3 and 4) A **Vega Fire TV Stick** with [Developer Mode](https://developer.amazon.com/docs/vega/latest/developer-mode.html) enabled. The Vega Virtual Device works for most phases, but real-device runs give the most accurate performance measurements.
 
 ## 2. Install Node.js
 
@@ -177,11 +177,11 @@ Learn more at [modelcontextprotocol.io](https://modelcontextprotocol.io/).
 
 ### B. Manual Vega SDK Install (fallback)
 
-If the prompt-based install doesn't work for your setup, follow the manual guide: [Vega SDK Download and Installation](https://developer.amazon.com/docs/vega/0.21/setup-overview.html).
+If the prompt-based install doesn't work for your setup, follow the manual guide: [Vega SDK Download and Installation](https://developer.amazon.com/docs/vega/latest/setup-overview.html).
 
 ### C. Optional: Vega Studio VS Code extension
 
-The [Vega Studio VS Code extension](https://developer.amazon.com/docs/vega/0.21/setup-vscode.html) provides an IDE-integrated sidebar with buttons for creating and running Vega apps. It's optional for this workshop, every step in the workshop is fully prompt- and CLI-driven, but if you already use VS Code, feel free to install it.
+The [Vega Studio VS Code extension](https://developer.amazon.com/docs/vega/latest/setup-overview.html) provides an IDE-integrated sidebar with buttons for creating and running Vega apps. It's optional for this workshop, every step in the workshop is fully prompt- and CLI-driven, but if you already use VS Code, feel free to install it.
 
 ---
 

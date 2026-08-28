@@ -1,8 +1,8 @@
 # Phase 2: Create a 3-screen app
 
-Now the fun part! We are going to build our TV-based UI, a basic 3-screen video streaming app with some AI-generated videos. You can either use the Vega Virtual Device or a Fire TV 4K Select (with [developer mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) enabled). We generally recommend using the Vega Virtual Device for developing new screens, and using the Fire TV device for validating performance/video playback.
+Now the fun part! We are going to build our TV-based UI, a basic 3-screen video streaming app with some AI-generated videos. You can either use the Vega Virtual Device or a Fire TV 4K Select (with [developer mode](https://developer.amazon.com/docs/vega/latest/developer-mode.html) enabled). We generally recommend using the Vega Virtual Device for developing new screens, and using the Fire TV device for validating performance/video playback.
 
-_If you do not wish to use AI (or were unable to use AI), you can always follow our tutorial on our tech docs: <https://developer.amazon.com/docs/vega-tutorial/0.21/introduction.html>_
+_If you do not wish to use AI (or were unable to use AI), you can always follow our tutorial on our tech docs: <https://developer.amazon.com/docs/vega-tutorial/latest/introduction.html>_
 
 <details>
 <summary><strong>Speed Run: Execute All Steps at Once</strong></summary>
@@ -29,7 +29,7 @@ For this Vega app, I want to create a new component called HomeScreen with just 
 
 Assuming you have Fast Refresh enabled, your app UI should automatically update to something like the following:
 
-<img src="../images/XHR5823cc7985054a889de068d78.jpg" width="640">
+<img src="../images/XHR5823cc7985054a889de068d78.png" width="640">
 
 You should have a new HomeScreen.tsx (likely in a new "screens" folder) with content similar to this:
 
@@ -88,7 +88,7 @@ We like to include a question at the end of our prompt to resolve any ambiguity 
 
 Once complete, you should have a UI that looks something like the below image:
 
-<img src="../images/XHR0e4c37191438420684935f77e.jpg" height="400">
+<img src="../images/XHR0e4c37191438420684935f77e.png" height="400">
 
 **Optional**: modify styling. Since we are going to be using TV Directional-Pad (D-Pad) controls to drive the experience, we will need to understand what item is selected. There should be some basic indicator of what is selected, but consider modifying the style such as setting/changing a background color when focused or setting/changing the scale transform to 1.15. Try using natural language to describe any changes you'd like to make. OR go into the code of your HomeScreen.tsx and make these changes directly.
 
@@ -167,7 +167,7 @@ Add actions/buttons to the screen. Now let's add some buttons to the screen so w
 Add "Play" and "Add to watchlist" buttons to my DetailsScreen; the button presses should log an acknowledgment message in the logs". Make sure the buttons indicate which one is focused; the "Play" button should be focused by default.
 ```
 
-<img src="../images/XHR96fe2b067f0c4c5abb0d47686.jpg" height="400">
+<img src="../images/XHR96fe2b067f0c4c5abb0d47686.png" height="400">
 
 Commit changes for safe-measure (`git add * / git commit`)
 
@@ -216,7 +216,7 @@ Let's update our focus management rules, I want to trap focus on each row such t
 
 _This should import TvFocusGuideView (if it's not already included - and you may have to "npm install" again) and implement the trapFocusLeft and trapFocusRight props._
 
-<img src="../images/XHRa9e779280eb94f8192f4393d7.jpg" height="400">
+<img src="../images/XHRa9e779280eb94f8192f4393d7.png" height="400">
 
 Finally, since our videos are short, let's add some logic that once the content finishes playing, it goes back to the previous detail screen:
 

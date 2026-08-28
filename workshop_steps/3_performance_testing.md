@@ -7,7 +7,7 @@ In this phase, we'll establish a performance baseline for your app using Vega's 
 > The UI fluidity KPI test requires **Appium** with the Vega Kepler driver. If you haven't set up Appium yet, follow the installation guide here before proceeding: [Appium Setup for Vega](https://developer.amazon.com/docs/vega/latest/appium-setup.html)
 >
 > For the best and most accurate results, you should:
-> 1. **Use a physical Vega Fire TV device** (with [developer mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) enabled), virtual devices may not support the kpi-visualizer tracing tools and can produce unreliable or missing metrics.
+> 1. **Use a physical Vega Fire TV device** (with [developer mode](https://developer.amazon.com/docs/vega/latest/developer-mode.html) enabled), virtual devices may not support the kpi-visualizer tracing tools and can produce unreliable or missing metrics.
 > 2. **Build and install a "Release" build** of your app (not "Debug"), debug builds include extra overhead from Fast Refresh and developer tooling that will skew your performance numbers.
 
 ## 4.1: Run Baseline UI Fluidity Test

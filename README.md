@@ -28,7 +28,7 @@ You'll create a 3-screen media streaming app optimized for TV, featuring:
 
 ## Prerequisites
 
-Check out our [Prerequisites](workshop_steps/0_prerequisites.md) page to install **Amazon Devices Builder Tools for AI (ADBT for AI)** and then use it to install the **Vega SDK** via an AI prompt. In order to run any of the performance capabilities, you will need a Vega Fire TV Stick with [Developer Mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) enabled. We also highly recommend reading about the Vega architecture and component APIs to have a better understanding of the SDK capabilities as you run through this workshop.
+Check out our [Prerequisites](workshop_steps/0_prerequisites.md) page to install **Amazon Devices Builder Tools for AI (ADBT for AI)** and then use it to install the **Vega SDK** via an AI prompt. In order to run any of the performance capabilities, you will need a Vega Fire TV Stick with [Developer Mode](https://developer.amazon.com/docs/vega/latest/developer-mode.html) enabled. We also highly recommend reading about the Vega architecture and component APIs to have a better understanding of the SDK capabilities as you run through this workshop.
 
 ## Workshop Steps
 
@@ -46,6 +46,6 @@ Begin with the [Prerequisites](workshop_steps/0_prerequisites.md) to ensure you 
 
 ## Toubleshooting
 
-Running into issues? Check out our [troubleshooting guide](https://developer.amazon.com/docs/vega/0.22/troubleshoot-overview.html) on our [Vega Developer Docs](https://developer.amazon.com/apps-and-games/vega).
+Running into issues? Check out our [troubleshooting guide](https://developer.amazon.com/docs/vega/latest/troubleshoot-overview.html) on our [Vega Developer Docs](https://developer.amazon.com/apps-and-games/vega).
 
 Prefer to see a working code example to compare what you have built? Check out our reference code example in this repo [here](./reference/RnlConfApp/).
