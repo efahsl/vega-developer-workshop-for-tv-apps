@@ -1,14 +1,14 @@
-# Phase 4: Performance Testing & Analysis
+# Phase 3: Performance Testing & Analysis
 
 In this phase, we'll establish a performance baseline for your app using Vega's KPI visualization tools. This baseline will help us measure the impact of optimizations in the next phase.
 
-> **Important — Prerequisites for UI Fluidity Testing:**
+> **Important, Prerequisites for UI Fluidity Testing:**
 >
 > The UI fluidity KPI test requires **Appium** with the Vega Kepler driver. If you haven't set up Appium yet, follow the installation guide here before proceeding: [Appium Setup for Vega](https://developer.amazon.com/docs/vega/latest/appium-setup.html)
 >
 > For the best and most accurate results, you should:
-> 1. **Use a physical Vega Fire TV device** (with [developer mode](https://developer.amazon.com/docs/vega/0.21/developer-mode.html) enabled) — virtual devices may not support the kpi-visualizer tracing tools and can produce unreliable or missing metrics.
-> 2. **Build and install a "Release" build** of your app (not "Debug") — debug builds include extra overhead from Fast Refresh and developer tooling that will skew your performance numbers.
+> 1. **Use a physical Vega Fire TV device** (with [developer mode](https://developer.amazon.com/docs/vega/latest/developer-mode.html) enabled), virtual devices may not support the kpi-visualizer tracing tools and can produce unreliable or missing metrics.
+> 2. **Build and install a "Release" build** of your app (not "Debug"), debug builds include extra overhead from Fast Refresh and developer tooling that will skew your performance numbers.
 
 ## 4.1: Run Baseline UI Fluidity Test
 
@@ -48,8 +48,8 @@ Shutting down telemetry client.
 
 ```
 
-**🏁 Checkpoint:** Your agent should save these results to a .md file. Look for metrics like "Fluidity %" and "App Event Response Time" — we'll compare against these after making optimizations. 
+**🏁 Checkpoint:** Your agent should save these results to a .md file. Look for metrics like "Fluidity %" and "App Event Response Time", we'll compare against these after making optimizations. 
 
 ---
 
-**Previous:** [Create a 3 Screen App](3_create_3_screen_app.md) | **Next:** [Optimize Re-rendering Performance](5_optimize_rerendering_performance.md)
+**Previous:** [Create a 3 Screen App](2_create_3_screen_app.md) | **Next:** [Optimize Re-rendering Performance](4_optimize_rerendering_performance.md)
