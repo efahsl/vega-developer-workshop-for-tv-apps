@@ -44,8 +44,8 @@ Check out our [Prerequisites](workshop_steps/0_prerequisites.md) page to install
 
 Begin with the [Prerequisites](workshop_steps/0_prerequisites.md) to ensure you have all necessary tools installed, then follow the workshop steps in order.
 
-## Toubleshooting
+## Troubleshooting
 
 Running into issues? Check out our [troubleshooting guide](https://developer.amazon.com/docs/vega/latest/troubleshoot-overview.html) on our [Vega Developer Docs](https://developer.amazon.com/apps-and-games/vega).
 
-Prefer to see a working code example to compare what you have built? Check out our reference code example in this repo [here](./reference/RnlConfApp/).
+Prefer to see a working code example to compare what you have built? Check out our reference code example in this repo [here](./reference/RnlConfApp-Final/).

@@ -141,7 +141,7 @@ If your agent supports MCP prompts (Claude Code, Kiro CLI, etc.), list ADBT's sl
 /prompts
 ```
 
-You should see entries such as `apply_performance_best_practices`, `detect_component_re-renders`, `diagnose_crash`, `diagnose_ui_fluidity`, `fix_hot_functions`, and `upgrade_carousel_component`. We'll use `detect_component_re-renders` in [Phase 4](4_optimize_rerendering_performance.md).
+You should see entries such as `apply_performance_best_practices`, `detect_component_re-renders`, `diagnose_crash`, `diagnose_ui_fluidity`, `fix_hot_functions`, `upgrade_carousel_component`, and `summarize_adbt_session`. We'll use `detect_component_re-renders` in [Phase 4](4_optimize_rerendering_performance.md), and `summarize_adbt_session` at the end in [Phase 6](6_wrap_up_and_next_steps.md).
 
 ## 5. Install the Vega SDK via a Prompt
 
