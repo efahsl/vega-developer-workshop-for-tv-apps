@@ -6,6 +6,18 @@ We look forward to seeing you build and submit more apps by using [Vega Develope
 
 For any questions or suggestions either use [developer forums](https://community.amazondeveloper.com/c/vega/6) or [contact-us](https://developer.amazon.com/support/cases/new).
 
+## Summarize and share your session with the ADBT team
+
+Before you wrap up, capture a summary of what you did in this session so the Amazon Devices Builder Tools for AI (ADBT for AI) team can learn from it. In your AI agent's chat, run the ADBT prompt:
+
+```
+@summarize_adbt_session
+```
+
+The prompt reconstructs a structured Markdown summary of your ADBT session and writes it to a local file you choose (you'll be asked for a path if you don't pass one). Review the file, edit anything you want, and it stays entirely local, nothing is uploaded automatically. If you're willing, share the file with the ADBT team so they can see what worked well and where the tools got in your way.
+
+> If your agent doesn't support MCP prompts (`/prompts`), you can trigger the same flow by asking: "Summarize this ADBT session into a Markdown file I can review."
+
 ## Need a few TV-Friendly app ideas to tinker?
 
 Inspired to build other TV apps / experiences? Here is a list of some ideas that can work well on a large screen that may be of inspiration. Feel free to use Amazon Devices Builder Tools for AI (ADBT for AI) to help you build out some of these experiences (or variants of).
